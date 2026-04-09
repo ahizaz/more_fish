@@ -1,0 +1,102 @@
+part of 'app_pages.dart';
+// DO NOT EDIT. This is code generated via package:get_cli/get_cli.dart
+
+abstract class Routes {
+  Routes._();
+  static const DMA_TECHNOLOGIES = _Paths.DMA_TECHNOLOGIES;
+  static const COMING_SOON = _Paths.COMING_SOON;
+  static const HOME = _Paths.HOME;
+  static const INDEX = _Paths.INDEX;
+  static const POULTRY_INDEX = _Paths.POULTRY_INDEX;
+  static const CATTLE_INDEX = _Paths.CATTLE_INDEX;
+  static const CLEAN_AIR_INDEX = _Paths.CLEAN_AIR_INDEX;
+  static const SPLASH_SCREEN = _Paths.SPLASH_SCREEN;
+  static const NOTIFICATIONS = _Paths.NOTIFICATIONS;
+  static const PROFILE = _Paths.PROFILE;
+  static const MORE = _Paths.MORE;
+  static const LOGIN = _Paths.LOGIN;
+  static const REGISTRATION = _Paths.REGISTRATION;
+  static const PRODUCT_COMPANIES = _Paths.PRODUCT_COMPANIES;
+  static const PRODUCT_DETAILS = _Paths.PRODUCT_DETAILS;
+  static const PRODUCT_COMP_WISE_LIST = _Paths.PRODUCT_COMP_WISE_LIST;
+  static const POND_MANAGEMENT = _Paths.POND_MANAGEMENT;
+  static const FEED_MANAGEMENT = _Paths.FEED_MANAGEMENT;
+  static const FISH_DISEASE_TREATMENT = _Paths.FISH_DISEASE_TREATMENT;
+  static const FARM_MANAGEMENT = _Paths.FARM_MANAGEMENT;
+  static const AERATOR_CONNECTION = _Paths.AERATOR_CONNECTION;
+  static const FEEDER_CONNECTION = _Paths.FEEDER_CONNECTION;
+  static const WEATHER_FORECAST = _Paths.WEATHER_FORECAST;
+  static const TRAINING_AND_WORKSHOP = _Paths.TRAINING_AND_WORKSHOP;
+  static const FARM_MANAGEMENT_DETAILS = _Paths.FARM_MANAGEMENT_DETAILS;
+  static const WATER_QUALITY_DEVICE = _Paths.WATER_QUALITY_DEVICE;
+  static const ABOUT_DEVICES = _Paths.ABOUT_DEVICES;
+  static const FAQ = _Paths.FAQ;
+  static const ABOUT_APP = _Paths.ABOUT_APP;
+  static const PASSWORD_CHANGE = _Paths.PASSWORD_CHANGE;
+  static const RESET_PASSWORD = _Paths.RESET_PASSWORD;
+  static const FORGET_PASSWORD = _Paths.FORGET_PASSWORD;
+  static const OTP_VERIFY = _Paths.OTP_VERIFY;
+  static const INTERNET_CHECKER = _Paths.INTERNET_CHECKER;
+  static const VERSION_CHECKER = _Paths.VERSION_CHECKER;
+  static const HIGH_DENSITY_FISH_FARMING = _Paths.HIGH_DENSITY_FISH_FARMING;
+  static const FISH_DISEASE_TREATMENT_DETAILS =
+      _Paths.FISH_DISEASE_TREATMENT_DETAILS;
+  static const FAQ_DETAILS = _Paths.FAQ_DETAILS;
+  static const ABOUT_APP_DETAILS = _Paths.ABOUT_APP_DETAILS;
+  static const ABOUT_DEVICES_DETAILS = _Paths.ABOUT_DEVICES_DETAILS;
+  static const POND_MANAGEMENT_DETAILS = _Paths.POND_MANAGEMENT_DETAILS;
+  static const POND_MANAGEMENT_TABLE = _Paths.POND_MANAGEMENT_TABLE;
+  static const FEED_MANAGEMENT_DETAILS = _Paths.FEED_MANAGEMENT_DETAILS;
+  static const SMART_KHAMARI = _Paths.SMART_KHAMARI;
+  static const GRAPH = _Paths.GRAPH;
+}
+
+abstract class _Paths {
+  _Paths._();
+  static const DMA_TECHNOLOGIES = '/dma-technologies';
+  static const COMING_SOON = '/coming-soon';
+  static const HOME = '/home';
+  static const INDEX = '/index';
+  static const POULTRY_INDEX = '/poultry-index';
+  static const CATTLE_INDEX = '/cattle-index';
+  static const CLEAN_AIR_INDEX = '/clean-air-index';
+  static const SPLASH_SCREEN = '/splash-screen';
+  static const NOTIFICATIONS = '/notifications';
+  static const PROFILE = '/profile';
+  static const MORE = '/more';
+  static const LOGIN = '/login';
+  static const REGISTRATION = '/registration';
+  static const PRODUCT_COMPANIES = '/product-companies';
+  static const PRODUCT_DETAILS = '/product-details';
+  static const PRODUCT_COMP_WISE_LIST = '/product-comp-wise-list';
+  static const POND_MANAGEMENT = '/pond-management';
+  static const FEED_MANAGEMENT = '/feed-management';
+  static const FISH_DISEASE_TREATMENT = '/fish-disease-treatment';
+  static const FARM_MANAGEMENT = '/farm-management';
+  static const AERATOR_CONNECTION = '/aerator-connection';
+  static const FEEDER_CONNECTION = '/feeder-connection';
+  static const WEATHER_FORECAST = '/weather-forecast';
+  static const TRAINING_AND_WORKSHOP = '/training-and-workshop';
+  static const FARM_MANAGEMENT_DETAILS = '/farm-management-details';
+  static const WATER_QUALITY_DEVICE = '/water-quality-device';
+  static const ABOUT_DEVICES = '/about-devices';
+  static const FAQ = '/faq';
+  static const ABOUT_APP = '/about-app';
+  static const PASSWORD_CHANGE = '/password-change';
+  static const FORGET_PASSWORD = '/forget-password';
+  static const OTP_VERIFY = '/otp-verify';
+  static const RESET_PASSWORD = '/reset-password';
+  static const INTERNET_CHECKER = '/internet-checker';
+  static const VERSION_CHECKER = '/version-checker';
+  static const HIGH_DENSITY_FISH_FARMING = '/high-density-fish-farming';
+  static const FISH_DISEASE_TREATMENT_DETAILS =
+      '/fish-disease-treatment-details';
+  static const FAQ_DETAILS = '/faq-details';
+  static const ABOUT_APP_DETAILS = '/about-app-details';
+  static const ABOUT_DEVICES_DETAILS = '/about-devices-details';
+  static const POND_MANAGEMENT_DETAILS = '/pond-management-details';
+  static const POND_MANAGEMENT_TABLE = '/pond-management-table';
+  static const FEED_MANAGEMENT_DETAILS = '/feed-management-details';
+  static const SMART_KHAMARI = '/smart-khamari';
+  static const GRAPH = '/graph';
+}

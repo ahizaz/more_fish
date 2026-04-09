@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1059690091021",
+    "project_id": "dma-technologies-98ce2",
+    "storage_bucket": "dma-technologies-98ce2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1059690091021:android:9772d6ebef3181d9c63b44",
+        "android_client_info": {
+          "package_name": "com.dmatechnologies.more_fish"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAT8SwqTV62rVwBPZ7YN4tpq1ryvjFsWVk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
