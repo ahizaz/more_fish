@@ -17,6 +17,13 @@ class PoultryHomeView extends GetView<PoultryIndexController> {
   Widget build(BuildContext context) {
     final header = Get.find<PoultryHeaderController>();
 
+    void openIfLoggedIn(VoidCallback navigate) async {
+      final canOpen = await controller.ensureLoggedIn();
+      if (canOpen) {
+        navigate();
+      }
+    }
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
         statusBarColor: Color(0xffdbcc68),
@@ -52,104 +59,119 @@ class PoultryHomeView extends GetView<PoultryIndexController> {
                       _HomeFeatureTile(
                         title: 'Live Data\nmonitoring',
                         iconAssetPath: 'assets/icons/water_quality_check.png',
-                        onTap: () {
-                          Get.to(() => const PoultryLiveMonitoringView());
-                        },
+                        onTap: () => openIfLoggedIn(
+                          () => Get.to(() => const PoultryLiveMonitoringView()),
+                        ),
                       ),
                       _HomeFeatureTile(
                         title: 'Farm\nManagement',
                         iconAssetPath:
                             'assets/icons/farm_management/farm_management.png',
-                        onTap: () {
-                          Get.toNamed(Routes.COMING_SOON, arguments: {'title': 'Farm Management'});
-                        },
+                        onTap: () => openIfLoggedIn(
+                          () => Get.toNamed(
+                            Routes.COMING_SOON,
+                            arguments: {'title': 'Farm Management'},
+                          ),
+                        ),
                       ),
                       _HomeFeatureTile(
                         title: 'Feed\nManagement',
                         iconAssetPath:
                             'assets/icons/farm_management/feed_management.png',
-                        onTap: () {
-                          Get.toNamed(Routes.COMING_SOON, arguments: {'title': 'Feed Management'});
-                        },
+                        onTap: () => openIfLoggedIn(
+                          () => Get.toNamed(
+                            Routes.COMING_SOON,
+                            arguments: {'title': 'Feed Management'},
+                          ),
+                        ),
                       ),
                       _HomeFeatureTile(
                         title: 'Poultry Disease\nTreatment',
                         iconAssetPath:
                             'assets/icons/farm_management/poultry_disease_treatment.png',
-                        onTap: () {
-                          Get.toNamed(
+                        onTap: () => openIfLoggedIn(
+                          () => Get.toNamed(
                             Routes.COMING_SOON,
                             arguments: {'title': 'Poultry Disease Treatment'},
-                          );
-                        },
+                          ),
+                        ),
                       ),
                       _HomeFeatureTile(
                         title: 'Chicks\nMarketplace',
                         iconAssetPath:
                             'assets/icons/farm_management/chicks_marketplace.png',
-                        onTap: () {
-                          Get.toNamed(Routes.COMING_SOON, arguments: {'title': 'Chicks Marketplace'});
-                        },
+                        onTap: () => openIfLoggedIn(
+                          () => Get.toNamed(
+                            Routes.COMING_SOON,
+                            arguments: {'title': 'Chicks Marketplace'},
+                          ),
+                        ),
                       ),
                       _HomeFeatureTile(
                         title: 'Poultry Feed\nMarketplace',
                         iconAssetPath:
                             'assets/icons/farm_management/poultry_feed_marketplace.png',
-                        onTap: () {
-                          Get.toNamed(
+                        onTap: () => openIfLoggedIn(
+                          () => Get.toNamed(
                             Routes.COMING_SOON,
                             arguments: {'title': 'Poultry Feed Marketplace'},
-                          );
-                        },
+                          ),
+                        ),
                       ),
                       _HomeFeatureTile(
                         title: 'Auto Feeder',
                         iconAssetPath:
                             'assets/icons/farm_management/auto_feeder.png',
-                        onTap: () {
-                          Get.toNamed(Routes.COMING_SOON, arguments: {'title': 'Auto Feeder'});
-                        },
+                        onTap: () => openIfLoggedIn(
+                          () => Get.toNamed(
+                            Routes.COMING_SOON,
+                            arguments: {'title': 'Auto Feeder'},
+                          ),
+                        ),
                       ),
                       _HomeFeatureTile(
                         title: 'Weather\nForecast',
                         iconAssetPath:
                             'assets/icons/farm_management/weather_forecast.png',
-                        onTap: () {
-                          Get.toNamed(Routes.COMING_SOON, arguments: {'title': 'Weather Forecast'});
-                        },
+                        onTap: () => openIfLoggedIn(
+                          () => Get.toNamed(
+                            Routes.COMING_SOON,
+                            arguments: {'title': 'Weather Forecast'},
+                          ),
+                        ),
                       ),
                       _HomeFeatureTile(
                         title: 'Live\nConsultancy',
                         iconAssetPath:
                             'assets/icons/farm_management/live_consultancy.png',
-                        onTap: () {
-                          Get.toNamed(
+                        onTap: () => openIfLoggedIn(
+                          () => Get.toNamed(
                             Routes.COMING_SOON,
                             arguments: {'title': 'Live Consultancy'},
-                          );
-                        },
+                          ),
+                        ),
                       ),
                       _HomeFeatureTile(
                         title: 'Auto Water\nSystem',
                         iconAssetPath:
                             'assets/icons/farm_management/auto_water_system.png',
-                        onTap: () {
-                          Get.toNamed(
+                        onTap: () => openIfLoggedIn(
+                          () => Get.toNamed(
                             Routes.COMING_SOON,
                             arguments: {'title': 'Auto Water System'},
-                          );
-                        },
+                          ),
+                        ),
                       ),
                       _HomeFeatureTile(
                         title: 'Financial\nManagement',
                         iconAssetPath:
                             'assets/icons/farm_management/financial_management.png',
-                        onTap: () {
-                          Get.toNamed(
+                        onTap: () => openIfLoggedIn(
+                          () => Get.toNamed(
                             Routes.COMING_SOON,
                             arguments: {'title': 'Financial Management'},
-                          );
-                        },
+                          ),
+                        ),
                       ),
                     ],
                   ),
