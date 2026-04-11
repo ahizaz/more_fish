@@ -1,16 +1,21 @@
 class PoultryLiveData {
   final String deviceId;
   final String timestamp; // ISO or formatted
+  final double? aqi;
   final double nh3MgL;
   final double temperatureC;
+  final double? refTemperatureC;
   final int humidityPct;
   final double vocMgM3;
   final int co2Ppm;
+
   /// Methane concentration in ppm (CH4).
   final int ch4Ppm;
+
   /// Dust particle concentration PM1.0 (µg/m³).
   final int pm1UgM3;
   final int pm25UgM3;
+
   /// Dust particle concentration PM4.0 (µg/m³).
   final int pm4UgM3;
   final int pm10UgM3;
@@ -20,8 +25,10 @@ class PoultryLiveData {
   const PoultryLiveData({
     required this.deviceId,
     required this.timestamp,
+    this.aqi,
     required this.nh3MgL,
     required this.temperatureC,
+    this.refTemperatureC,
     required this.humidityPct,
     required this.vocMgM3,
     required this.co2Ppm,
@@ -43,10 +50,22 @@ class PoultryLiveData {
     return PoultryLiveData(
       deviceId: (json['deviceId'] ?? '').toString(),
       timestamp: (json['timestamp'] ?? '').toString(),
-      nh3MgL: (json['nh3'] is num) ? (json['nh3'] as num).toDouble() : double.tryParse('${json['nh3']}') ?? 0,
-      temperatureC: (json['temperature'] is num) ? (json['temperature'] as num).toDouble() : double.tryParse('${json['temperature']}') ?? 0,
+      aqi: (json['aqi'] is num)
+          ? (json['aqi'] as num).toDouble()
+          : double.tryParse('${json['aqi']}') ?? 0.0,
+      nh3MgL: (json['nh3'] is num)
+          ? (json['nh3'] as num).toDouble()
+          : double.tryParse('${json['nh3']}') ?? 0,
+      temperatureC: (json['temperature'] is num)
+          ? (json['temperature'] as num).toDouble()
+          : double.tryParse('${json['temperature']}') ?? 0,
+      refTemperatureC: (json['ref_temperature'] is num)
+          ? (json['ref_temperature'] as num).toDouble()
+          : double.tryParse('${json['ref_temperature']}') ?? 0.0,
       humidityPct: _intVal(json['humidity']),
-      vocMgM3: (json['voc'] is num) ? (json['voc'] as num).toDouble() : double.tryParse('${json['voc']}') ?? 0.0,
+      vocMgM3: (json['voc'] is num)
+          ? (json['voc'] as num).toDouble()
+          : double.tryParse('${json['voc']}') ?? 0.0,
       co2Ppm: _intVal(json['co2']),
       // Backend might send methane as `ch4` or `methane`.
       ch4Ppm: _intVal(json['ch4'] ?? json['methane']),
@@ -60,21 +79,23 @@ class PoultryLiveData {
   }
 
   Map<String, dynamic> toJson() => {
-        'deviceId': deviceId,
-        'timestamp': timestamp,
-        'nh3': nh3MgL,
-        'temperature': temperatureC,
-        'humidity': humidityPct,
-        'voc': vocMgM3,
-        'co2': co2Ppm,
-        'ch4': ch4Ppm,
-        'pm1': pm1UgM3,
-        'pm25': pm25UgM3,
-        'pm4': pm4UgM3,
-        'pm10': pm10UgM3,
-        'noise': noiseDb,
-        'lightLux': lightLux,
-      };
+    'deviceId': deviceId,
+    'timestamp': timestamp,
+    'aqi': aqi,
+    'nh3': nh3MgL,
+    'temperature': temperatureC,
+    'ref_temperature': refTemperatureC,
+    'humidity': humidityPct,
+    'voc': vocMgM3,
+    'co2': co2Ppm,
+    'ch4': ch4Ppm,
+    'pm1': pm1UgM3,
+    'pm25': pm25UgM3,
+    'pm4': pm4UgM3,
+    'pm10': pm10UgM3,
+    'noise': noiseDb,
+    'lightLux': lightLux,
+  };
 }
 
 class PoultryDevice {

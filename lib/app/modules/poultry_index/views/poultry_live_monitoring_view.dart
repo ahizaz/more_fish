@@ -108,6 +108,13 @@ class _LoggedInDashboard extends StatelessWidget {
                 runSpacing: 12,
                 children: [
                   _MetricCard(
+                    iconAsset: 'assets/icons/poultry_co.png',
+                    title: 'Air Quality Index (AQI)',
+                    value: live == null
+                        ? '--'
+                        : (live.aqi ?? 0.0).toStringAsFixed(1),
+                  ),
+                  _MetricCard(
                     iconAsset: 'assets/icons/poultry_nh3.png',
                     title: 'Ammonia (NH3)',
                     value: live == null
@@ -122,6 +129,13 @@ class _LoggedInDashboard extends StatelessWidget {
                         : '${live.temperatureC.toStringAsFixed(2)} °C',
                   ),
                   _MetricCard(
+                    iconAsset: 'assets/icons/poultry_temperature.png',
+                    title: 'Reference temperature',
+                    value: live == null
+                        ? '--'
+                        : '${(live.refTemperatureC ?? 0.0).toStringAsFixed(2)} °C',
+                  ),
+                  _MetricCard(
                     iconAsset: 'assets/icons/poultry_humidity.png',
                     title: 'Humidity',
                     value: live == null ? '--' : '${live.humidityPct} %',
@@ -133,20 +147,15 @@ class _LoggedInDashboard extends StatelessWidget {
                   ),
                   _MetricCard(
                     iconAsset: 'assets/icons/cattle_voc.png',
-                    title: 'Volatile Organic Compounds(VOCs)',
+                    title: 'TVOC',
                     value: live == null
                         ? '--'
                         : '${live.vocMgM3.toStringAsFixed(2)} mg/m³',
                   ),
                   _MetricCard(
                     iconAsset: 'assets/icons/poultry_noise.png',
-                    title: 'Noise level',
+                    title: 'Sound',
                     value: live == null ? '--' : '${live.noiseDb} dB',
-                  ),
-                  _MetricCard(
-                    iconAsset: 'assets/icons/poultry_light_intensity.png',
-                    title: 'Light Intensity',
-                    value: live == null ? '--' : '${live.lightLux} lux',
                   ),
                   _MetricCard(
                     iconAsset: 'assets/icons/poultry_ch4.png',

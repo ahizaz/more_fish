@@ -21,9 +21,13 @@ class MockPoultryLiveRepository implements PoultryLiveRepository {
     return PoultryLiveData(
       deviceId: deviceId,
       timestamp: now.toIso8601String(),
+      aqi: double.parse((1 + _rand.nextDouble() * 3).toStringAsFixed(1)),
       nh3MgL: double.parse((_rand.nextDouble() * 0.05).toStringAsFixed(2)),
       temperatureC: double.parse(
         (20 + _rand.nextDouble() * 10).toStringAsFixed(2),
+      ),
+      refTemperatureC: double.parse(
+        (21 + _rand.nextDouble() * 10).toStringAsFixed(2),
       ),
       humidityPct: 60 + _rand.nextInt(30),
       vocMgM3: double.parse((_rand.nextDouble() * 0.30).toStringAsFixed(2)),

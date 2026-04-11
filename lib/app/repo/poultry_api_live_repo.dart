@@ -14,7 +14,7 @@ class PoultryApiLiveRepository implements PoultryLiveRepository {
   List<Map<String, dynamic>>? _cachedItems;
   DateTime? _lastFetchedAt;
 
-  static const Duration _cacheTtl = Duration(seconds: 20);
+  static const Duration _cacheTtl = Duration(seconds: 5);
 
   Uri get _latestReadingsUri =>
       Uri.parse('${ApiService.baseUrl}/poultry_care/api/latest-readings/');
@@ -121,8 +121,10 @@ class PoultryApiLiveRepository implements PoultryLiveRepository {
     return PoultryLiveData(
       deviceId: resolvedDeviceId.isEmpty ? selectedDeviceId : resolvedDeviceId,
       timestamp: ts,
+      aqi: _double(payload['aqi']),
       nh3MgL: _double(payload['nh3_gas']),
       temperatureC: _double(payload['temperature']),
+      refTemperatureC: _double(payload['ref_temperature']),
       humidityPct: _double(payload['humidity']).round(),
       vocMgM3: _double(payload['tvoc']),
       co2Ppm: _double(payload['co2']).round(),

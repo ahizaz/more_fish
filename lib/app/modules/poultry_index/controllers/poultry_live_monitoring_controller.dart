@@ -26,7 +26,7 @@ class PoultryLiveMonitoringController extends GetxController
   Timer? _pollTimer;
   bool _isRefreshInProgress = false;
 
-  static const Duration _refreshInterval = Duration(minutes: 5);
+  static const Duration _refreshInterval = Duration(seconds: 10);
 
   @override
   void onInit() {
