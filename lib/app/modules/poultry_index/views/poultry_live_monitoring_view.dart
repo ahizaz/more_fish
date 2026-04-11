@@ -43,6 +43,9 @@ class PoultryLiveMonitoringView extends StatelessWidget {
                 child: Builder(
                   builder: (_) {
                     final ctrl = Get.put(PoultryLiveMonitoringController());
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      ctrl.refreshWhenPageVisible();
+                    });
                     return _LoggedInDashboard(controller: ctrl);
                   },
                 ),

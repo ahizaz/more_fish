@@ -14,7 +14,7 @@ class PoultryApiLiveRepository implements PoultryLiveRepository {
   List<Map<String, dynamic>>? _cachedItems;
   DateTime? _lastFetchedAt;
 
-  static const Duration _cacheTtl = Duration(seconds: 5);
+  static const Duration _cacheTtl = Duration(seconds: 1);
 
   Uri get _latestReadingsUri =>
       Uri.parse('${ApiService.baseUrl}/poultry_care/api/latest-readings/');

@@ -25,6 +25,7 @@ class PoultryLiveMonitoringController extends GetxController
 
   Timer? _pollTimer;
   bool _isRefreshInProgress = false;
+  DateTime? _lastPageVisibleRefreshAt;
 
   static const Duration _refreshInterval = Duration(seconds: 10);
 
@@ -126,6 +127,23 @@ class PoultryLiveMonitoringController extends GetxController
 
   Future<void> onDeviceChanged(String deviceId) async {
     selectedDeviceId.value = deviceId;
+    await refreshLiveData();
+    _startPolling();
+  }
+
+  Future<void> refreshWhenPageVisible() async {
+    final now = DateTime.now();
+    final last = _lastPageVisibleRefreshAt;
+    if (last != null && now.difference(last) < const Duration(seconds: 2)) {
+      return;
+    }
+    _lastPageVisibleRefreshAt = now;
+
+    if (selectedDeviceId.value.isEmpty || devices.isEmpty) {
+      await loadDevices();
+      return;
+    }
+
     await refreshLiveData();
     _startPolling();
   }
