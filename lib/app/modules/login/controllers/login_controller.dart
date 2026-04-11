@@ -41,7 +41,9 @@ class LoginController extends GetxController {
     }
 
     if (loginTokenStorage.hasValidToken()) {
-      debugPrint('Guard login skipped: token already found in SharedPreferences.');
+      debugPrint(
+        'Guard login skipped: token already found in SharedPreferences.',
+      );
       Future.microtask(() => Get.back(result: true));
     }
   }
@@ -74,7 +76,9 @@ class LoginController extends GetxController {
           final userId = loginResponse.value?.data?.userId;
 
           if (token == null || token.trim().isEmpty || userId == null) {
-            debugPrint('Login response missing token/userId, cannot persist session.');
+            debugPrint(
+              'Login response missing token/userId, cannot persist session.',
+            );
             isActiveLoginButton.value = true;
             Get.snackbar(
               'Login Failed',
@@ -86,7 +90,9 @@ class LoginController extends GetxController {
 
           await loginTokenStorage.setToken(token);
           await loginTokenStorage.setUserId(userId);
-          debugPrint('Saved token in SharedPreferences: ${loginTokenStorage.getToken() != null}');
+          debugPrint(
+            'Saved token in SharedPreferences: ${loginTokenStorage.getToken() != null}',
+          );
 
           if (_openedFromGuard) {
             Get.back(result: true);

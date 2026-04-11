@@ -42,5 +42,4 @@ class LoginTokenStorage {
         normalized != 'null' &&
         normalized != 'undefined';
   }
-
 }

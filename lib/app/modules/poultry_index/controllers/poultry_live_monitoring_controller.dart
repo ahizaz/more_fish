@@ -83,7 +83,7 @@ class PoultryLiveMonitoringController extends GetxController {
     if (token == null) return false;
     final normalized = token.trim().toLowerCase();
     return normalized.isNotEmpty &&
-        normalized != 'null' &&
+        normalized != 'null' && //
         normalized != 'undefined';
   }
 
