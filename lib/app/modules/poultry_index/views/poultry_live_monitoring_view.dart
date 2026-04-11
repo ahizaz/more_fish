@@ -131,13 +131,13 @@ class _LoggedInDashboard extends StatelessWidget {
                         ? '--'
                         : '${live.temperatureC.toStringAsFixed(2)} °C',
                   ),
-                  _MetricCard(
-                    iconAsset: 'assets/icons/poultry_temperature.png',
-                    title: 'Reference temperature',
-                    value: live == null
-                        ? '--'
-                        : '${(live.refTemperatureC ?? 0.0).toStringAsFixed(2)} °C',
-                  ),
+                  // _MetricCard(
+                  //   iconAsset: 'assets/icons/poultry_temperature.png',
+                  //   title: 'Reference temperature',
+                  //   value: live == null
+                  //       ? '--'
+                  //       : '${(live.refTemperatureC ?? 0.0).toStringAsFixed(2)} °C',
+                  // ),
                   _MetricCard(
                     iconAsset: 'assets/icons/poultry_humidity.png',
                     title: 'Humidity',
