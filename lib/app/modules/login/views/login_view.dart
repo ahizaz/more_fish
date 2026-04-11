@@ -152,7 +152,7 @@ class LoginView extends GetView<LoginController> {
                                       );
                                     }
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     "Login",
                                     style: TextStyle(
                                       fontSize: 18,
@@ -161,7 +161,7 @@ class LoginView extends GetView<LoginController> {
                                   ),
                                 ),
                               )
-                            : CircularProgressIndicator();
+                            : const CircularProgressIndicator();
                       }),
 
                       SizedBox(height: 15),
@@ -174,7 +174,7 @@ class LoginView extends GetView<LoginController> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
+                              const Text(
                                 "Don't have an account?",
                                 style: TextStyle(color: Colors.blueGrey),
                               ),

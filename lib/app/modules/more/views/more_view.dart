@@ -39,7 +39,7 @@ class MoreView extends GetView<MoreController> {
               }),
               Expanded(
                 child: ListView.builder(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
                   itemCount: controller.items.length,
                   itemBuilder: (context, index) {
                     return InkWell(
@@ -56,8 +56,8 @@ class MoreView extends GetView<MoreController> {
                       },
                       child: CommonContainer(
                         height: 50,
-                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                        margin: EdgeInsets.only(bottom: 14),
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                        margin: const EdgeInsets.only(bottom: 14),
                         alignment: Alignment.center,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -67,7 +67,7 @@ class MoreView extends GetView<MoreController> {
                               children: [
                                 Text(
                                   controller.items[index],
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
@@ -90,7 +90,7 @@ class MoreView extends GetView<MoreController> {
                 fontWeight: FontWeight.bold,
                 color: Colors.grey.shade500,
               ),
-              SizedBox(height: 30,)
+              const SizedBox(height: 30,)
             ],
           ),
       ),

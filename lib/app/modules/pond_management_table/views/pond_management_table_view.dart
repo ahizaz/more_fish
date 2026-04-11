@@ -116,7 +116,7 @@ class PondManagementTableView extends GetView<PondManagementTableController> {
                             ],
                           ),
                         ),
-                        SizedBox(height: 12,),
+                        const SizedBox(height: 12,),
                       ],
                     ),
                   ),
@@ -136,7 +136,7 @@ class PondManagementTableView extends GetView<PondManagementTableController> {
       children: [
         Expanded(
           child: CommonText(
-            "${text}",
+            "$text",
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: Color(0xff0370c3),
@@ -150,7 +150,7 @@ class PondManagementTableView extends GetView<PondManagementTableController> {
 
   section({text}){
     return Container(
-      margin: EdgeInsets.only(bottom: 2),
+      margin: const EdgeInsets.only(bottom: 2),
       child: Row(
         children: [
           Expanded(
@@ -168,12 +168,12 @@ class PondManagementTableView extends GetView<PondManagementTableController> {
 
   section2({text}){
     return Container(
-      margin: EdgeInsets.only(bottom: 2),
+      margin: const EdgeInsets.only(bottom: 2),
       child: Row(
         children: [
           Expanded(
             child: CommonText(
-              "${text}",
+              "$text",
               fontSize: 18,
               fontWeight: FontWeight.bold,
               maxLines: 3,
@@ -186,12 +186,12 @@ class PondManagementTableView extends GetView<PondManagementTableController> {
 
   subSection({text}){
     return Container(
-      margin: EdgeInsets.only(bottom: 2),
+      margin: const EdgeInsets.only(bottom: 2),
       child: Row(
         children: [
           Expanded(
             child: CommonText(
-              "${text}",
+              "$text",
               fontSize: 16,
               fontWeight: FontWeight.w500,
               maxLines: 3,
@@ -217,7 +217,7 @@ class PondManagementTableView extends GetView<PondManagementTableController> {
 
   boxDecoration(){
     return BoxDecoration(
-      gradient: LinearGradient(
+      gradient: const LinearGradient(
         colors: [
           Color(0xffebffff), // Start color
           Colors.white,      // End color

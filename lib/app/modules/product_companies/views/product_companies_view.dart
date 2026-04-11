@@ -40,7 +40,7 @@ class ProductCompaniesView extends GetView<ProductCompaniesController> {
               var data = controller.productCompaniesResponse.value?.data;
               return data == null ? Center(child: CircularProgressIndicator()):
                 GridView.builder(
-                padding: EdgeInsets.all(12.0),
+                padding: const EdgeInsets.all(12.0),
                 itemCount: data.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,          // Number of columns

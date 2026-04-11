@@ -4,14 +4,14 @@ class CommonContainer extends StatelessWidget{
 
   const CommonContainer(
       {
-        Key? key,
+        super.key,
         this.height,
         this.width,
         this.child,
         this.padding,
         this.margin,
         this.alignment,
-      }) : super(key: key);
+      });
 
   final double? height;
   final double? width;
@@ -28,7 +28,7 @@ class CommonContainer extends StatelessWidget{
         margin: margin,
         alignment: alignment,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             colors: [
               Color(0xffebffff),
               Colors.white,

@@ -4,9 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:more_fish/app/common_widgets/common_container.dart';
 import 'package:more_fish/app/common_widgets/common_text.dart';
 
-import '../../../common_widgets/common_app_bar.dart';
+
 import '../../../res/colors/colors.dart';
-import '../../home/controllers/home_controller.dart';
+
 import '../controllers/password_change_controller.dart';
 
 class PasswordChangeView extends GetView<PasswordChangeController> {
@@ -43,7 +43,7 @@ class PasswordChangeView extends GetView<PasswordChangeController> {
                           ),
                         ),
                    SizedBox(height: 30),
-                        CommonText(
+                        const CommonText(
                           "Change Password",
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -134,7 +134,7 @@ class PasswordChangeView extends GetView<PasswordChangeController> {
                                 style: TextStyle(fontSize: 18, color: Colors.white),
                               ),
                             ),
-                          ) : CircularProgressIndicator();
+                          ) : const CircularProgressIndicator();
                         })
                         ,
                       ],

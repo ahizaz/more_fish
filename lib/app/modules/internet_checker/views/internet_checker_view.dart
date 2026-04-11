@@ -31,7 +31,7 @@ class InternetCheckerView extends GetView<InternetCheckerController> {
           
                 ),
                 SizedBox(height: 20,),
-                CommonText(
+                const CommonText(
                   'Sorry, No Internet Connection.',
                   fontWeight: FontWeight.bold,
                   fontSize: 18,

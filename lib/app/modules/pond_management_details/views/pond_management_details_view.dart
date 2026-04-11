@@ -73,16 +73,16 @@ class PondManagementDetailsView
                         Column(
                           children: [
                             CommonContainer(
-                              margin: EdgeInsets.all(16),
-                              padding: EdgeInsets.all(16),
+                              margin: const EdgeInsets.all(16),
+                              padding: const EdgeInsets.all(16),
                               child: Column(
                                 children: [
-                                  section(text: "${PondManagementData.title3Value1}"),
-                                  section(text: "${PondManagementData.title3Value2}"),
-                                  section(text: "${PondManagementData.title3Value3}"),
-                                  section(text: "${PondManagementData.title3Value4}"),
-                                  section(text: "${PondManagementData.title3Value5}"),
-                                  section(text: "${PondManagementData.title3Value6}"),
+                                  section(text: PondManagementData.title3Value1),
+                                  section(text: PondManagementData.title3Value2),
+                                  section(text: PondManagementData.title3Value3),
+                                  section(text: PondManagementData.title3Value4),
+                                  section(text: PondManagementData.title3Value5),
+                                  section(text: PondManagementData.title3Value6),
                                 ],
                               ),
                             ),
@@ -208,7 +208,7 @@ class PondManagementDetailsView
 
   boxDecoration(){
     return BoxDecoration(
-      gradient: LinearGradient(
+      gradient: const LinearGradient(
         colors: [
           Color(0xffebffff), // Start color
           Colors.white,      // End color

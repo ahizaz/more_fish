@@ -15,10 +15,10 @@ class IndexView extends GetView<IndexController> {
   Widget build(BuildContext context) {
 
     final List<Widget> pages = [
-      HomeView(),
-      NotificationsView(),
-      ProfileView(),
-      MoreView(),
+      const HomeView(),
+      const NotificationsView(),
+      const ProfileView(),
+      const MoreView(),
     ];
 
     return Obx((){
@@ -54,27 +54,27 @@ class IndexView extends GetView<IndexController> {
 
           },
           type: BottomNavigationBarType.fixed,
-          selectedItemColor: Color(0xff0370c3),
+          selectedItemColor: const Color(0xff0370c3),
           unselectedItemColor: Colors.blueGrey.shade300,
           elevation: 4,
-          selectedLabelStyle: TextStyle(
+          selectedLabelStyle: const TextStyle(
             fontWeight: FontWeight.bold
           ),
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: const Icon(Icons.home),
               label: 'home'.tr,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.notifications),
+              icon: const Icon(Icons.notifications),
               label: 'notifications'.tr,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
+              icon: const Icon(Icons.person),
               label: 'profile'.tr,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.menu),
+              icon: const Icon(Icons.menu),
               label: 'more'.tr,
             ),
           ],

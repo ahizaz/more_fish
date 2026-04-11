@@ -24,7 +24,7 @@ class InternetCheckerController extends GetxController {
 
   checkInternet() async{
     timer?.cancel();
-    timer = Timer(Duration(seconds: 1), ()async {
+    timer = Timer(const Duration(seconds: 1), ()async {
       if(await InternetConnectionChecker.instance.hasConnection){
         Get.back();
       }

@@ -277,7 +277,7 @@ class CommonAppBar extends StatelessWidget {
                               height: 28,
                               width: 55,
                               decoration: BoxDecoration(
-                                color: Color(0xff8beeef),
+                                color: const Color(0xff8beeef),
                                 borderRadius: BorderRadius.circular(100),
                               ),
                               child: Center(
@@ -330,7 +330,7 @@ class CommonAppBar extends StatelessWidget {
                     children: [
                       Column(
                         children: [
-                          CommonText(
+                          const CommonText(
                             'Air Temp',
                             fontSize: 10,
                             fontWeight: FontWeight.w500,
@@ -345,7 +345,7 @@ class CommonAppBar extends StatelessWidget {
                       const SizedBox(width: 8),
                       Column(
                         children: [
-                          CommonText(
+                          const CommonText(
                             'Humidity',
                             fontSize: 10,
                             fontWeight: FontWeight.w500,

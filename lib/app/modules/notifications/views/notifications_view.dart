@@ -55,7 +55,7 @@ class NotificationsView extends GetView<NotificationsController> {
                               children: [
                                 Container(
                                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     gradient: LinearGradient(
                                       colors: [
                                         Colors.white,
@@ -71,15 +71,15 @@ class NotificationsView extends GetView<NotificationsController> {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       CommonText(
-                                        "${DateFormat('dd:MM:yyyy').format(data.data![index].notTime!.toLocal())}",
-                                        color: Color(0xff0d66a8),
+                                        DateFormat('dd:MM:yyyy').format(data.data![index].notTime!.toLocal()),
+                                        color: const Color(0xff0d66a8),
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                       ),
                                       CommonText(
                                       data.data?[index].notTime != null ?
-                                        "${DateFormat('hh:mm a').format(data.data![index].notTime!.toLocal())}" : '',
-                                        color: Color(0xff0d66a8),
+                                        DateFormat('hh:mm a').format(data.data![index].notTime!.toLocal()) : '',
+                                        color: const Color(0xff0d66a8),
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -89,7 +89,7 @@ class NotificationsView extends GetView<NotificationsController> {
                                     ],
                                   ),
                                 ),
-                                SizedBox(height: 8,),
+                                const SizedBox(height: 8,),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 16,),
                                   child: CommonText(
@@ -101,12 +101,12 @@ class NotificationsView extends GetView<NotificationsController> {
                                     maxLines: 20,
                                   ),
                                 ),
-                                SizedBox(height: 12,),
+                                const SizedBox(height: 12,),
                               ],
                             ),
                           );
                     },
-                  ) : Center(child: CircularProgressIndicator());
+                  ) : const Center(child: CircularProgressIndicator());
                 }),
               ),
             ],
@@ -119,9 +119,9 @@ class NotificationsView extends GetView<NotificationsController> {
 
   appBar()=>
     Container(
-      padding: EdgeInsets.only(top: 0, left: 12, right: 12),
+      padding: const EdgeInsets.only(top: 0, left: 12, right: 12),
       height: 75,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Color(0xffd4fcfd),
       ),
       child: Column(
@@ -135,17 +135,17 @@ class NotificationsView extends GetView<NotificationsController> {
                   Column(
                     children: [
                       ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
                         child: Image.asset(
                           "assets/icons/logo_trade_mark.jpg",
                           height: 60,
                           width: 60,
                         ),
-                        borderRadius: BorderRadius.circular(100),
                       ),
                     ],
                   ),
-                  SizedBox(width: 8,),
-                  Column(
+                  const SizedBox(width: 8,),
+                  const Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -178,7 +178,7 @@ class NotificationsView extends GetView<NotificationsController> {
               Row(
                 children: [
                   Container(
-                    padding: EdgeInsets.all(3),
+                    padding: const EdgeInsets.all(3),
                     height: 35,
                     width: 35,
                     decoration: BoxDecoration(
@@ -203,7 +203,7 @@ class NotificationsView extends GetView<NotificationsController> {
     );
 
   decoration()=>BoxDecoration(
-    gradient: LinearGradient(
+    gradient: const LinearGradient(
       colors: [
         Color(0xfffbffff),
         Colors.white,

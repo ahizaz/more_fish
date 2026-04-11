@@ -95,7 +95,7 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                   ),
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               InkWell(
                 onTap: () async {
                   final Uri launchUri = Uri(
@@ -112,7 +112,7 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                   height: 50,
                   margin: EdgeInsets.symmetric(vertical: 12),
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
+                    gradient: const LinearGradient(
                       colors: [
                         Color(0xffebffff), // Start color
                         Colors.white,      // End color
@@ -135,7 +135,7 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.phone, color: Colors.green.shade700,),
-                      SizedBox(width: 12,),
+                      const SizedBox(width: 12,),
                       Text(
                         "Call Now",
                         style: TextStyle(
