@@ -8,10 +8,10 @@ class CommonAlertDialog extends StatelessWidget {
   final VoidCallback login;
 
   const CommonAlertDialog({
-    Key? key,
+    super.key,
     required this.notNow,
     required this.login,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +33,14 @@ class CommonAlertDialog extends StatelessWidget {
           onPressed: notNow,
           child: Text(
             'not_now'.tr,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
           ),
         ),
         TextButton(
           onPressed: login,
           child: Text(
             'login'.tr,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
           ),
         ),
       ],

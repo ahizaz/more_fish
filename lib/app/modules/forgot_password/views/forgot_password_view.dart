@@ -34,7 +34,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                         width: 120,
                       ),
                     ),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

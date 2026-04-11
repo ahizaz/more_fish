@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'package:get/get.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import '../../../repo/auth.dart';
-import '../../../response/version_checker_response.dart';
+
 import '../../../routes/app_pages.dart';
 import '../../../service/local_storage.dart';
 

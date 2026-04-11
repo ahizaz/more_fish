@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../../../res/strings/about_app.dart';
+
 
 class AboutAppController extends GetxController {
 

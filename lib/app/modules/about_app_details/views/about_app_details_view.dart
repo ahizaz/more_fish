@@ -14,10 +14,10 @@ class AboutAppDetailsView extends GetView<AboutAppDetailsController> {
     return Scaffold(
       backgroundColor: AppColors.backGround,
       appBar: AppBar(
-        backgroundColor: Color(0xffcbffff),
+        backgroundColor: const Color(0xffcbffff),
         title: Text(
-          '${controller.title}'.tr,
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          controller.title.tr,
+          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         elevation: 1,
@@ -30,14 +30,14 @@ class AboutAppDetailsView extends GetView<AboutAppDetailsController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CommonText(
-                "${controller.data}".tr,
+                controller.data.tr,
                 maxLines: 30,
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
                 color: Colors.blueGrey.shade800,
                 textAlign: TextAlign.justify,
               ),
-              SizedBox(height: 15,),
+              const SizedBox(height: 15,),
             ],
           ),
         ),

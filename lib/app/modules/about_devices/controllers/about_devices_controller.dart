@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
-import 'package:more_fish/app/res/strings/about_app.dart';
-import 'package:more_fish/app/res/strings/about_device.dart';
+
 
 class AboutDevicesController extends GetxController {
 

@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:more_fish/app/common_widgets/common_container.dart';
 import 'package:more_fish/app/common_widgets/common_text.dart';
 import 'package:more_fish/app/res/colors/colors.dart';
-import '../../../routes/app_pages.dart';
 import '../controllers/otp_verify_controller.dart';
 
 class OtpVerifyView extends GetView<OtpVerifyController> {

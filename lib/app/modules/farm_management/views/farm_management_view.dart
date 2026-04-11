@@ -38,7 +38,7 @@ class FarmManagementView extends GetView<FarmManagementController> {
           Expanded(
             child: GridView.builder(
                 itemCount: controller.listItemsEnglish.length,
-                padding: EdgeInsets.all(12.0),
+                padding: const EdgeInsets.all(12.0),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 12.0,
@@ -56,7 +56,7 @@ class FarmManagementView extends GetView<FarmManagementController> {
             
                     },
                     child: CommonContainer(
-                      padding: EdgeInsets.symmetric(horizontal: 4),
+                      padding: const EdgeInsets.symmetric(horizontal: 4),
                       alignment: Alignment.center,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -66,10 +66,10 @@ class FarmManagementView extends GetView<FarmManagementController> {
                             height: 45,
                             width: 45,
                           ),
-                          SizedBox(height: 5),
+                          const SizedBox(height: 5),
                           Text(
-                            '${controller.listItemsEnglish[index]}'.tr,
-                            style: TextStyle(
+                            controller.listItemsEnglish[index].tr,
+                            style: const TextStyle(
                               color: Colors.black,
                               fontSize: 14,
                               fontWeight: FontWeight.bold,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:more_fish/app/common_widgets/common_alert_dialog.dart';
-import 'package:more_fish/app/common_widgets/common_text.dart';
+
 import '../../../routes/app_pages.dart';
 import '../../home/views/home_view.dart';
 import '../../more/views/more_view.dart';

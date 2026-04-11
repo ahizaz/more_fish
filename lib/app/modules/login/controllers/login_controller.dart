@@ -29,10 +29,10 @@ class LoginController extends GetxController {
     var response = await authRepository.setLogin(email: email, password: password);
     response.fold(
             (l){
-              print('${l.message}');
+              debugPrint('${l.message}');
               isActiveLoginButton.value = true;
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text("Oops! ❌ Invalid login credentials.")),
+                const SnackBar(content: Text("Oops! ❌ Invalid login credentials.")),
               );
             },
             (r) async {
@@ -44,7 +44,7 @@ class LoginController extends GetxController {
               await loginTokenStorage.setUserId(userId!);
               Get.offAllNamed(Routes.INDEX);
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text("Login Successful ✅")),
+                const SnackBar(content: Text("Login Successful ✅")),
               );
 
 

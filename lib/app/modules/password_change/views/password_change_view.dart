@@ -42,7 +42,7 @@ class PasswordChangeView extends GetView<PasswordChangeController> {
                             width: 120,
                           ),
                         ),
-                        SizedBox(height: 30),
+                   SizedBox(height: 30),
                         CommonText(
                           "Change Password",
                           fontSize: 24,

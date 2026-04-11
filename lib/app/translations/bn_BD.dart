@@ -1,4 +1,4 @@
-import 'package:more_fish/app/res/strings/about_device.dart';
+
 
 const Map<String, String> bnBD = {
   'title': 'আরো মাছ - MoreFish',

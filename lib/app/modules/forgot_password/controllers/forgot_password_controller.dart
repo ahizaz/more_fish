@@ -29,10 +29,10 @@ class ForgotPasswordController extends GetxController {
     var response = await authRepository.forgotPassword(email: email, phone: phone);
     response.fold(
             (l){
-          print('${l.message}');
+          debugPrint(l.message);
           isActiveButton.value = true;
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Oops! ❌ Invalid credentials.")),
+            const SnackBar(content: Text("Oops! ❌ Invalid credentials.")),
           );
         },
             (r) async {
@@ -40,7 +40,7 @@ class ForgotPasswordController extends GetxController {
               Get.toNamed(Routes.OTP_VERIFY);
               isActiveButton.value = true;
               ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Successful ✅")),
+            const SnackBar(content: Text("Successful ✅")),
           );
 
 

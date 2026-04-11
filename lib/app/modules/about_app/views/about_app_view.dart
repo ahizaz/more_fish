@@ -37,7 +37,7 @@ class AboutAppView extends GetView<AboutAppController> {
               }),
               Expanded(
                 child: ListView.builder(
-                  padding: EdgeInsets.only(top: 16),
+                  padding: const EdgeInsets.only(top: 16),
                   itemCount: controller.titleList.length,
                   itemBuilder: (context, index){
                     return InkWell(
@@ -45,15 +45,15 @@ class AboutAppView extends GetView<AboutAppController> {
                         Get.toNamed(Routes.ABOUT_APP_DETAILS, arguments: {"title": controller.titleList[index], "data":controller.dataList[index]});
                       },
                       child: CommonContainer(
-                        margin: EdgeInsets.only(left: 16, right: 16, bottom: 14),
-                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                        margin: const EdgeInsets.only(left: 16, right: 16, bottom: 14),
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                         child: Column(
                           children: [
                             Row(
                               children: [
                                 Expanded(
                                   child: CommonText(
-                                    "${controller.titleList[index]}".tr,
+                                    controller.titleList[index].tr,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
                                     maxLines: 3,

@@ -37,7 +37,7 @@ class FaqView extends GetView<FaqController> {
               }),
               Expanded(
                 child: ListView.builder(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   itemCount: controller.titleList.length,
                   itemBuilder: (context, index){
                     return InkWell(
@@ -45,12 +45,12 @@ class FaqView extends GetView<FaqController> {
                         Get.toNamed(Routes.FAQ_DETAILS, arguments: {"title": controller.titleList[index],"data":controller.dataList[index]});
                       },
                       child: CommonContainer(
-                        margin: EdgeInsets.only(bottom: 14),
-                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                        margin: const EdgeInsets.only(bottom: 14),
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                         child: Column(
                           children: [
                             CommonText(
-                              "${controller.titleList[index]}".tr,
+                              controller.titleList[index].tr,
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
                               fontSize: 18,

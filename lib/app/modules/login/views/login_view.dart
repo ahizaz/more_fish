@@ -23,7 +23,7 @@ class LoginView extends GetView<LoginController> {
       body: CommonContainer(
         child: Center(
           child: SingleChildScrollView(
-            padding: EdgeInsets.all(12),
+            padding:const EdgeInsets.all(12),
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Form(
@@ -39,15 +39,15 @@ class LoginView extends GetView<LoginController> {
                         width: 120,
                       ),
                     ),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
 
-                    CommonText(
+                    const CommonText(
                       "Login",
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: Colors.green,
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
                     TextFormField(
                       controller: controller.emailController,
@@ -67,7 +67,7 @@ class LoginView extends GetView<LoginController> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
 
                     Obx(() => TextFormField(
                       controller: controller.passwordController,
@@ -110,7 +110,7 @@ class LoginView extends GetView<LoginController> {
                       ]
                     ),
 
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
                     Obx((){
                       return controller.isActiveLoginButton == true?

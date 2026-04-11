@@ -1,4 +1,5 @@
-import 'dart:convert';
+
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../repo/products.dart';
 import '../../../response/product_list_response.dart';
@@ -19,12 +20,12 @@ class ProductCompWiseListController extends GetxController {
 
     response.fold(
           (l) {
-        print('Failed to fetch product list: ${l.message}');
+        debugPrint('Failed to fetch product list: ${l.message}');
       }, (r) {
       productListResponse.value = r;
-      print("=================================");
-      print(productListResponse.value);
-      print("=================================");
+      debugPrint("=================================");
+      debugPrint("productListResponse.value");
+      debugPrint("=================================");
     },
     );
   }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../../../common_widgets/common_app_bar.dart';
-import '../../../common_widgets/common_container.dart';
+
 import '../../../common_widgets/common_text.dart';
 import '../../../res/colors/colors.dart';
 import '../../home/controllers/home_controller.dart';
@@ -34,7 +34,7 @@ class AeratorConnectionView extends GetView<AeratorConnectionController> {
               humidity: '${homeController.weatherData['main']['humidity']}%',
             );
           }),
-          Expanded(
+          const Expanded(
             child: Padding(
               padding: EdgeInsets.all(16),
               child: Center(

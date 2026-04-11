@@ -5,7 +5,7 @@ import '../../../common_widgets/common_app_bar.dart';
 import '../../../common_widgets/common_container.dart';
 import '../../../common_widgets/common_text.dart';
 import '../../../res/colors/colors.dart';
-import '../../../res/strings/fish_disease_treatment.dart';
+
 import '../../../routes/app_pages.dart';
 import '../../home/controllers/home_controller.dart';
 import '../controllers/fish_disease_treatment_controller.dart';
@@ -106,12 +106,12 @@ class FishDiseaseTreatmentView extends GetView<FishDiseaseTreatmentController> {
 
   section2({text}){
     return Container(
-      margin: EdgeInsets.only(bottom: 2),
+      margin: const EdgeInsets.only(bottom: 2),
       child: Row(
         children: [
           Expanded(
             child: CommonText(
-              "${text}",
+              "$text",
               fontSize: 18,
               fontWeight: FontWeight.bold,
               maxLines: 3,
@@ -124,12 +124,12 @@ class FishDiseaseTreatmentView extends GetView<FishDiseaseTreatmentController> {
 
   subSection({text}){
     return Container(
-      margin: EdgeInsets.only(bottom: 2),
+      margin: const EdgeInsets.only(bottom: 2),
       child: Row(
         children: [
           Expanded(
             child: CommonText(
-              "${text}",
+              "$text",
               fontSize: 16,
               fontWeight: FontWeight.w500,
               maxLines: 3,

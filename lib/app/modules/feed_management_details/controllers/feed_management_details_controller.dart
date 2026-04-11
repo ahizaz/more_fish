@@ -1,8 +1,7 @@
 import 'package:get/get.dart';
 
 class FeedManagementDetailsController extends GetxController {
-  //TODO: Implement FeedManagementDetailsController
-
+  
   final count = 0.obs;
   var title = ''.obs;
   var data = [].obs;

@@ -55,20 +55,20 @@ class HomeView extends GetView<HomeController> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         gridViewSection1(controller),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         banner(controller),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         gridViewSection2(controller),
-                        SizedBox(height: 4),
+                        const SizedBox(height: 4),
                         Row(
                           children: [
                             Expanded(child: premiumMemberButton(controller)),
                             Expanded(child: emergencyButton(controller)),
                           ],
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                       ],
                     ),
                   ),
@@ -84,7 +84,7 @@ class HomeView extends GetView<HomeController> {
   banner(homeController) => Obx(() {
     return Container(
       height: 120,
-      padding: EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       child: PageView.builder(
         itemCount: homeController.bannerList.length,
         controller: homeController.pageController,
@@ -113,8 +113,8 @@ class HomeView extends GetView<HomeController> {
   gridViewSection1(homeController) {
     return Obx(() {
       return GridView.builder(
-        padding: EdgeInsets.all(12.0),
-        physics: NeverScrollableScrollPhysics(),
+        padding: const EdgeInsets.all(12.0),
+        physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: homeController.listItemsEnglish1.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -191,10 +191,10 @@ class HomeView extends GetView<HomeController> {
                     height: 40,
                     width: 40,
                   ),
-                  SizedBox(height: 3),
+                  const SizedBox(height: 3),
                   Text(
                     "${homeController.listItemsEnglish1[index]}".tr,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 14,
                       fontWeight: FontWeight.bold,

@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:more_fish/app/repo/devices_repo.dart';
+
 import 'package:more_fish/app/res/strings/pond_management.dart';
 
-import '../../../response/pond_list_response.dart';
+
 
 class PondManagementController extends GetxController {
 

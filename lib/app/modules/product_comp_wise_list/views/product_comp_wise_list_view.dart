@@ -4,7 +4,7 @@ import '../../../common_widgets/common_container.dart';
 import '../../../res/colors/colors.dart';
 import '../../../routes/app_pages.dart';
 import '../../../service/service.dart';
-import '../../product_companies/controllers/product_companies_controller.dart';
+
 import '../controllers/product_comp_wise_list_controller.dart';
 
 class ProductCompWiseListView extends GetView<ProductCompWiseListController> {
@@ -15,7 +15,7 @@ class ProductCompWiseListView extends GetView<ProductCompWiseListController> {
     return Scaffold(
       backgroundColor: AppColors.backGround,
       appBar: AppBar(
-        backgroundColor: Color(0xffd4fcfd),
+        backgroundColor: const Color(0xffd4fcfd),
         title: const Text(
           'Product List',
           style: TextStyle(
@@ -26,7 +26,7 @@ class ProductCompWiseListView extends GetView<ProductCompWiseListController> {
       ),
       body: Obx((){
         var data = controller.productListResponse.value?.data;
-        return data == null ? Center(child: CircularProgressIndicator()):
+        return data == null ? const Center(child: CircularProgressIndicator()):
         GridView.builder(
           padding: EdgeInsets.all(12),
           itemCount: data.data.length,
@@ -42,20 +42,20 @@ class ProductCompWiseListView extends GetView<ProductCompWiseListController> {
                 Get.toNamed(Routes.PRODUCT_DETAILS,arguments: {"id": data.data[index].guid});
               },
               child: CommonContainer(
-                padding: EdgeInsets.symmetric(horizontal: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 12),
                 alignment: Alignment.center,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.network(
-                      "${ApiService.baseUrl}${data.data[index].productimageSet[0].image??Icon(Icons.account_circle_sharp)}",
+                      "${ApiService.baseUrl}${data.data[index].productimageSet[0].image}",
                       height: 80,
                       width: 80,
                     ),
-                    SizedBox(height: 3),
+                    const SizedBox(height: 3),
                     Text(
-                      "${data.data[index].name}",
-                      style: TextStyle(
+                      data.data[index].name,
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
@@ -67,7 +67,7 @@ class ProductCompWiseListView extends GetView<ProductCompWiseListController> {
                     SizedBox(height: 3),
                     Row(
                       children: [
-                        Text(
+                        const Text(
                           "৳",
                           style: TextStyle(
                             color: Colors.black,
@@ -77,10 +77,10 @@ class ProductCompWiseListView extends GetView<ProductCompWiseListController> {
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        SizedBox(width: 1,),
+                        const SizedBox(width: 1,),
                         Text(
-                          "${data.data[index].price}",
-                          style: TextStyle(
+                          data.data[index].price,
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 20,
                             fontWeight: FontWeight.bold,

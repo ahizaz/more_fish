@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../common_widgets/common_container.dart';
-import '../controllers/farm_management_details_controller.dart';
+
 
 
 class FishGrowthDataView extends StatelessWidget {

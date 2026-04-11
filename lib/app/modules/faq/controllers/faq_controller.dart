@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:more_fish/app/res/strings/faq_info.dart';
+
 
 class FaqController extends GetxController {
 

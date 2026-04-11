@@ -15,17 +15,17 @@ class FishDiseaseTreatmentDetailsView
     return Scaffold(
       backgroundColor: AppColors.backGround,
       appBar: AppBar(
-        backgroundColor: Color(0xffcbffff),
+        backgroundColor: const Color(0xffcbffff),
         title: Text(
-          '${controller.title}',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          controller.title,
+          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         elevation: 1,
       ),
       body: CommonContainer(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        margin: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         child: ListView.builder(
 
           itemCount: controller.data.length,
