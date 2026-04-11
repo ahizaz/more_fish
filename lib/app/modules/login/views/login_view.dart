@@ -11,162 +11,190 @@ class LoginView extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
+    final isGuardLogin = controller.openedFromGuard;
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
-        value: const SystemUiOverlayStyle(
-          statusBarColor: Color(0xffebffff),
-          statusBarIconBrightness: Brightness.dark,
-          statusBarBrightness: Brightness.dark,
-        ),
-        child: Scaffold(
-
-      body: CommonContainer(
-        child: Center(
-          child: SingleChildScrollView(
-            padding:const EdgeInsets.all(12),
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Form(
-                key: controller.formKey,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: Image.asset(
-                        "assets/icons/logo_trade_mark.jpg",
-                        height: 120,
-                        width: 120,
-                      ),
-                    ),
-                    const SizedBox(height: 30),
-
-                    const CommonText(
-                      "Login",
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.green,
-                    ),
-                    const SizedBox(height: 20),
-
-                    TextFormField(
-                      controller: controller.emailController,
-                      decoration: InputDecoration(
-                        labelText: "Email",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
+      value: const SystemUiOverlayStyle(
+        statusBarColor: Color(0xffebffff),
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.dark,
+      ),
+      child: Scaffold(
+        body: CommonContainer(
+          child: Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(12),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Form(
+                  key: controller.formKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: Image.asset(
+                          "assets/icons/logo_trade_mark.jpg",
+                          height: 120,
+                          width: 120,
                         ),
                       ),
-                      keyboardType: TextInputType.emailAddress,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) return "Enter your email";
-                        String emailPattern = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
-                        if (!RegExp(emailPattern).hasMatch(value) && value.length < 6) {
-                          return "Enter a valid email or phone";
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 15),
+                      const SizedBox(height: 30),
 
-                    Obx(() => TextFormField(
-                      controller: controller.passwordController,
-                      decoration: InputDecoration(
-                        labelText: "Password",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        suffixIcon: IconButton(
-                          icon: Icon(controller.showPassword.value
-                              ? Icons.visibility
-                              : Icons.visibility_off),
-                          onPressed: () => controller.showPassword.value =
-                          !controller.showPassword.value,
-                        ),
+                      const CommonText(
+                        "Login",
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green,
                       ),
-                      obscureText: !controller.showPassword.value,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) return "Enter your password";
-                        if (value.length < 5) return "Password must be at least 5 characters";
-                        return null;
-                      },
-                    )),
-                    SizedBox(height: 5),
+                      const SizedBox(height: 20),
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            Get.toNamed(Routes.FORGET_PASSWORD);
-                          },
-                          child: CommonText(
-                            "Forgot Password?",
-                            color: Colors.blueGrey.shade700,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                      TextFormField(
+                        controller: controller.emailController,
+                        decoration: InputDecoration(
+                          labelText: "Email",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                      ]
-                    ),
+                        keyboardType: TextInputType.emailAddress,
+                        validator: (value) {
+                          if (value == null || value.isEmpty)
+                            return "Enter your email";
+                          String emailPattern =
+                              r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
+                          if (!RegExp(emailPattern).hasMatch(value) &&
+                              value.length < 6) {
+                            return "Enter a valid email or phone";
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 15),
 
-                    const SizedBox(height: 20),
-
-                    Obx((){
-                      return controller.isActiveLoginButton == true?
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green,
-                            padding: EdgeInsets.symmetric(vertical: 14),
-                            shape: RoundedRectangleBorder(
+                      Obx(
+                        () => TextFormField(
+                          controller: controller.passwordController,
+                          decoration: InputDecoration(
+                            labelText: "Password",
+                            border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                controller.showPassword.value
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                              ),
+                              onPressed: () => controller.showPassword.value =
+                                  !controller.showPassword.value,
+                            ),
                           ),
-                          onPressed: () {
-                            if (controller.formKey.currentState!.validate()) {
-                              controller.isActiveLoginButton.value = false;
-                              print("Email/Phone: ${controller.emailController.text}");
-                              print("Password: ${controller.passwordController.text}");
-                              controller.login(context, controller.emailController.text, controller.passwordController.text);
-                            }
+                          obscureText: !controller.showPassword.value,
+                          validator: (value) {
+                            if (value == null || value.isEmpty)
+                              return "Enter your password";
+                            if (value.length < 5)
+                              return "Password must be at least 5 characters";
+                            return null;
                           },
-                          child: Text(
-                            "Login",
-                            style: TextStyle(fontSize: 18, color: Colors.white),
+                        ),
+                      ),
+                      SizedBox(height: 5),
+
+                      if (!isGuardLogin)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                Get.toNamed(Routes.FORGET_PASSWORD);
+                              },
+                              child: CommonText(
+                                "Forgot Password?",
+                                color: Colors.blueGrey.shade700,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                      SizedBox(height: isGuardLogin ? 15 : 20),
+
+                      Obx(() {
+                        return controller.isActiveLoginButton.value == true
+                            ? SizedBox(
+                                width: double.infinity,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.green,
+                                    padding: EdgeInsets.symmetric(vertical: 14),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    if (controller.formKey.currentState!
+                                        .validate()) {
+                                      controller.isActiveLoginButton.value =
+                                          false;
+                                      debugPrint(
+                                        "Email/Phone: ${controller.emailController.text}",
+                                      );
+                                      debugPrint(
+                                        "Password length: ${controller.passwordController.text.length}",
+                                      );
+                                      controller.login(
+                                        context,
+                                        controller.emailController.text,
+                                        controller.passwordController.text,
+                                      );
+                                    }
+                                  },
+                                  child: Text(
+                                    "Login",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : CircularProgressIndicator();
+                      }),
+
+                      SizedBox(height: 15),
+
+                      if (!isGuardLogin)
+                        TextButton(
+                          onPressed: () {
+                            Get.toNamed(Routes.REGISTRATION);
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Don't have an account?",
+                                style: TextStyle(color: Colors.blueGrey),
+                              ),
+                              Text(
+                                " Register",
+                                style: TextStyle(
+                                  color: Colors.red.shade700,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ) : CircularProgressIndicator();
-                    }),
-
-                    SizedBox(height: 15),
-
-                    TextButton(
-                      onPressed: () {
-                        Get.toNamed(Routes.REGISTRATION);
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Don't have an account?",
-                            style: TextStyle(color: Colors.blueGrey),
-                          ),
-                          Text(
-                            " Register",
-                            style: TextStyle(color: Colors.red.shade700, fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
         ),
-      ),
       ),
     );
   }

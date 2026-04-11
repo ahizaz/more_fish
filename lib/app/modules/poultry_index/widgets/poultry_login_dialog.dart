@@ -34,7 +34,7 @@ class _PoultryLoginDialogState extends State<PoultryLoginDialog> {
     if (username.isEmpty || password.isEmpty) {
       Get.snackbar(
         'Missing Information',
-        'Please enter username and password.',
+        'Please enter email and password.',
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: const Color(0xfffff7e8),
         colorText: const Color(0xff7a5713),
@@ -125,7 +125,7 @@ class _PoultryLoginDialogState extends State<PoultryLoginDialog> {
               controller: _usernameController,
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
-                labelText: 'Username',
+                labelText: 'Email',
                 prefixIcon: const Icon(Icons.person_outline),
                 filled: true,
                 fillColor: Colors.white,

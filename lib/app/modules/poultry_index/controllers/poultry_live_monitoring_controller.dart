@@ -3,10 +3,12 @@ import 'package:get/get.dart';
 import '../../../repo/mock_poultry_live_repo.dart';
 import '../../../repo/poultry_live_models.dart';
 import '../../../repo/poultry_live_repo.dart';
+import '../../../routes/app_pages.dart';
+import '../../../service/local_storage.dart';
 
 class PoultryLiveMonitoringController extends GetxController {
   PoultryLiveMonitoringController({PoultryLiveRepository? repository})
-      : _repo = repository ?? MockPoultryLiveRepository();
+    : _repo = repository ?? MockPoultryLiveRepository();
 
   final PoultryLiveRepository _repo;
 
@@ -22,7 +24,7 @@ class PoultryLiveMonitoringController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    loadDevices();
+    _bootstrap();
   }
 
   @override
@@ -47,6 +49,42 @@ class PoultryLiveMonitoringController extends GetxController {
     } finally {
       isLoading.value = false;
     }
+  }
+
+  Future<void> _bootstrap() async {
+    final canProceed = await _ensureLoggedIn();
+    if (!canProceed) {
+      if (Get.isOverlaysOpen != true) {
+        Get.back();
+      }
+      return;
+    }
+    await loadDevices();
+  }
+
+  Future<bool> _ensureLoggedIn() async {
+    final loginTokenStorage = Get.find<LoginTokenStorage>();
+    final token = loginTokenStorage.getToken();
+
+    if (_hasValidToken(token)) {
+      return true;
+    }
+
+    final result = await Get.toNamed(
+      Routes.LOGIN,
+      arguments: {'fromGuard': true},
+    );
+
+    final nextToken = loginTokenStorage.getToken();
+    return result == true || _hasValidToken(nextToken);
+  }
+
+  bool _hasValidToken(String? token) {
+    if (token == null) return false;
+    final normalized = token.trim().toLowerCase();
+    return normalized.isNotEmpty &&
+        normalized != 'null' &&
+        normalized != 'undefined';
   }
 
   Future<void> onDeviceChanged(String deviceId) async {
