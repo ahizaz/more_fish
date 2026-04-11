@@ -8,11 +8,14 @@ class LoginTokenStorage {
   static const _userIdKey = 'userId';
 
   String? getToken() {
-    return sharedPreferences.getString(_tokenKey);
+    final token = sharedPreferences.getString(_tokenKey);
+    if (token == null) return null;
+    final normalized = token.trim();
+    return normalized.isEmpty ? null : normalized;
   }
 
   Future<void> setToken(String value) async {
-    await sharedPreferences.setString(_tokenKey, value);
+    await sharedPreferences.setString(_tokenKey, value.trim());
   }
 
   Future<void> removeToken() async {
@@ -31,5 +34,13 @@ class LoginTokenStorage {
     await sharedPreferences.remove(_userIdKey);
   }
 
+  bool hasValidToken() {
+    final token = getToken();
+    if (token == null) return false;
+    final normalized = token.trim().toLowerCase();
+    return normalized.isNotEmpty &&
+        normalized != 'null' &&
+        normalized != 'undefined';
+  }
 
 }

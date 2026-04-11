@@ -32,6 +32,18 @@ class LoginController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    _bypassGuardLoginIfAlreadyAuthenticated();
+  }
+
+  void _bypassGuardLoginIfAlreadyAuthenticated() {
+    if (!_openedFromGuard) {
+      return;
+    }
+
+    if (loginTokenStorage.hasValidToken()) {
+      debugPrint('Guard login skipped: token already found in SharedPreferences.');
+      Future.microtask(() => Get.back(result: true));
+    }
   }
 
   login(context, email, password) async {
@@ -58,10 +70,23 @@ class LoginController extends GetxController {
         (r) async {
           loginResponse.value = r;
 
-          var token = await loginResponse.value?.data?.token;
-          var userId = await loginResponse.value?.data?.userId;
-          await loginTokenStorage.setToken(token!);
-          await loginTokenStorage.setUserId(userId!);
+          final token = loginResponse.value?.data?.token;
+          final userId = loginResponse.value?.data?.userId;
+
+          if (token == null || token.trim().isEmpty || userId == null) {
+            debugPrint('Login response missing token/userId, cannot persist session.');
+            isActiveLoginButton.value = true;
+            Get.snackbar(
+              'Login Failed',
+              'Session data not found from server response.',
+              snackPosition: SnackPosition.BOTTOM,
+            );
+            return;
+          }
+
+          await loginTokenStorage.setToken(token);
+          await loginTokenStorage.setUserId(userId);
+          debugPrint('Saved token in SharedPreferences: ${loginTokenStorage.getToken() != null}');
 
           if (_openedFromGuard) {
             Get.back(result: true);
@@ -78,6 +103,7 @@ class LoginController extends GetxController {
         },
       );
     } finally {
+      isActiveLoginButton.value = true;
       EasyLoading.dismiss();
     }
   }

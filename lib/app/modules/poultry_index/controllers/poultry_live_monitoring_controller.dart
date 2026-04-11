@@ -66,7 +66,7 @@ class PoultryLiveMonitoringController extends GetxController {
     final loginTokenStorage = Get.find<LoginTokenStorage>();
     final token = loginTokenStorage.getToken();
 
-    if (_hasValidToken(token)) {
+    if (loginTokenStorage.hasValidToken()) {
       return true;
     }
 
