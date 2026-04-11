@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../routes/app_pages.dart';
+import '../../../service/local_storage.dart';
 
 class DmaTechnologiesView extends StatelessWidget {
   const DmaTechnologiesView({super.key});
@@ -31,6 +32,24 @@ class DmaTechnologiesGrid extends StatelessWidget {
     const bg = Color(0xffebffff);
     const tileBg = Color(0xffd7f2ee);
 
+    Future<void> openPoultryWithLogin() async {
+      final loginTokenStorage = Get.find<LoginTokenStorage>();
+
+      if (loginTokenStorage.hasValidToken()) {
+        Get.toNamed(Routes.POULTRY_INDEX);
+        return;
+      }
+
+      final result = await Get.toNamed(
+        Routes.LOGIN,
+        arguments: {'fromGuard': true},
+      );
+
+      if (result == true || loginTokenStorage.hasValidToken()) {
+        Get.toNamed(Routes.POULTRY_INDEX);
+      }
+    }
+
     final tiles = <_DmaTileData>[
       _DmaTileData(
         title: 'More Fish',
@@ -40,7 +59,7 @@ class DmaTechnologiesGrid extends StatelessWidget {
       _DmaTileData(
         title: 'Poultry Care',
         asset: 'assets/icons/dma_poultry_pulse.png',
-        onTap: () => Get.toNamed(Routes.POULTRY_INDEX),
+        onTap: openPoultryWithLogin,
       ),
       _DmaTileData(
         title: 'Cattle Care',
@@ -141,60 +160,6 @@ class DmaTechnologiesGrid extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class _FullWidthTile extends StatelessWidget {
-  final Color bg;
-  final String title;
-  final VoidCallback onTap;
-
-  const _FullWidthTile({
-    required this.bg,
-    required this.title,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(14),
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
-        decoration: BoxDecoration(
-          color: bg,
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: Colors.black12),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 8,
-              offset: Offset(0, 2),
-            ),
-          ],
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(height: 8),
-            const Icon(Icons.air, size: 76, color: Colors.blueGrey),
-            const SizedBox(height: 10),
-            Text(
-              title,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: Colors.black,
-                fontFamily: 'Times New Roman',
-              ),
-            ),
-          ],
         ),
       ),
     );

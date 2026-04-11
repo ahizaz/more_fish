@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../common_widgets/common_app_bar.dart';
+import '../../../routes/app_pages.dart';
+import '../../../service/local_storage.dart';
 import '../controllers/poultry_header_controller.dart';
 
 class PoultryProfileView extends StatelessWidget {
@@ -36,11 +38,39 @@ class PoultryProfileView extends StatelessWidget {
                   backgroundColor: const Color(0xffdbcc68),
                 ),
               ),
-              const Expanded(
+              Expanded(
                 child: Center(
-                  child: Text(
-                    'Profile (Coming soon)',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(
+                        width: 180,
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            final loginTokenStorage =
+                                Get.find<LoginTokenStorage>();
+                            await loginTokenStorage.removeToken();
+                            await loginTokenStorage.removeUserId();
+                            Get.offAllNamed(Routes.DMA_TECHNOLOGIES);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xffdbcc68),
+                            foregroundColor: Colors.black87,
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          child: const Text(
+                            'Logout',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
