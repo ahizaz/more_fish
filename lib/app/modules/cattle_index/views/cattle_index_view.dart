@@ -13,7 +13,7 @@ class CattleIndexView extends GetView<CattleIndexController> {
 
   @override
   Widget build(BuildContext context) {
-    final pages = const [
+    const pages = [
       CattleHomeView(),
       CattleNotificationsView(),
       CattleProfileView(),

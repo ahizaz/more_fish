@@ -33,8 +33,8 @@ class TrainingAndWorkshopView extends GetView<TrainingAndWorkshopController> {
               humidity: '${homeController.weatherData['main']['humidity']}%',
             );
           }),
-          Expanded(
-            child: const Center(
+          const Expanded(
+            child: Center(
               child: CommonText(
                 'Training is not available.',
                 fontSize: 20,

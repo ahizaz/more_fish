@@ -35,7 +35,7 @@ class ResetPasswordView extends GetView<ResetPasswordController> {
                             width: 120,
                           ),
                         ),
-                      SizedBox(height: 30),
+                      const SizedBox(height: 30),
                       CommonText(
                         'Reset Password',
                         fontSize: 24,
@@ -51,7 +51,7 @@ class ResetPasswordView extends GetView<ResetPasswordController> {
                               decoration: InputDecoration(
                                 labelText: "New Password",
                                 hintText: "Password minimum 8 digits",
-                                hintStyle: TextStyle(
+                                hintStyle: const TextStyle(
                                   fontSize: 14,
                                   color: Colors.grey
                                 ),
@@ -75,13 +75,13 @@ class ResetPasswordView extends GetView<ResetPasswordController> {
                               },
 
                             ),
-                            SizedBox(height: 30,),
+                            const SizedBox(height: 30,),
                             TextFormField(
                               controller: controller.confirmPassController,
                               decoration: InputDecoration(
                                 labelText: "Confirm Password",
                                 hintText: "Password minimum 8 digits",
-                                hintStyle: TextStyle(
+                                hintStyle: const TextStyle(
                                     fontSize: 14,
                                     color: Colors.grey
                                 ),
@@ -118,7 +118,7 @@ class ResetPasswordView extends GetView<ResetPasswordController> {
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green,
-                              padding: EdgeInsets.symmetric(vertical: 14),
+                              padding: const EdgeInsets.symmetric(vertical: 14),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
@@ -129,12 +129,12 @@ class ResetPasswordView extends GetView<ResetPasswordController> {
                                 controller.resetPassword(context, controller.userId.value, controller.passwordController.text );
                               }
                             },
-                            child: Text(
+                            child: const Text(
                               "Submit",
                               style: TextStyle(fontSize: 18, color: Colors.white),
                             ),
                           ),
-                        ) : CircularProgressIndicator();
+                        ) : const CircularProgressIndicator();
                       }),
                     ],
                   ),

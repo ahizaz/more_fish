@@ -11,7 +11,7 @@ class PoultryIndexView extends GetView<PoultryIndexController> {
 
   @override
   Widget build(BuildContext context) {
-    final pages = const [
+    const pages = [
       PoultryHomeView(),
       PoultryNotificationsView(),
       PoultryProfileView(),

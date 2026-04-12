@@ -47,7 +47,7 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                   child: Obx((){
                     var data = controller.pondDataResponse.value;
                     return data == null ?
-                        Center(child: CircularProgressIndicator()):
+                        const Center(child: CircularProgressIndicator()):
                         Column(
                           children: [
                             Center(
@@ -55,7 +55,7 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                 final pondList = controller.pondListResponse.value?.data ?? [];
 
                                 if (pondList.isEmpty) {
-                                  return SizedBox();
+                                  return const SizedBox();
                                 }
 
                                 final astNameIdList = pondList.map((pond) => {
@@ -71,9 +71,9 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
 
                                 return Column(
                                   children: [
-                                    SizedBox(height: 12,),
+                                    const SizedBox(height: 12,),
                                     Container(
-                                      margin: EdgeInsets.symmetric(horizontal: 12),
+                                      margin: const EdgeInsets.symmetric(horizontal: 12),
                                       decoration: BoxDecoration(
                                           color: Colors.white,
                                         borderRadius: BorderRadius.circular(10)
@@ -108,7 +108,7 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                             );
                                           }).toList(),
                                           buttonStyleData: ButtonStyleData(
-                                            padding: EdgeInsets.symmetric(horizontal: 16),
+                                            padding: const EdgeInsets.symmetric(horizontal: 16),
                                             height: 60,
                                             width: double.infinity,
                                             decoration: BoxDecoration(
@@ -137,7 +137,7 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                             Expanded(
                               child: SingleChildScrollView(
                                 child: Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                                  margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(10)
@@ -145,9 +145,9 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      SizedBox(height: 12,),
+                                      const SizedBox(height: 12,),
                                       Padding(
-                                        padding: EdgeInsets.symmetric(horizontal: 12,),
+                                        padding: const EdgeInsets.symmetric(horizontal: 12,),
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
@@ -159,7 +159,7 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                                     height: 16,
                                                     width: 16,
                                                     decoration: BoxDecoration(
-                                                      color: Color(0xff00cc00),
+                                                      color: const Color(0xff00cc00),
                                                       borderRadius: BorderRadius.circular(100),
                                                     ),
                                                   ):
@@ -171,43 +171,43 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                                       borderRadius: BorderRadius.circular(100),
                                                     ),
                                                   ),
-                                                  SizedBox(width: 6,),
+                                                  const SizedBox(width: 6,),
                                                   Expanded(
                                                     child: CommonText(
-                                                      "${data.data.devices[0].deviceName}",
+                                                      data.data.devices[0].deviceName,
                                                       fontSize: 18,
                                                       fontWeight: FontWeight.bold,
                                                       overflow: TextOverflow.ellipsis,
-                                                      color: Color(0xff0370c3),
+                                                      color: const Color(0xff0370c3),
                                                     ),
                                                   ),
-                                                  SizedBox(width: 8,),
+                                                  const SizedBox(width: 8,),
                                                 ],
                                               ),
                                             ),
                                             CommonText(
-                                              "${data.data.devices[0].sensors[0].dataTime}",
+                                              data.data.devices[0].sensors[0].dataTime,
                                               fontSize: 12,
                                               fontWeight: FontWeight.bold,
                                               textAlign: TextAlign.center,
-                                              color: Color(0xff0370c3),
+                                              color: const Color(0xff0370c3),
                                             ),
                                           ],
                                         ),
                                       ),
-                                      SizedBox(height: 10,),
+                                      const SizedBox(height: 10,),
                                       Container(
-                                        margin: EdgeInsets.symmetric(horizontal: 12),
+                                        margin: const EdgeInsets.symmetric(horizontal: 12),
                                         height: 2,
-                                        color: Color(0xff0370c3),
+                                        color: const Color(0xff0370c3),
                                       ),
                                       Obx((){
                                         return GridView.builder(
-                                            physics: NeverScrollableScrollPhysics(),
-                                            padding: EdgeInsets.symmetric(horizontal: 14, vertical: 16),
+                                            physics: const NeverScrollableScrollPhysics(),
+                                            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 16),
                                             itemCount: controller.pondDataResponse.value?.data.devices[0].sensors.length,
                                             shrinkWrap: true,
-                                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                                 crossAxisCount: 2,
                                                 crossAxisSpacing: 10,
                                                 mainAxisSpacing: 10,
@@ -240,7 +240,7 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                                   print("${controller.pondDataResponse.value?.data.devices[0].sensors[index].sensorName}");
                                                 },
                                                 child: CommonContainer(
-                                                  padding: EdgeInsets.symmetric(horizontal: 4),
+                                                  padding: const EdgeInsets.symmetric(horizontal: 4),
                                                   child: Column(
                                                     children: [
                                                       Expanded(
@@ -259,22 +259,22 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                                                 CommonText(
                                                                   controller.pondDataResponse.value?.data.devices[0].sensors[index].dangerStatus == "invalid" ?
                                                                   "No Data":
-                                                                  "${double.tryParse(controller.pondDataResponse.value?.data.devices[0].sensors[index].lastValue ?? '')?.toStringAsFixed(2) ?? '0'}",
+                                                                  double.tryParse(controller.pondDataResponse.value?.data.devices[0].sensors[index].lastValue ?? '')?.toStringAsFixed(2) ?? '0',
                                                                   fontSize: controller.pondDataResponse.value?.data.devices[0].sensors[index].dangerStatus == "invalid" ?16:20,
                                                                   fontWeight: FontWeight.bold,
                                                                   color: controller.pondDataResponse.value?.data.devices[0].sensors[index].dangerStatus == "perfect" ?
-                                                                  Color(0xff00cc00): Colors.red,
+                                                                  const Color(0xff00cc00): Colors.red,
                                                                   overflow: TextOverflow.ellipsis,
                                                                   textAlign: TextAlign.center,
                                                                 ),
-                                                                SizedBox(width: 3,),
+                                                                const SizedBox(width: 3,),
                                                                 CommonText(
                                                                   controller.pondDataResponse.value?.data.devices[0].sensors[index].dangerStatus == "invalid" ?
                                                                   "":
                                                                   "${controller.pondDataResponse.value?.data.devices[0].sensors[index].sensorUnit}",
                                                                   fontSize: 20,
                                                                   color: controller.pondDataResponse.value?.data.devices[0].sensors[index].dangerStatus == "perfect" ?
-                                                                  Color(0xff00cc00): Colors.red,
+                                                                  const Color(0xff00cc00): Colors.red,
                                                                   fontWeight: FontWeight.w500,
                                                                 )
                                                               ],
@@ -299,15 +299,15 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                         );
                                       }),
 
-                                      SizedBox(height: 16,),
+                                      const SizedBox(height: 16,),
                                       Obx((){
                                         return ListView.builder(
                                           itemCount: controller.pondDataResponse.value?.data.devices[0].aerators.length,
                                           shrinkWrap: true,
                                           itemBuilder: (BuildContext context, int index) {
                                             return CommonContainer(
-                                              margin: EdgeInsets.only(left: 14, right: 14, bottom: 16),
-                                              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                                              margin: const EdgeInsets.only(left: 14, right: 14, bottom: 16),
+                                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                                               child: Row(
                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
@@ -364,7 +364,7 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                               var value = double.tryParse(sensor.lastValue.toString()) ?? 0.0;
 
                                               if (data == "pH" && value < 7)
-                                                return Row(
+                                                return const Row(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     CommonText(
@@ -383,7 +383,7 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                                   ],
                                                 );
                                              if(data == "pH" && value > 8.5)
-                                                return Row(
+                                                return const Row(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     CommonText(
@@ -402,7 +402,7 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                                   ],
                                                 );
                                               if(data == "DO" && value < 3)
-                                                return Row(
+                                                return const Row(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     CommonText(
@@ -421,7 +421,7 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                                   ],
                                                 );
                                               if(data == "TDS" && value < 100)
-                                                return Row(
+                                                return const Row(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     CommonText(
@@ -440,7 +440,7 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                                   ],
                                                 );
                                               if(data == "TDS" && value > 1000)
-                                                return Row(
+                                                return const Row(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     CommonText(
@@ -459,7 +459,7 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                                   ],
                                                 );
                                               if(data == "Temperature" && value > 34)
-                                                return Row(
+                                                return const Row(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     CommonText(
@@ -478,7 +478,7 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                                   ],
                                                 );
                                               if(data == "NH3" && value > 0.5)
-                                                return Row(
+                                                return const Row(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     CommonText(

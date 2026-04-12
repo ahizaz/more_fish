@@ -1,7 +1,7 @@
-import 'dart:convert';
+
 import 'package:get/get.dart';
 import '../../../repo/products.dart';
-import '../../../response/product_companies_response.dart';
+
 import '../../../response/product_details_response.dart';
 
 class ProductDetailsController extends GetxController {

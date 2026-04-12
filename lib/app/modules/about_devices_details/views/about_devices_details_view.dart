@@ -12,9 +12,9 @@ class AboutDevicesDetailsView extends GetView<AboutDevicesDetailsController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xffcbffff),
+        backgroundColor: const Color(0xffcbffff),
         title: Text(
-          '${controller.title}'.tr,
+          controller.title.tr,
           style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,

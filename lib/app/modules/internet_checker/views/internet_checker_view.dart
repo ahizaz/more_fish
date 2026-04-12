@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:more_fish/app/res/colors/colors.dart';
+
 import '../../../common_widgets/common_container.dart';
 import '../../../common_widgets/common_text.dart';
 import '../controllers/internet_checker_controller.dart';
@@ -30,7 +30,7 @@ class InternetCheckerView extends GetView<InternetCheckerController> {
                   width: 150,
           
                 ),
-                SizedBox(height: 20,),
+                const SizedBox(height: 20,),
                 const CommonText(
                   'Sorry, No Internet Connection.',
                   fontWeight: FontWeight.bold,

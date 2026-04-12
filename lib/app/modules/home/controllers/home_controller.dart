@@ -144,7 +144,7 @@ class HomeController extends GetxController {
             }, (r) {
             categoryResponse.value = r;
 
-            print("=================================");
+            debugPrint("=================================");
             print(categoryResponse.value);
             print("=================================");
           },

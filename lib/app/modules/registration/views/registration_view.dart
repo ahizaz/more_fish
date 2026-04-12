@@ -20,7 +20,7 @@ class RegistrationView extends GetView<RegistrationController> {
         ),
         child: Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Color(0xffebffff), Colors.white],
             begin: Alignment.topCenter,
@@ -29,7 +29,7 @@ class RegistrationView extends GetView<RegistrationController> {
         ),
         child: Center(
           child: SingleChildScrollView(
-            padding: EdgeInsets.all(12),
+            padding: const EdgeInsets.all(12),
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Form(
@@ -37,7 +37,7 @@ class RegistrationView extends GetView<RegistrationController> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
+                    const Text(
                       "Registration",
                       style: TextStyle(
                         fontSize: 24,
@@ -45,7 +45,7 @@ class RegistrationView extends GetView<RegistrationController> {
                         color: Colors.green,
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
                     Row(
                       children: [
@@ -62,7 +62,7 @@ class RegistrationView extends GetView<RegistrationController> {
                             (value == null || value.isEmpty) ? "Enter your first name" : null,
                           ),
                         ),
-                        SizedBox(width: 12,),
+                        const SizedBox(width: 12,),
                         Expanded(
                           child: TextFormField(
                             controller: controller.lastNameController,
@@ -78,7 +78,7 @@ class RegistrationView extends GetView<RegistrationController> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
 
                     TextFormField(
                       controller: controller.addressController,
@@ -99,7 +99,7 @@ class RegistrationView extends GetView<RegistrationController> {
                       }
 
                     ),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
 
                     TextFormField(
                       controller: controller.emailController,
@@ -117,7 +117,7 @@ class RegistrationView extends GetView<RegistrationController> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
 
                     IntlPhoneField(
                       decoration: InputDecoration(
@@ -131,7 +131,7 @@ class RegistrationView extends GetView<RegistrationController> {
                         controller.phoneNumber.value = phone.completeNumber;
                       },
                     ),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
 
                     Obx((){
                       return TextFormField(
@@ -158,7 +158,7 @@ class RegistrationView extends GetView<RegistrationController> {
                         },
                       );
                     }),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     Obx((){
                       return TextFormField(
                         controller: controller.confirmPasswordController,
@@ -184,7 +184,7 @@ class RegistrationView extends GetView<RegistrationController> {
                       );
                     })
                     ,
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
 
                     /*Row(
                       children: [
@@ -260,7 +260,7 @@ class RegistrationView extends GetView<RegistrationController> {
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.green,
-                            padding: EdgeInsets.symmetric(vertical: 14),
+                            padding: const EdgeInsets.symmetric(vertical: 14),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
@@ -284,15 +284,15 @@ class RegistrationView extends GetView<RegistrationController> {
                               controller.isActiveRegButton.value = false;
 
                               final requestModel = RegistrationRequest(
-                                firstName: "${controller.firstNameController.text}",
-                                lastName: "${controller.lastNameController.text}",
-                                usrEmail: "${controller.emailController.text}",
-                                phone: "${controller.phoneNumber.value}",
-                                password: "${controller.passwordController.text}",
+                                firstName: controller.firstNameController.text,
+                                lastName: controller.lastNameController.text,
+                                usrEmail: controller.emailController.text,
+                                phone: controller.phoneNumber.value,
+                                password: controller.passwordController.text,
                                 company: 1,
                                 userType: 2,
                                 userDetails: "null",
-                                usrAddress: "${controller.addressController.text}",
+                                usrAddress: controller.addressController.text,
                                 interestedProductDetails: "null",
                               );
 
@@ -300,12 +300,12 @@ class RegistrationView extends GetView<RegistrationController> {
                             }
 
                           },
-                          child: Text(
+                          child: const Text(
                             "Submit",
                             style: TextStyle(fontSize: 18, color: Colors.white),
                           ),
                         ),
-                      ): CircularProgressIndicator();
+                      ): const CircularProgressIndicator();
                     }),
                   ],
                 ),

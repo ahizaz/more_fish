@@ -44,15 +44,15 @@ class PondManagementTableView extends GetView<PondManagementTableController> {
                     child: Column(
                       children: [
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                           decoration: boxDecoration(),
                           child: Column(
                             children: [
-                              title(text: "${PondManagementData.title1}"),
-                              SizedBox(height: 10,),
+                              title(text: PondManagementData.title1),
+                              const SizedBox(height: 10,),
                               Table(
                                 border: TableBorder.all(),
-                                columnWidths: {
+                                columnWidths: const {
                                   0: FixedColumnWidth(140),
                                   1: FlexColumnWidth(),
                                 },
@@ -112,7 +112,7 @@ class PondManagementTableView extends GetView<PondManagementTableController> {
                                   ]),
                                 ],
                               ),
-                              SizedBox(height: 10,),
+                              const SizedBox(height: 10,),
                             ],
                           ),
                         ),
@@ -139,7 +139,7 @@ class PondManagementTableView extends GetView<PondManagementTableController> {
             "$text",
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: Color(0xff0370c3),
+            color: const Color(0xff0370c3),
             maxLines: 2,
             textAlign: TextAlign.center,
           ),
@@ -155,7 +155,7 @@ class PondManagementTableView extends GetView<PondManagementTableController> {
         children: [
           Expanded(
             child: CommonText(
-              "${text}",
+              "$text",
               fontSize: 16,
               fontWeight: FontWeight.w500,
               maxLines: 3,
@@ -231,7 +231,7 @@ class PondManagementTableView extends GetView<PondManagementTableController> {
           color: Colors.blueGrey.withOpacity(0.5),  // Shadow color with opacity
           spreadRadius: 1,   // How much the shadow spreads
           blurRadius: 1,     // How blurry the shadow is
-          offset: Offset(.2, .2), // Position of shadow: (x, y)
+          offset: const Offset(.2, .2), // Position of shadow: (x, y)
         ),
       ],
     );

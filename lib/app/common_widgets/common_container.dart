@@ -42,7 +42,7 @@ class CommonContainer extends StatelessWidget{
               color: Colors.blueGrey.withOpacity(0.5),
               spreadRadius: 1,
               blurRadius: 1,
-              offset: Offset(.2, .2),
+              offset: const Offset(.2, .2),
             ),
           ],
         ),

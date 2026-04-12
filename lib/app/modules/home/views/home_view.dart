@@ -181,7 +181,7 @@ class HomeView extends GetView<HomeController> {
               }
             },
             child: CommonContainer(
-              padding: EdgeInsets.symmetric(horizontal: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 4),
               alignment: Alignment.center,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -211,8 +211,8 @@ class HomeView extends GetView<HomeController> {
   }
 
   gridViewSection2(homeController) => GridView.builder(
-    padding: EdgeInsets.all(12.0),
-    physics: NeverScrollableScrollPhysics(),
+    padding: const EdgeInsets.all(12.0),
+    physics: const NeverScrollableScrollPhysics(),
     shrinkWrap: true,
     itemCount: homeController.listItemsEnglish2.length,
     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -247,7 +247,7 @@ class HomeView extends GetView<HomeController> {
           }
         },
         child: CommonContainer(
-          padding: EdgeInsets.symmetric(horizontal: 4),
+          padding: const EdgeInsets.symmetric(horizontal: 4),
           alignment: Alignment.center,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -257,10 +257,10 @@ class HomeView extends GetView<HomeController> {
                 height: 40,
                 width: 40,
               ),
-              SizedBox(height: 3),
+              const SizedBox(height: 3),
               Text(
                 "${homeController.listItemsEnglish2[index]}".tr,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
@@ -279,13 +279,13 @@ class HomeView extends GetView<HomeController> {
       Get.toNamed(Routes.SMART_KHAMARI);
     },
     child: CommonContainer(
-      margin: EdgeInsets.only(left: 12, right: 6, top: 12, bottom: 12),
+      margin: const EdgeInsets.only(left: 12, right: 6, top: 12, bottom: 12),
       height: 120,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset("assets/icons/community.png", height: 45, width: 45),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           CommonText(
             "smart_khamari".tr,
             color: Colors.black,
@@ -310,7 +310,7 @@ class HomeView extends GetView<HomeController> {
               homeController.activeCallButton.value = false;
             },
             child: CommonContainer(
-              margin: EdgeInsets.only(left: 6, right: 12, top: 12, bottom: 12),
+              margin: const EdgeInsets.only(left: 6, right: 12, top: 12, bottom: 12),
               height: 120,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -403,7 +403,7 @@ class HomeView extends GetView<HomeController> {
               homeController.activeCallButton.value = true;
             },
             child: CommonContainer(
-              margin: EdgeInsets.only(left: 6, right: 12, top: 12, bottom: 12),
+              margin: const EdgeInsets.only(left: 6, right: 12, top: 12, bottom: 12),
               height: 120,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -413,10 +413,10 @@ class HomeView extends GetView<HomeController> {
                     height: 45,
                     width: 45,
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
                     "emergency_service".tr,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

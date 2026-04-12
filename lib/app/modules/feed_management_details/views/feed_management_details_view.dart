@@ -47,35 +47,35 @@ class FeedManagementDetailsView
                         Column(
                           children: [
                             CommonContainer(
-                              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                               child: Column(
                                 children: [
-                                  title(text: "${FeedManagementData.title1}"),
-                                  SizedBox(height: 10,),
-                                  section(text: "${FeedManagementData.title1Subtitle1}"),
-                                  section(text: "${FeedManagementData.title1Subtitle2}"),
-                                  section(text: "${FeedManagementData.title1Subtitle2Value1}"),
-                                  section(text: "${FeedManagementData.title1Subtitle2Value2}"),
+                                  title(text: FeedManagementData.title1),
+                                  const SizedBox(height: 10,),
+                                  section(text: FeedManagementData.title1Subtitle1),
+                                  section(text: FeedManagementData.title1Subtitle2),
+                                  section(text: FeedManagementData.title1Subtitle2Value1),
+                                  section(text: FeedManagementData.title1Subtitle2Value2),
                                 ],
                               ),
                             ),
-                            SizedBox(height: 12,),
+                            const SizedBox(height: 12,),
                           ],
                         ),
                         if(controller.title.value == "Feed Selection Guidelines")
                         Column(
                           children: [
                             CommonContainer(
-                              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                               child: Column(
                                 children: [
-                                  title(text: "${FeedManagementData.title2}",),
-                                  SizedBox(height: 10,),
+                                  title(text: FeedManagementData.title2,),
+                                  const SizedBox(height: 10,),
                                   Table(
                                     border: TableBorder.all(),
                                     columnWidths: {
-                                      0: FixedColumnWidth(140),
-                                      1: FlexColumnWidth(),
+                                      0: const FixedColumnWidth(140),
+                                      1: const FlexColumnWidth(),
                                     },
                                     children: [
                                       TableRow(
@@ -105,11 +105,11 @@ class FeedManagementDetailsView
 
                                     ],
                                   ),
-                                  SizedBox(height: 15,),
+                                  const SizedBox(height: 15,),
                                   Row(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      CommonText(
+                                      const CommonText(
                                         "* ",
                                         fontSize: 24,
                                         fontWeight: FontWeight.bold,
@@ -124,32 +124,32 @@ class FeedManagementDetailsView
                                       )
                                     ],
                                   ),
-                                  SizedBox(height: 10,),
+                                  const SizedBox(height: 10,),
                                 ],
                               ),
                             ),
-                            SizedBox(height: 12,),
+                            const SizedBox(height: 12,),
                           ],
                         ),
                         if(controller.title.value == "Feeding Time and Quantity")
                           Column(
                             children: [
                               CommonContainer(
-                                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                                 child: Column(
                                   children: [
-                                    title(text: "${FeedManagementData.title3}"),
-                                    SizedBox(height: 10,),
-                                    section(text: "${FeedManagementData.title3Subtitle1}"),
-                                    section(text: "${FeedManagementData.title3Subtitle2}"),
-                                    section(text: "${FeedManagementData.title3Subtitle2Value1}"),
-                                    section(text: "${FeedManagementData.title3Subtitle2Value2}"),
-                                    section(text: "${FeedManagementData.title3Subtitle2Value3}"),
-                                    SizedBox(height: 15,),
+                                    title(text: FeedManagementData.title3),
+                                    const SizedBox(height: 10,),
+                                    section(text: FeedManagementData.title3Subtitle1),
+                                    section(text: FeedManagementData.title3Subtitle2),
+                                    section(text: FeedManagementData.title3Subtitle2Value1),
+                                    section(text: FeedManagementData.title3Subtitle2Value2),
+                                    section(text: FeedManagementData.title3Subtitle2Value3),
+                                    const SizedBox(height: 15,),
                                     Row(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        CommonText(
+                                        const CommonText(
                                           "* ",
                                           fontSize: 24,
                                           fontWeight: FontWeight.bold,
@@ -167,92 +167,92 @@ class FeedManagementDetailsView
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 12,),
+                              const SizedBox(height: 12,),
                             ],
                           ),
                         if(controller.title.value == "Feeding Methods")
                           Column(
                             children: [
                               CommonContainer(
-                                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                                 child: Column(
                                   children: [
-                                    title(text: "${FeedManagementData.title4}",),
-                                    SizedBox(height: 10,),
-                                    section(text: "${FeedManagementData.title4Subtitle1}",),
-                                    section(text: "${FeedManagementData.title4Subtitle2}",),
-                                    section(text: "${FeedManagementData.title4Subtitle3}",),
-                                    section(text: "${FeedManagementData.title4Subtitle4}",),
+                                    title(text: FeedManagementData.title4,),
+                                    const SizedBox(height: 10,),
+                                    section(text: FeedManagementData.title4Subtitle1,),
+                                    section(text: FeedManagementData.title4Subtitle2,),
+                                    section(text: FeedManagementData.title4Subtitle3,),
+                                    section(text: FeedManagementData.title4Subtitle4,),
 
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 12,),
+                              const SizedBox(height: 12,),
                             ],
                           ),
                         if(controller.title.value == "Relationship Between Water & Feed Management")
                           Column(
                             children: [
                               CommonContainer(
-                                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                                 child: Column(
                                   children: [
-                                    title(text: "${FeedManagementData.title5}"),
-                                    SizedBox(height: 10,),
-                                    section(text: "${FeedManagementData.title5Subtitle1}",),
-                                    section(text: "${FeedManagementData.title5Subtitle2}",),
-                                    section(text: "${FeedManagementData.title5Subtitle3}",),
+                                    title(text: FeedManagementData.title5),
+                                    const SizedBox(height: 10,),
+                                    section(text: FeedManagementData.title5Subtitle1,),
+                                    section(text: FeedManagementData.title5Subtitle2,),
+                                    section(text: FeedManagementData.title5Subtitle3,),
 
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 12,),
+                              const SizedBox(height: 12,),
                             ],
                           ),
                         if(controller.title.value == "Special Feeding Tips")
                           Column(
                             children: [
                               CommonContainer(
-                                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                                 child: Column(
                                   children: [
-                                    title(text: "${FeedManagementData.title6}"),
-                                    SizedBox(height: 10,),
-                                    section(text: "${FeedManagementData.title6Subtitle1}",),
-                                    section(text: "${FeedManagementData.title6Subtitle2}",),
-                                    section(text: "${FeedManagementData.title6Subtitle3}",),
-                                    section(text: "${FeedManagementData.title6Subtitle4}",),
+                                    title(text: FeedManagementData.title6),
+                                    const SizedBox(height: 10,),
+                                    section(text: FeedManagementData.title6Subtitle1,),
+                                    section(text: FeedManagementData.title6Subtitle2,),
+                                    section(text: FeedManagementData.title6Subtitle3,),
+                                    section(text: FeedManagementData.title6Subtitle4,),
 
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 12,),
+                              const SizedBox(height: 12,),
                             ],
                           ),
                         if(controller.title.value == "Feed Conversion Ratio (FCR)")
                           CommonContainer(
-                          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                           child: Column(
                             children: [
-                              title(text: "${FeedManagementData.title7}"),
-                              SizedBox(height: 10,),
-                              section2(text: "${FeedManagementData.title7Subtitle1}",),
-                              section(text: "${FeedManagementData.title7Subtitle1Value1}",),
-                              section2(text: "${FeedManagementData.title7Subtitle2}",),
-                              section(text: "${FeedManagementData.title7Subtitle2Value1}",),
-                              section(text: "${FeedManagementData.title7Subtitle2Value2}",),
-                              SizedBox(height: 15,),
+                              title(text: FeedManagementData.title7),
+                              const SizedBox(height: 10,),
+                              section2(text: FeedManagementData.title7Subtitle1,),
+                              section(text: FeedManagementData.title7Subtitle1Value1,),
+                              section2(text: FeedManagementData.title7Subtitle2,),
+                              section(text: FeedManagementData.title7Subtitle2Value1,),
+                              section(text: FeedManagementData.title7Subtitle2Value2,),
+                              const SizedBox(height: 15,),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  CommonText(
+                                  const CommonText(
                                     "* ",
                                     fontSize: 24,
                                     fontWeight: FontWeight.bold,
                                   ),
                                   Expanded(
                                     child: CommonText(
-                                      "${FeedManagementData.title7Subtitle3}",
+                                      FeedManagementData.title7Subtitle3,
                                       color: Colors.red.shade800,
                                       maxLines: 2,
                                       fontWeight: FontWeight.w500,
@@ -264,25 +264,25 @@ class FeedManagementDetailsView
                             ],
                           ),
                         ),
-                        SizedBox(height: 12,),
+                        const SizedBox(height: 12,),
                         if(controller.title.value == "Feed Requirement Calculator")
                         Column(
                           children: [
                             CommonContainer(
-                              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                               child: Column(
                                 children: [
-                                  title(text: "${FeedManagementData.title8}"),
-                                  SizedBox(height: 10,),
-                                  section2(text: "${FeedManagementData.title8Subtitle1}",),
-                                  section(text: "${FeedManagementData.title8Subtitle1Value1}",),
-                                  section(text: "${FeedManagementData.title8Subtitle1Value2}",),
-                                  section(text: "${FeedManagementData.title8Subtitle1Value3}",),
+                                  title(text: FeedManagementData.title8),
+                                  const SizedBox(height: 10,),
+                                  section2(text: FeedManagementData.title8Subtitle1,),
+                                  section(text: FeedManagementData.title8Subtitle1Value1,),
+                                  section(text: FeedManagementData.title8Subtitle1Value2,),
+                                  section(text: FeedManagementData.title8Subtitle1Value3,),
 
                                 ],
                               ),
                             ),
-                            SizedBox(height: 12,),
+                            const SizedBox(height: 12,),
                           ],
                         ),
 
@@ -304,10 +304,10 @@ class FeedManagementDetailsView
       children: [
         Expanded(
           child: CommonText(
-            "${text}",
+            "$text",
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: Color(0xff0370c3),
+            color: const Color(0xff0370c3),
             maxLines: 2,
             textAlign: TextAlign.center,
           ),
@@ -318,12 +318,12 @@ class FeedManagementDetailsView
 
   section({text}){
     return Container(
-      margin: EdgeInsets.only(bottom: 2),
+      margin: const EdgeInsets.only(bottom: 2),
       child: Row(
         children: [
           Expanded(
             child: CommonText(
-              "${text}",
+              "$text",
               fontSize: 16,
               fontWeight: FontWeight.w500,
               maxLines: 3,
@@ -336,12 +336,12 @@ class FeedManagementDetailsView
 
   section2({text}){
     return Container(
-      margin: EdgeInsets.only(bottom: 2),
+      margin: const EdgeInsets.only(bottom: 2),
       child: Row(
         children: [
           Expanded(
             child: CommonText(
-              "${text}",
+              "$text",
               fontSize: 18,
               fontWeight: FontWeight.bold,
               maxLines: 3,
@@ -354,12 +354,12 @@ class FeedManagementDetailsView
 
   subSection({text}){
     return Container(
-      margin: EdgeInsets.only(bottom: 2),
+      margin: const EdgeInsets.only(bottom: 2),
       child: Row(
         children: [
           Expanded(
             child: CommonText(
-              "${text}",
+              "$text",
               fontSize: 16,
               fontWeight: FontWeight.w500,
               maxLines: 3,

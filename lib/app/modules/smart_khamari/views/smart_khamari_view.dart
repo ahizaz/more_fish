@@ -14,7 +14,7 @@ class SmartKhamariView extends GetView<SmartKhamariController> {
     return Scaffold(
       backgroundColor: AppColors.backGround,
       appBar: AppBar(
-        backgroundColor: Color(0xffd4fcfd),
+        backgroundColor: const Color(0xffd4fcfd),
         title: const Text(
           'Smart Khamari',
           style: TextStyle(
@@ -24,12 +24,12 @@ class SmartKhamariView extends GetView<SmartKhamariController> {
         ),
       ),
       body: ListView.builder(
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         itemCount: controller.dataList.length,
         itemBuilder: (context, index){
           return CommonContainer(
-            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-            margin: EdgeInsets.only(bottom: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+            margin: const EdgeInsets.only(bottom: 12),
             child: Column(
               children: [
                 Row(
@@ -37,7 +37,7 @@ class SmartKhamariView extends GetView<SmartKhamariController> {
                   children: [
                     Expanded(
                       child: CommonText(
-                        "${controller.titleList[index]}",
+                        controller.titleList[index],
                         fontSize: 18,
                         maxLines: 10,
                         fontWeight: FontWeight.bold,
@@ -46,16 +46,16 @@ class SmartKhamariView extends GetView<SmartKhamariController> {
                   ],
                 ),
 
-                controller.dataList[index].isEmpty ? SizedBox() :
+                controller.dataList[index].isEmpty ? const SizedBox() :
                 Column(
                   children: [
-                    SizedBox(height: 10,),
+                    const SizedBox(height: 10,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Expanded(
                           child: CommonText(
-                            "${controller.dataList[index]}",
+                            controller.dataList[index],
                             fontSize: 16,
                             maxLines: 15,
                             fontWeight: FontWeight.w400,

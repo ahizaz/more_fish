@@ -28,7 +28,7 @@ class ProductCompWiseListView extends GetView<ProductCompWiseListController> {
         var data = controller.productListResponse.value?.data;
         return data == null ? const Center(child: CircularProgressIndicator()):
         GridView.builder(
-          padding: EdgeInsets.all(12),
+          padding: const EdgeInsets.all(12),
           itemCount: data.data.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
@@ -64,7 +64,7 @@ class ProductCompWiseListView extends GetView<ProductCompWiseListController> {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    SizedBox(height: 3),
+                    const SizedBox(height: 3),
                     Row(
                       children: [
                         const Text(

@@ -13,7 +13,7 @@ class WeatherForecastView extends GetView<WeatherForecastController> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Color(0xffcbffff),
+        backgroundColor: const Color(0xffcbffff),
         title: const Text(
           'Weather Forecast',
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
@@ -65,7 +65,7 @@ class WeatherForecastView extends GetView<WeatherForecastController> {
                         height: 100,
                         width: 100,
                         decoration: BoxDecoration(
-                          color: Color(0xff87CEEB),
+                          color: const Color(0xff87CEEB),
                           borderRadius: BorderRadius.circular(10)
                         ),
                         child: Image.network(

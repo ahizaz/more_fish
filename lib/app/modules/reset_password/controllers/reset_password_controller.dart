@@ -29,14 +29,14 @@ class ResetPasswordController extends GetxController {
       print('${l.message}');
       isActiveButton.value = true;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Oops! ❌ Invalid Credentials")),
+        const SnackBar(content: Text("Oops! ❌ Invalid Credentials")),
       );
     },
         (r) async {
       forgotPasswordResponse.value = r;
       Get.offAllNamed(Routes.INDEX);
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Successful ✅")),
+        const SnackBar(content: Text("Successful ✅")),
       );
 
 

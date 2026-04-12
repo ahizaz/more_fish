@@ -14,7 +14,7 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
     return Scaffold(
       backgroundColor: AppColors.backGround,
       appBar: AppBar(
-        backgroundColor: Color(0xffd4fcfd),
+        backgroundColor: const Color(0xffd4fcfd),
         title: const Text(
           'Product Details',
           style: TextStyle(
@@ -25,7 +25,7 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
       ),
       body: Obx((){
         var data = controller.productDetailsResponse.value?.data;
-        return data == null ? Center(child: CircularProgressIndicator()):
+        return data == null ? const Center(child: CircularProgressIndicator()):
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -50,7 +50,7 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                                 Expanded(
                                   child: Text(
                                     "${data?.name}",
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 20,
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold,
@@ -59,7 +59,7 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 10,),
+                            const SizedBox(height: 10,),
                             Row(
                               children: [
                                 Text(
@@ -72,7 +72,7 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 10,),
+                            const SizedBox(height: 10,),
                             Row(
                               children: [
                                 Expanded(
@@ -87,7 +87,7 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 20,),
+                            const SizedBox(height: 20,),
                           ],
                         ),
                       ],
@@ -110,7 +110,7 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                 },
                 child: Container(
                   height: 50,
-                  margin: EdgeInsets.symmetric(vertical: 12),
+                  margin: const EdgeInsets.symmetric(vertical: 12),
                   decoration: BoxDecoration(
                     gradient: const LinearGradient(
                       colors: [

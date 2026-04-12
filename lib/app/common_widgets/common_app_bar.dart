@@ -258,21 +258,28 @@ class CommonAppBar extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(width: 12),
-                          InkWell(
-                            onTap: () {
-                              Locale currentLocale =
-                                  Get.locale ?? const Locale('en', 'US');
-                              if (currentLocale.languageCode == 'en') {
-                                Get.updateLocale(
-                                  const Locale('bn', 'BD'),
-                                ); // switch to Bangla
-                              } else {
-                                Get.updateLocale(
-                                  const Locale('en', 'US'),
-                                ); // switch to English
+                          PopupMenuButton<String>(
+                            onSelected: (value) {
+                              if (value == 'bn') {
+                                Get.updateLocale(const Locale('bn', 'BD'));
+                                return;
                               }
+                              Get.updateLocale(const Locale('en', 'US'));
                             },
-                            borderRadius: BorderRadius.circular(100),
+                            itemBuilder: (context) => const [
+                              PopupMenuItem<String>(
+                                value: 'en',
+                                child: Text('Eng'),
+                              ),
+                              PopupMenuItem<String>(
+                                value: 'bn',
+                                child: Text('বাংলা'),
+                              ),
+                            ],
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            offset: const Offset(0, 34),
                             child: Container(
                               height: 28,
                               width: 55,
@@ -282,7 +289,7 @@ class CommonAppBar extends StatelessWidget {
                               ),
                               child: Center(
                                 child: Text(
-                                  (Get.locale?.languageCode ?? 'en') == 'en'
+                                  (Get.locale?.languageCode ?? 'en') == 'bn'
                                       ? 'বাংলা'
                                       : 'Eng',
                                   style: const TextStyle(

@@ -48,24 +48,24 @@ class PondManagementDetailsView
                         Column(
                           children: [
                             CommonContainer(
-                              margin: EdgeInsets.all(16),
-                              padding: EdgeInsets.all(16),
+                              margin: const EdgeInsets.all(16),
+                              padding: const EdgeInsets.all(16),
                               child: Column(
                                 children: [
-                                  section(text: "${PondManagementData.title2Value1}"),
-                                  section(text: "${PondManagementData.title2Value2}"),
-                                  section(text: "${PondManagementData.title2Value3}"),
-                                  section(text: "${PondManagementData.title2Value4}"),
-                                  section(text: "${PondManagementData.title2Value5}"),
-                                  section(text: "${PondManagementData.title2Value6}"),
-                                  section(text: "${PondManagementData.title2Value7}"),
-                                  section(text: "${PondManagementData.title2Value8}"),
-                                  section(text: "${PondManagementData.title2Value9}"),
-                                  section(text: "${PondManagementData.title2Value10}"),
+                                  section(text: PondManagementData.title2Value1),
+                                  section(text: PondManagementData.title2Value2),
+                                  section(text: PondManagementData.title2Value3),
+                                  section(text: PondManagementData.title2Value4),
+                                  section(text: PondManagementData.title2Value5),
+                                  section(text: PondManagementData.title2Value6),
+                                  section(text: PondManagementData.title2Value7),
+                                  section(text: PondManagementData.title2Value8),
+                                  section(text: PondManagementData.title2Value9),
+                                  section(text: PondManagementData.title2Value10),
                                 ],
                               ),
                             ),
-                            SizedBox(height: 12),
+                            const SizedBox(height: 12),
                           ],
                         ),
 
@@ -86,7 +86,7 @@ class PondManagementDetailsView
                                 ],
                               ),
                             ),
-                            SizedBox(height: 12),
+                            const SizedBox(height: 12),
                           ],
                         ),
 
@@ -127,10 +127,10 @@ class PondManagementDetailsView
       children: [
         Expanded(
           child: CommonText(
-            "${text}",
+            "$text",
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: Color(0xff0370c3),
+            color: const Color(0xff0370c3),
             maxLines: 2,
             textAlign: TextAlign.center,
           ),
@@ -141,12 +141,12 @@ class PondManagementDetailsView
 
   section({text}){
     return Container(
-      margin: EdgeInsets.only(bottom: 2),
+      margin: const EdgeInsets.only(bottom: 2),
       child: Row(
         children: [
           Expanded(
             child: CommonText(
-              "${text}",
+              "$text",
               fontSize: 16,
               fontWeight: FontWeight.w500,
               maxLines: 3,
@@ -159,12 +159,12 @@ class PondManagementDetailsView
 
   section2({text}){
     return Container(
-      margin: EdgeInsets.only(bottom: 2),
+      margin: const EdgeInsets.only(bottom: 2),
       child: Row(
         children: [
           Expanded(
             child: CommonText(
-              "${text}",
+              "$text",
               fontSize: 18,
               fontWeight: FontWeight.bold,
               maxLines: 3,
@@ -177,12 +177,12 @@ class PondManagementDetailsView
 
   subSection({text}){
     return Container(
-      margin: EdgeInsets.only(bottom: 2),
+      margin: const EdgeInsets.only(bottom: 2),
       child: Row(
         children: [
           Expanded(
             child: CommonText(
-              "${text}",
+              "$text",
               fontSize: 16,
               fontWeight: FontWeight.w500,
               maxLines: 3,
@@ -222,7 +222,7 @@ class PondManagementDetailsView
           color: Colors.blueGrey.withOpacity(0.5),  // Shadow color with opacity
           spreadRadius: 1,   // How much the shadow spreads
           blurRadius: 1,     // How blurry the shadow is
-          offset: Offset(.2, .2), // Position of shadow: (x, y)
+          offset: const Offset(.2, .2), // Position of shadow: (x, y)
         ),
       ],
     );

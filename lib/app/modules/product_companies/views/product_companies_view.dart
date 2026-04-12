@@ -38,7 +38,7 @@ class ProductCompaniesView extends GetView<ProductCompaniesController> {
           Expanded(
             child: Obx((){
               var data = controller.productCompaniesResponse.value?.data;
-              return data == null ? Center(child: CircularProgressIndicator()):
+              return data == null ? const Center(child: CircularProgressIndicator()):
                 GridView.builder(
                 padding: const EdgeInsets.all(12.0),
                 itemCount: data.length,
@@ -54,7 +54,7 @@ class ProductCompaniesView extends GetView<ProductCompaniesController> {
                       Get.toNamed(Routes.PRODUCT_COMP_WISE_LIST, arguments: {"guid": data[index].guid});
                     },
                     child: CommonContainer(
-                      padding: EdgeInsets.symmetric(horizontal: 12),
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
                       alignment: Alignment.center,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -64,10 +64,10 @@ class ProductCompaniesView extends GetView<ProductCompaniesController> {
                             height: 80,
                             width: 80,
                           ),
-                          SizedBox(height: 3),
+                          const SizedBox(height: 3),
                           Text(
                             "${data[index].name}",
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.black,
                               fontSize: 18,
                               fontWeight: FontWeight.bold,

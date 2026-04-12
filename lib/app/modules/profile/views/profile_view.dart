@@ -40,14 +40,14 @@ class ProfileView extends GetView<ProfileController> {
                 child: Obx((){
                   var data = controller.profileResponse.value;
                   return controller.isLoggedIn.isEmpty ?
-                  SizedBox( ):
+                  const SizedBox( ):
                   data == null ?
-                  Center(child: CircularProgressIndicator(),):
+                  const Center(child: CircularProgressIndicator(),):
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Column(
                       children: [
-                        SizedBox(height: 20,),
+                        const SizedBox(height: 20,),
                         Expanded(
                           child: CommonContainer(
                             width: double.infinity,
@@ -63,20 +63,20 @@ class ProfileView extends GetView<ProfileController> {
                                       fontSize: 24,
                                       overflow: TextOverflow.ellipsis,
                                     ),
-                                    SizedBox(height: 4,),
+                                    const SizedBox(height: 4,),
                                     CommonText(
-                                        "${data.data?.usrEmail??''}",
+                                        data.data?.usrEmail??'',
                                         fontWeight: FontWeight.bold,
                                         fontSize: 18
                                     ),
-                                    SizedBox(height: 4,),
+                                    const SizedBox(height: 4,),
                                     data.data?.userPhone == null ?
                                     CommonText(
                                       "${data.data?.userPhone?.phnCell??''}",
                                       fontWeight: FontWeight.w500,
                                       fontSize: 18
-                                    ) : CommonText(""),
-                                    SizedBox(height: 50,),
+                                    ) : const CommonText(""),
+                                    const SizedBox(height: 50,),
                                   ],
                                 ),
                               ],
@@ -90,7 +90,7 @@ class ProfileView extends GetView<ProfileController> {
                                 onTap: () async {
                                   Get.toNamed(Routes.PASSWORD_CHANGE);
                                 },
-                                child: CommonContainer(
+                                child: const CommonContainer(
                                   height: 50,
                                   margin: EdgeInsets.symmetric(horizontal: 0, vertical: 16),
                                   alignment: Alignment.center,
@@ -112,14 +112,14 @@ class ProfileView extends GetView<ProfileController> {
                                 ),
                               ),
                             ),
-                            SizedBox(width: 10,),
+                            const SizedBox(width: 10,),
                             Expanded(
                               child: InkWell(
                                 onTap: () async {
                                   await controller.loginTokenStorage.removeToken();
                                   Get.offAllNamed(Routes.INDEX);
                                 },
-                                child: CommonContainer(
+                                child: const CommonContainer(
                                   height: 50,
                                   margin: EdgeInsets.symmetric(horizontal: 0, vertical: 16),
                                   alignment: Alignment.center,

@@ -321,8 +321,8 @@ class _DustParticlesSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 10),
+          const Padding(
+            padding: EdgeInsets.only(bottom: 10),
             child: Center(
               child: Text(
                 'Dust particles',

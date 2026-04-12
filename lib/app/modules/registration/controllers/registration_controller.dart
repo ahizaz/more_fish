@@ -49,17 +49,17 @@ class RegistrationController extends GetxController {
 
     response.fold(
         (l){
-          print('${l.message}');
+          debugPrint('${l.message}');
           isActiveRegButton.value = true;
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Oops! ❌ Invalid registration info.")),
+            const SnackBar(content: Text("Oops! ❌ Invalid registration info.")),
           );
         },
         (r){
           registrationResponse.value = r;
           Get.offAllNamed(Routes.INDEX);
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Registered Successfully ✅")),
+            const SnackBar(content: Text("Registered Successfully ✅")),
           );
 
 
