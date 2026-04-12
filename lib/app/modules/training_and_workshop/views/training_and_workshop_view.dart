@@ -13,41 +13,41 @@ class TrainingAndWorkshopView extends GetView<TrainingAndWorkshopController> {
   Widget build(BuildContext context) {
     HomeController homeController = Get.put(HomeController());
     return AnnotatedRegion<SystemUiOverlayStyle>(
-        value: const SystemUiOverlayStyle(
-          statusBarColor: Color(0xffd4fcfd),
-          statusBarIconBrightness: Brightness.dark,
-          statusBarBrightness: Brightness.dark,
-        ),
-        child:SafeArea(
-            child: Scaffold(
-      backgroundColor: AppColors.backGround,
-      body: Column(
-        children: [
-          Obx((){
-            return CommonAppBar(
-              title: 'title'.tr,
-              cityName: "dhaka".tr,
-              date: '${homeController.formattedDate}',
-              time: '${homeController.formattedTime}',
-              temp: '${homeController.weatherData['main']['temp']}°C',
-              humidity: '${homeController.weatherData['main']['humidity']}%',
-            );
-          }),
-          const Expanded(
-            child: Center(
-              child: CommonText(
-                'Training is not available.',
-                fontSize: 20,
-                color: Colors.red,
-                fontWeight: FontWeight.bold,
-
-              ),
-            ),
+      value: const SystemUiOverlayStyle(
+        statusBarColor: Color(0xffd4fcfd),
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.dark,
+      ),
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: AppColors.backGround,
+          body: Column(
+            children: [
+              Obx(() {
+                return CommonAppBar(
+                  title: 'title'.tr,
+                  cityName: "dhaka".tr,
+                  date: '${homeController.formattedDate}',
+                  time: '${homeController.formattedTime}',
+                  temp: '${homeController.weatherData['main']['temp']}°C',
+                  humidity:
+                      '${homeController.weatherData['main']['humidity']}%',
+                );
+              }),
+              const Expanded(
+                child: Center(
+                  child: CommonText(
+                    'Training is not available.',
+                    fontSize: 20,
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ), ////
+            ],
           ),
-        ],
-      ),
-      ),
+        ),
       ),
     );
   }
-}
+} //
