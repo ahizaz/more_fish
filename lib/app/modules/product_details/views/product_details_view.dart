@@ -32,7 +32,7 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
             children: [
               Expanded(
                 child: CommonContainer(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
@@ -44,7 +44,7 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            SizedBox(height: 10,),
+                            const SizedBox(height: 10,),
                             Row(
                               children: [
                                 Expanded(
@@ -63,7 +63,7 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                             Row(
                               children: [
                                 Text(
-                                  "Price:  ${data?.price}",
+                                  "Price:  ${data.price}",
                                   style: TextStyle(
                                     color: Colors.red.shade800,
                                     fontSize: 20,
@@ -126,7 +126,7 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                         color: Colors.blueGrey.withOpacity(0.5),  // Shadow color with opacity
                         spreadRadius: 1,   // How much the shadow spreads
                         blurRadius: 1,     // How blurry the shadow is
-                        offset: Offset(.2, .2), // Position of shadow: (x, y)
+                        offset: const Offset(.2, .2), // Position of shadow: (x, y)
                       ),
                     ],
                   ),

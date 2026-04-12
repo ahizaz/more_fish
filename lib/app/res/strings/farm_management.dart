@@ -1,27 +1,27 @@
 class FarmManagementData{
 
-  static final text1 = "A fish farm management software is no longer a luxury but a necessity for modern aquaculture operations. It enhances efficiency, ensures compliance, improves fish health, and supports sustainable and profitable farming practices. By leveraging technology, fish farmers can overcome operational challenges, reduce costs, and stay competitive in a rapidly evolving industry. Investing in such software is a strategic move toward long-term success and growth in aquaculture."
+  static const text1 = "A fish farm management software is no longer a luxury but a necessity for modern aquaculture operations. It enhances efficiency, ensures compliance, improves fish health, and supports sustainable and profitable farming practices. By leveraging technology, fish farmers can overcome operational challenges, reduce costs, and stay competitive in a rapidly evolving industry. Investing in such software is a strategic move toward long-term success and growth in aquaculture."
   "\n\nOur fish farm management software is an essential tool for modern aquaculture operations, offering a centralized platform to streamline and optimize various aspects of fish farming. We offer such services at a very low monthly charge."
   "\n\nGet the services on a monthly subscription basis."
   "\n\nIf you want to use this service, Please contact us by pressing call now button.";
 
-  static final text2 = "Maintaining a weekly record of medicine use in a fish farm is not just a best practice—it is a necessity for ensuring fish health, protecting the environment, complying with regulations, and optimizing farm operations. It also enhances the farms reputation and marketability by demonstrating responsible and transparent practices. By keeping accurate and upto date records, fish farmers can ensure the long term sustainability and profitability of their operations."
+  static const text2 = "Maintaining a weekly record of medicine use in a fish farm is not just a best practice—it is a necessity for ensuring fish health, protecting the environment, complying with regulations, and optimizing farm operations. It also enhances the farms reputation and marketability by demonstrating responsible and transparent practices. By keeping accurate and upto date records, fish farmers can ensure the long term sustainability and profitability of their operations."
       "\n\nYou can take our subscription service on keeping records of the use of medicines at your ponds."
       "\n\nIf you want to use this service, Please contact us by pressing call now button.";
 
-  static final text3 = "Fish farming, like any other agricultural or aquaculture venture, requires careful financial and operational management to ensure profitability and sustainability. Maintaining detailed records of manpower and overhead expenses."
+  static const text3 = "Fish farming, like any other agricultural or aquaculture venture, requires careful financial and operational management to ensure profitability and sustainability. Maintaining detailed records of manpower and overhead expenses."
       "\n\nIt helps a farm to make cost control and budgeting, to increase operational efficiency, to maintain financial transparency, and to help  decision making and performance evaluation of the staff."
       "\n\nWe are ready to provide all these services through our software on a monthly service charge basis."
       "\n\nIf you want to use this service, Please contact us by pressing call now button.";
 
-  static final text4 = "To get this service pls subscribe this app with a payment of monthly fee"
+  static const text4 = "To get this service pls subscribe this app with a payment of monthly fee"
   "\n\n"
   "Fish Farming data be like:\n"
   ""
   "";
 
 
-  static final text5 = "As a technological company, we provide fish farm management support and farm development assistance, which is essential for fish farm owners to follow."
+  static const text5 = "As a technological company, we provide fish farm management support and farm development assistance, which is essential for fish farm owners to follow."
       "\n\nThe key points that a farm manager should focus on:"
 
       "\n• Data-driven decision making"
@@ -39,7 +39,7 @@ class FarmManagementData{
       "\n\nWe provide expert solutions to address all these needs efficiently."
       "\n\nIf you want to use this service, Please contact us by pressing call now button.";
 
-  static final text6 = "1. Earthen Ponds:"
+  static const text6 = "1. Earthen Ponds:"
   "The most traditional and widespread method."
   "How it works: Fish are raised in natural, soil-bottom ponds. They eat natural organisms (plankton) and supplemental feed."
   "Best for: Beginners, extensive to semi-intensive culture, species that thrive in still water (carp, tilapia, catfish)."
@@ -154,25 +154,25 @@ class FarmManagementData{
   "Please consult with our aquaculture specialist for your particular issue.";
 
 
-  static final text7 =   "Feed management is one of the most critical aspects of running a successful fish farm, as feed typically represents the largest operational cost (often 50-70% of total expenses). Proper feed management data is essential for optimizing fish growth, reducing costs, and ensuring the sustainability of the operation."
+  static const text7 =   "Feed management is one of the most critical aspects of running a successful fish farm, as feed typically represents the largest operational cost (often 50-70% of total expenses). Proper feed management data is essential for optimizing fish growth, reducing costs, and ensuring the sustainability of the operation."
       "\n\nFeed management data is the backbone of efficient and sustainable fish farming. It enables farmers to optimize feeding practices, reduce costs, improve fish health, and meet regulatory and consumer demands. By investing in systems to collect, analyze, and act on feed management data, fish farmers can enhance productivity, profitability, and environmental sustainability, ensuring the long-term success of their operations."
       "\n\nWe provide all the services, including the best quality feed procurement facility, through our specialist service on a monthly subscription basis.";
 
 
 
-  static final text8 = "আপনার পুরো খামার, পুকুরের গুরুত্বপূর্ণ এলাকাসমূহ সি সি টি ভির আওতায় এনে তাতে বিশেষ সেন্সর  ব্যবস্থার মাধ্যমে এলার্ম ও মেসেজ পেয়ে যাবেন আপনার প্রয়োজন অনুসারে এমন ব্যবস্থা সম্বলিত সিস্টেমের সার্বিক নিশ্চয়তা আমরা দিতে পারি।"
+  static const text8 = "আপনার পুরো খামার, পুকুরের গুরুত্বপূর্ণ এলাকাসমূহ সি সি টি ভির আওতায় এনে তাতে বিশেষ সেন্সর  ব্যবস্থার মাধ্যমে এলার্ম ও মেসেজ পেয়ে যাবেন আপনার প্রয়োজন অনুসারে এমন ব্যবস্থা সম্বলিত সিস্টেমের সার্বিক নিশ্চয়তা আমরা দিতে পারি।"
   "\n\n"
   "এই সেবা নেওয়ার পূর্ণাঙ্গ ডিজাইন ও খরচ জানতে যোগাযোগ করুণ।"
   "";
 
 
-  static final text9 = "একথা অনস্বীকার্য যে মাছের খামারিদের মাছ চাষ সংক্রান্ত  যাবতীয় হালনাগাদ সংবাদ সম্পর্কে সার্বক্ষণিকভাবে জ্ঞাত থাকা খুবই জরুরী। আমাদের এই অ্যাপের মাধ্যমে আমরা আমাদের সদস্যদের মাছ সংক্রান্ত যাবতীয় হালনাগাদ তথ্য সার্বক্ষণিকভাবে নিয়মিত দেয়ার চেষ্টা করবো।"
+  static const text9 = "একথা অনস্বীকার্য যে মাছের খামারিদের মাছ চাষ সংক্রান্ত  যাবতীয় হালনাগাদ সংবাদ সম্পর্কে সার্বক্ষণিকভাবে জ্ঞাত থাকা খুবই জরুরী। আমাদের এই অ্যাপের মাধ্যমে আমরা আমাদের সদস্যদের মাছ সংক্রান্ত যাবতীয় হালনাগাদ তথ্য সার্বক্ষণিকভাবে নিয়মিত দেয়ার চেষ্টা করবো।"
   "\n\n"
   "এছাড়া সোশ্যাল মিডিয়াতে আমাদের সরব উপস্থিতি এক ভিন্নমাত্রার কমিউনিটি গড়ে তুলতে সহায়ক হবে এবং মাছ চাষ সম্পর্কে মৎস্য বিশেষজ্ঞদের নানান পরামর্শ গ্রুপের সবার,মাছ চাষ সম্পর্কিত জ্ঞ্যান আরো সমৃদ্ধ করবে।"
   "";
 
 
-  static final text10 = "To decide about buying the equipment the farmers need to understanding their Needs First:"
+  static const text10 = "To decide about buying the equipment the farmers need to understanding their Needs First:"
   "The equipment you need depends entirely on:\n\n"
   "1.	Scale: Backyard hobbyist, small-scale farm, or large commercial operation."
   "2.	Species: Fish (e.g., tilapia, salmon, trout), shrimp, oysters, or plants (aquaponics)."
@@ -263,7 +263,7 @@ class FarmManagementData{
   "";
 
 
-  static final text11 = "যে কোনো ব্যবসার মেরুদণ্ড হলো হিসাব রক্ষন ব্যবস্থা। যে ব্যবসা প্রতিষ্ঠানের আয়,ব্যয়,ক্রয়, বিক্রয় ইত্যাদির সন্নিবেশিত সঠিক হিসাব নেই সেই প্রতিষ্ঠানের লাভ লোকসানের সঠিক হিসাব সংরক্ষণও সম্ভব না।"
+  static const text11 = "যে কোনো ব্যবসার মেরুদণ্ড হলো হিসাব রক্ষন ব্যবস্থা। যে ব্যবসা প্রতিষ্ঠানের আয়,ব্যয়,ক্রয়, বিক্রয় ইত্যাদির সন্নিবেশিত সঠিক হিসাব নেই সেই প্রতিষ্ঠানের লাভ লোকসানের সঠিক হিসাব সংরক্ষণও সম্ভব না।"
   "\n\n"
   "আমাদের উদ্ভাবিত মৎস্য খামারের বিশেষ হিসাব রক্ষন  সফটওয়্যার আপনার খামারের লাভের অংক বাড়িয়ে দিতে পারে কয়েকগুণ।"
   "\n\n"
@@ -271,7 +271,7 @@ class FarmManagementData{
   "";
 
 
-  static final text12 = "এই সফটওয়্যারের মাধ্যমে  ব্যবসা প্রতিষ্ঠানের সব কাজ স্বয়ংক্রিয়ভাবে সমাধান করা সম্ভব এবং একটি ব্যবসা প্রতিষ্ঠানের বিভিন্ন বিভাগ গুলোর মধ্যে প্রযুক্তির মাধ্যমে সংযোগ স্থাপন করে।"
+  static const text12 = "এই সফটওয়্যারের মাধ্যমে  ব্যবসা প্রতিষ্ঠানের সব কাজ স্বয়ংক্রিয়ভাবে সমাধান করা সম্ভব এবং একটি ব্যবসা প্রতিষ্ঠানের বিভিন্ন বিভাগ গুলোর মধ্যে প্রযুক্তির মাধ্যমে সংযোগ স্থাপন করে।"
   "\n\n"
   "একটি ই আর পি সফটওয়্যার একটি ব্যবসা প্রতিষ্ঠান এর আমূল পরিবর্তন ঘটিয়ে দিতে পারে এবং ব্যবসার উৎপাদন ক্ষমতা কয়েকগুন বাড়িয়ে দিতে পারে।"
   "\n\n"
@@ -279,7 +279,7 @@ class FarmManagementData{
   "";
 
 
-  static final text13 = "আমরা আমাদের খামারি ভাইদের উন্নত মাছ চাষ ব্যবসায় তাদের যাবতীয় পদ্ধতি, সরঞ্জাম,খাদ্য, ঔষধ ইত্যাদির দিকে যেমন গভীরভাবে নজর দেই ঠিক তেমনি তাদের বিনিয়োগের বিষয়েও আমরা যথেষ্ট চিন্তাভাবনা করি।"
+  static const text13 = "আমরা আমাদের খামারি ভাইদের উন্নত মাছ চাষ ব্যবসায় তাদের যাবতীয় পদ্ধতি, সরঞ্জাম,খাদ্য, ঔষধ ইত্যাদির দিকে যেমন গভীরভাবে নজর দেই ঠিক তেমনি তাদের বিনিয়োগের বিষয়েও আমরা যথেষ্ট চিন্তাভাবনা করি।"
   "\n\n"
   "খামারিদের স্বল্পকালীন ক্ষুদ্র ও মাঝারি ঋণের জন্য সঠিক পথ দেখানো ও ঋণ প্রাপ্তিতে আমরা সার্বিক পরামর্শ  সহায়তাও আমরা দিয়ে থাকি।"
   "\n\n"
@@ -287,7 +287,7 @@ class FarmManagementData{
   "";
 
 
-  static final text14 = "উন্নত মাছ চাষে সময়ে সময়ে বিভিন্ন জরুরী বিষয়ে বিশেষজ্ঞ পরামর্শ অত্যন্ত জরুরী তবে সময়মত মৎস্য বিশেষজ্ঞের পরামর্শ পাওয়া অত্যন্ত দুষ্কর।"
+  static const text14 = "উন্নত মাছ চাষে সময়ে সময়ে বিভিন্ন জরুরী বিষয়ে বিশেষজ্ঞ পরামর্শ অত্যন্ত জরুরী তবে সময়মত মৎস্য বিশেষজ্ঞের পরামর্শ পাওয়া অত্যন্ত দুষ্কর।"
   "\n\n"
   "আমাদের প্যানেলে বেশ কয়েকজন মৎস্য বিশেষজ্ঞ ও মৎস্য চিকিৎসক রয়েছে যারা ঘণ্টা ভিত্তিতে পরামর্শ দিয়ে থাকেন।"
   "\n\n"
@@ -295,7 +295,7 @@ class FarmManagementData{
   "";
 
 
-  static final text15 = "আর এ এস মাছ চাষ পদ্ধতি একটি আধুনিক উৎপাদন প্রক্রিয়া যা বর্তমান সময়ের বিপুল আমিষের চাহিদা মেটাতে বিরাট ভুমিকা রাখতে পারে।"
+  static const text15 = "আর এ এস মাছ চাষ পদ্ধতি একটি আধুনিক উৎপাদন প্রক্রিয়া যা বর্তমান সময়ের বিপুল আমিষের চাহিদা মেটাতে বিরাট ভুমিকা রাখতে পারে।"
   "\n\n"
   "বর্তমান সময়ের সকল মাছ চাষ পদ্ধতির মধ্যে RAS (রাস) পদ্ধতি সবচাইতে দ্রুত বৃদ্ধি লাভের একটি পরিক্ষিত পদ্ধতি।"
   "\n\n"
@@ -306,7 +306,7 @@ class FarmManagementData{
       "আপনাদের চাহিদা মোতাবেক আমরা এই পদ্ধতি সরবরাহ করবো।"
   "";
 
-  static final text16 = "এটি হলো পুকুরে প্রবহমান পদ্ধতিতে মাছ চাষের টেকসই মডেল ইন পন্ড রেসওয়ে সিস্টেম বা আইপিআরএস। আধুনিক এই পদ্ধতিতে অল্প জায়গায় বেশি ঘনত্বে কয়েকগুণ বেশি মাছ উৎপাদন করা যায়।"
+  static const text16 = "এটি হলো পুকুরে প্রবহমান পদ্ধতিতে মাছ চাষের টেকসই মডেল ইন পন্ড রেসওয়ে সিস্টেম বা আইপিআরএস। আধুনিক এই পদ্ধতিতে অল্প জায়গায় বেশি ঘনত্বে কয়েকগুণ বেশি মাছ উৎপাদন করা যায়।"
   "\n\n"
   "একে বলা যায় মাছ চাষের ক্ষেত্রে পুকুর, খাঁচা, বর্জ্য ব্যবস্থাপনা এবং অক্সিজেন-খাদ্যের সুষম বণ্টনের একটি প্রযুক্তিগত ব্যবস্থাপনা। এর মাধ্যমে আধুনিক যন্ত্রপাতি, বিদ্যুৎ ও কৌশল ব্যবহার করে স্বল্প জায়গায় অনেক বেশি পরিমাণে মাছ চাষ করা হয়। "
   "\n\n"
@@ -318,7 +318,7 @@ class FarmManagementData{
   "";
 
 
-  static final text17 = "Impact of aquaculture software in fish farming."
+  static const text17 = "Impact of aquaculture software in fish farming."
   "\n\n"
   "1.  Using the software in optimized feeding (The Single Biggest Cost Saver):"
   "Feed typically constitutes 50-70% of a fish farm's operating costs. Software directly attacks this major expense."
@@ -421,7 +421,7 @@ class FarmManagementData{
 
 
 
-  static final text18 = "===================";
+  static const text18 = "===================";
 
 
 

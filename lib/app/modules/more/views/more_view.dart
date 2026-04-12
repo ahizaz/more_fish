@@ -74,7 +74,7 @@ class MoreView extends GetView<MoreController> {
                                   ),
                                   textAlign: TextAlign.justify,
                                 ),
-                                Icon(Icons.arrow_forward_ios_outlined, size: 16,)
+                                const Icon(Icons.arrow_forward_ios_outlined, size: 16,)
                               ],
                             ),
                           ],

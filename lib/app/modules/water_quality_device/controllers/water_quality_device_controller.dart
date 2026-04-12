@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../repo/devices_repo.dart';
 import '../../../response/aerator_command_response.dart';
@@ -75,9 +76,9 @@ class WaterQualityDeviceController extends GetxController {
         },
             (r){
           sensorListResponse.value = r;
-          print("=================================");
-          print(sensorListResponse.value);
-          print("=================================");
+          debugPrint("=================================");
+          debugPrint("sensorListResponse.value");
+          debugPrint("=================================");
 
         }
     );

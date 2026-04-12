@@ -37,12 +37,12 @@ class HighDensityFishFarmingView
               }),
               Expanded(
                 child: ListView.builder(
-                  padding: EdgeInsets.symmetric(vertical: 16),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                   itemCount: controller.titleList.length,
                   itemBuilder: (context, index){
                     return CommonContainer(
-                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                      margin: EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                      margin: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
                       child: Column(
                         children: [
                           Row(
@@ -59,7 +59,7 @@ class HighDensityFishFarmingView
                               ),
                             ],
                           ),
-                          SizedBox(height: 5,),
+                          const SizedBox(height: 5,),
                           CommonText(
                             controller.dataList[index],
                             fontSize: 16,

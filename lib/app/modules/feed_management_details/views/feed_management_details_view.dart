@@ -73,9 +73,9 @@ class FeedManagementDetailsView
                                   const SizedBox(height: 10,),
                                   Table(
                                     border: TableBorder.all(),
-                                    columnWidths: {
-                                      0: const FixedColumnWidth(140),
-                                      1: const FlexColumnWidth(),
+                                    columnWidths: const {
+                                      0: FixedColumnWidth(140),
+                                      1: FlexColumnWidth(),
                                     },
                                     children: [
                                       TableRow(

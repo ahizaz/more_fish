@@ -100,7 +100,7 @@ class LoginView extends GetView<LoginController> {
                           },
                         ),
                       ),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
 
                       if (!isGuardLogin)
                         Row(
@@ -129,7 +129,7 @@ class LoginView extends GetView<LoginController> {
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.green,
-                                    padding: EdgeInsets.symmetric(vertical: 14),
+                                    padding: const EdgeInsets.symmetric(vertical: 14),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10),
                                     ),
@@ -164,7 +164,7 @@ class LoginView extends GetView<LoginController> {
                             : const CircularProgressIndicator();
                       }),
 
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
 
                       if (!isGuardLogin)
                         TextButton(

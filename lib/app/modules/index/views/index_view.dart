@@ -25,7 +25,7 @@ class IndexView extends GetView<IndexController> {
       return Scaffold(
         body: pages[controller.selectedIndex.value],
         bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Color(0xffebffff),
+          backgroundColor: const Color(0xffebffff),
           currentIndex: controller.selectedIndex.value,
           onTap: (index) {
             // Block Notifications/Profile tab for logged-out users.

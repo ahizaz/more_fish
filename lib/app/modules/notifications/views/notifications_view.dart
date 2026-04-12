@@ -40,21 +40,21 @@ class NotificationsView extends GetView<NotificationsController> {
                 child: Obx((){
                   var data = controller.notificationResponse.value;
                   return controller.isLoggedIn.value.isEmpty ?
-                      SizedBox():
+                      const SizedBox():
                       data != null ?
                       ListView.builder(
-                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
                         itemCount: data.data?.length,
                         itemBuilder: (context, index) {
                           return Container(
-                            margin: EdgeInsets.only(bottom: 16),
+                            margin: const EdgeInsets.only(bottom: 16),
                             decoration:  decoration(),
                             alignment: Alignment.center,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                                   decoration: const BoxDecoration(
                                     gradient: LinearGradient(
                                       colors: [
@@ -217,7 +217,7 @@ class NotificationsView extends GetView<NotificationsController> {
         color: Colors.blueGrey.withOpacity(0.5),
         spreadRadius: 1,
         blurRadius: 1,
-        offset: Offset(.2, .2),
+        offset: const Offset(.2, .2),
       ),
     ],
   );

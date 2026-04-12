@@ -17,7 +17,7 @@ class OtpVerifyController extends GetxController {
           print('${l.message}');
           isActiveButton.value = true;
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Oops! ❌ Invalid OTP.")),
+            const SnackBar(content: Text("Oops! ❌ Invalid OTP.")),
           );
         },
             (r) async {
@@ -25,7 +25,7 @@ class OtpVerifyController extends GetxController {
           Get.toNamed(Routes.RESET_PASSWORD, arguments: {"userId": otpVerifyResponse.value?.userId});
           isActiveButton.value = true;
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Successful ✅")),
+            const SnackBar(content: Text("Successful ✅")),
           );
 
 
