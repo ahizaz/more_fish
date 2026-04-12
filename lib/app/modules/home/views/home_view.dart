@@ -312,7 +312,12 @@ class HomeView extends GetView<HomeController> {
               homeController.activeCallButton.value = false;
             },
             child: CommonContainer(
-              margin: const EdgeInsets.only(left: 6, right: 12, top: 12, bottom: 12),
+              margin: const EdgeInsets.only(
+                left: 6,
+                right: 12,
+                top: 12,
+                bottom: 12,
+              ),
               height: 120,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -405,7 +410,12 @@ class HomeView extends GetView<HomeController> {
               homeController.activeCallButton.value = true;
             },
             child: CommonContainer(
-              margin: const EdgeInsets.only(left: 6, right: 12, top: 12, bottom: 12),
+              margin: const EdgeInsets.only(
+                left: 6,
+                right: 12,
+                top: 12,
+                bottom: 12,
+              ),
               height: 120,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

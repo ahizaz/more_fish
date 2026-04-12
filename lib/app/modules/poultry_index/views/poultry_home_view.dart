@@ -119,7 +119,7 @@ class PoultryHomeView extends GetView<PoultryIndexController> {
                         ),
                       ),
                       _HomeFeatureTile(
-                        title: 'Auto Feeder',
+                        title: 'Auto Feeder', //
                         iconAssetPath:
                             'assets/icons/farm_management/auto_feeder.png',
                         onTap: () => openIfLoggedIn(

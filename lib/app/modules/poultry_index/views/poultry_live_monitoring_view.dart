@@ -450,7 +450,7 @@ class _MetricCard extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset(iconAsset, height: 56, fit: BoxFit.contain),
+            Image.asset(iconAsset, height: 56, fit: BoxFit.contain), //
             const SizedBox(height: 6),
             Text(
               value,

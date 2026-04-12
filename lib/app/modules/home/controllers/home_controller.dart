@@ -9,17 +9,14 @@ import '../../../response/category_response.dart';
 import '../../../service/local_storage.dart';
 import '../../../service/service.dart';
 
-
 class HomeController extends GetxController {
   final PageController pageController = PageController();
-  Timer ? timer;
+  Timer? timer;
   var activeCallButton = false.obs;
 
   var currentPage = 0.obs;
 
-  var bannerList = [
-    "assets/banners/banner_bn_4.png",
-  ].obs;
+  var bannerList = ["assets/banners/banner_bn_4.png"].obs;
 
   var listItemsEnglish1 = [
     'live_data_monitoring',
@@ -34,7 +31,6 @@ class HomeController extends GetxController {
     "fish_medicine_enzyme",
   ].obs;
 
-
   var iconList1 = [
     "assets/icons/water_quality_check.png",
     "assets/icons/fish_disease_treatment.png",
@@ -47,7 +43,6 @@ class HomeController extends GetxController {
     "assets/icons/grown_fish.png",
     "assets/icons/fish_medicine.png",
   ].obs;
-
 
   var listItemsEnglish2 = [
     "fish_feed_marketplace",
@@ -66,7 +61,6 @@ class HomeController extends GetxController {
     "assets/icons/auto-feeder.png",
     "assets/icons/weather_forecast.png",
   ].obs;
-
 
   var listItemsBangla1 = [
     "২৪ ঘন্টা পানি পনিক্ষণ নিভাইস",
@@ -96,10 +90,8 @@ class HomeController extends GetxController {
   var isLoading = false.obs;
   var errorMessage = ''.obs;
 
-
   ProductsRepository productsRepository = ProductsRepository();
   final categoryResponse = Rxn<CategoryResponse>();
-
 
   @override
   void onInit() {
@@ -108,14 +100,13 @@ class HomeController extends GetxController {
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       DateTime now = DateTime.now();
       formattedDate.value = DateFormat('d-MMM-yyyy').format(now);
-      formattedTime.value =  DateFormat('h:mm:ss a').format(now);
+      formattedTime.value = DateFormat('h:mm:ss a').format(now);
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       bannerRotation();
     });
     getCategories();
-
   }
 
   void bannerRotation() {
@@ -136,23 +127,22 @@ class HomeController extends GetxController {
     });
   }
 
-
   getCategories() async {
     var response = await productsRepository.getProductCategories();
 
     response.fold(
-          (l) {
-            print('Failed to fetch categories: ${l.message}');
-            }, (r) {
-            categoryResponse.value = r;
+      (l) {
+        print('Failed to fetch categories: ${l.message}');
+      },
+      (r) {
+        categoryResponse.value = r;
 
-            debugPrint("=================================");
-            print(categoryResponse.value);
-            print("=================================");
-          },
+        debugPrint("=================================");
+        print(categoryResponse.value);
+        print("=================================");
+      },
     );
   }
-
 
   checkLogin() {
     loginTokenStorage = Get.find<LoginTokenStorage>();
@@ -161,9 +151,7 @@ class HomeController extends GetxController {
     if (token != null) {
       isLoggedIn.value = token;
     }
-
   }
-
 
   Future<void> fetchWeatherData(String city) async {
     isLoading.value = true;
@@ -171,7 +159,9 @@ class HomeController extends GetxController {
     weatherData.clear();
 
     try {
-      final url = Uri.parse('https://api.openweathermap.org/data/2.5/weather?q=$city&appid=$apiKey&units=metric');
+      final url = Uri.parse(
+        'https://api.openweathermap.org/data/2.5/weather?q=$city&appid=$apiKey&units=metric',
+      );
       final response = await http.get(url);
 
       if (response.statusCode == 200) {
@@ -186,6 +176,4 @@ class HomeController extends GetxController {
       isLoading.value = false;
     }
   }
-
-
 }
