@@ -23,6 +23,7 @@ class HomeController extends GetxController {
 
   var listItemsEnglish1 = [
     'live_data_monitoring',
+    'fish_disease_detector',
     "pond_management",
     "feed_management",
     "fish_disease_treatment",
@@ -36,6 +37,7 @@ class HomeController extends GetxController {
 
   var iconList1 = [
     "assets/icons/water_quality_check.png",
+    "assets/icons/fish_disease_treatment.png",
     "assets/icons/pond_management.png",
     "assets/icons/feed_management.png",
     "assets/icons/fish_disease_treatment.png",

@@ -135,12 +135,14 @@ class HomeView extends GetView<HomeController> {
                   Get.toNamed(Routes.WATER_QUALITY_DEVICE);
                 }
               } else if (index == 1) {
-                Get.toNamed(Routes.POND_MANAGEMENT);
-              } else if (index == 2) {
-                Get.toNamed(Routes.FEED_MANAGEMENT);
-              } else if (index == 3) {
                 Get.toNamed(Routes.FISH_DISEASE_TREATMENT);
+              } else if (index == 2) {
+                Get.toNamed(Routes.POND_MANAGEMENT);
+              } else if (index == 3) {
+                Get.toNamed(Routes.FEED_MANAGEMENT);
               } else if (index == 4) {
+                Get.toNamed(Routes.FISH_DISEASE_TREATMENT);
+              } else if (index == 5) {
                 final Uri launchUri = Uri(
                   scheme: 'tel',
                   path: "+880 1898-938355",
@@ -148,7 +150,7 @@ class HomeView extends GetView<HomeController> {
                 if (await canLaunchUrl(launchUri)) {
                   await launchUrl(launchUri);
                 } else {}
-              } else if (index == 5) {
+              } else if (index == 6) {
                 var category = homeController.categoryResponse.value?.data;
                 for (int i = 0; i < category.length; i++) {
                   if (category[i].categoryName == "Fish Farming Equipment") {
@@ -158,12 +160,12 @@ class HomeView extends GetView<HomeController> {
                     );
                   }
                 }
-              } else if (index == 6) {
+              } else if (index == 7) {
                 Get.toNamed(
                   Routes.PRODUCT_COMPANIES,
                   arguments: {"id": "ce86362d-828c-4c81-a644-72d6c27c7e13"},
                 );
-              } else if (index == 7) {
+              } else if (index == 8) {
                 Get.toNamed(
                   Routes.PRODUCT_COMPANIES,
                   arguments: {"id": "08a69b99-9d57-4097-afc0-b38f49f5318d"},

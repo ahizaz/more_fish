@@ -11,6 +11,7 @@ const Map<String, String> enUS = {
   'please_login': "Please, Login before continue.",
 
   'live_data_monitoring': 'Live Data Monitoring',
+    'fish_disease_detector': 'Fish Disease Detector',
   'pond_management': 'Pond Management',
   'feed_management': 'Feed Management',
   'fish_disease_treatment': 'Fish Disease Treatment',

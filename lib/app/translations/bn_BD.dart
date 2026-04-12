@@ -12,6 +12,7 @@ const Map<String, String> bnBD = {
   'please_login': "অনুগ্রহ করে, আগে লগইন করুন।",
 
   'live_data_monitoring': 'লাইভ ডাটা মনিটরিং',
+    'fish_disease_detector': 'Fish Disease Detector',
   'pond_management': 'পুকুর ব্যবস্থাপনা',
   'feed_management': 'খাদ্য ব্যবস্থাপনা',
   'fish_disease_treatment': 'মাছের রোগের চিকিৎসা',
