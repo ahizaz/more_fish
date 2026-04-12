@@ -112,34 +112,6 @@ class FishDiseaseDetectorView extends GetView<FishDiseaseDetectorController> {
                         color: Colors.black,
                       ),
                     ),
-                    if (controller.confidencePercent.value.isNotEmpty)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 14,
-                            vertical: 8,
-                          ),
-                          decoration: BoxDecoration(
-                            color: const Color(0xffe9f9fc),
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                              color: const Color(0xff2f7d8b),
-                              width: 1,
-                            ),
-                          ),
-                          child: Text(
-                            'Confidence: ${controller.confidencePercent.value}',
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              color: Color(0xff0f3f49),
-                              fontWeight: FontWeight.w700,
-                              letterSpacing: 0.2,
-                            ),
-                          ),
-                        ),
-                      ),
                   ],
                 ),
               if (controller.selectedImage.value != null)
