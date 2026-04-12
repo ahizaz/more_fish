@@ -38,7 +38,7 @@ class FishDiseaseTreatmentView extends GetView<FishDiseaseTreatmentController> {
           }),
           Expanded(
             child: ListView.builder(
-              padding: EdgeInsets.symmetric(vertical: 16),
+              padding: const EdgeInsets.symmetric(vertical: 16),
               itemCount: controller.titleList.length,
               itemBuilder: (context, index){
                 return InkWell(
@@ -46,8 +46,8 @@ class FishDiseaseTreatmentView extends GetView<FishDiseaseTreatmentController> {
                     Get.toNamed(Routes.FISH_DISEASE_TREATMENT_DETAILS, arguments: {"diseaseName": controller.titleList[index], "data": controller.dataList[index]});
                   },
                   child: CommonContainer(
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-                    margin: EdgeInsetsGeometry.only(left: 16, right: 16,  bottom: 14),
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                    margin: const EdgeInsetsGeometry.only(left: 16, right: 16,  bottom: 14),
                     child: CommonText(
                       "${controller.titleList[index]}",
                       fontWeight: FontWeight.bold,
@@ -77,7 +77,7 @@ class FishDiseaseTreatmentView extends GetView<FishDiseaseTreatmentController> {
             "${text}",
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: Color(0xff0370c3),
+            color: const Color(0xff0370c3),
             maxLines: 2,
             textAlign: TextAlign.center,
           ),
@@ -88,7 +88,7 @@ class FishDiseaseTreatmentView extends GetView<FishDiseaseTreatmentController> {
 
   section({text}){
     return Container(
-      margin: EdgeInsets.only(bottom: 2),
+      margin: const EdgeInsets.only(bottom: 2),
       child: Row(
         children: [
           Expanded(
@@ -155,7 +155,7 @@ class FishDiseaseTreatmentView extends GetView<FishDiseaseTreatmentController> {
 
   boxDecoration(){
     return BoxDecoration(
-      gradient: LinearGradient(
+      gradient: const LinearGradient(
         colors: [
           Color(0xffebffff), // Start color
           Colors.white,      // End color
@@ -169,7 +169,7 @@ class FishDiseaseTreatmentView extends GetView<FishDiseaseTreatmentController> {
           color: Colors.blueGrey.withOpacity(0.5),  // Shadow color with opacity
           spreadRadius: 1,   // How much the shadow spreads
           blurRadius: 1,     // How blurry the shadow is
-          offset: Offset(.2, .2), // Position of shadow: (x, y)
+          offset: const Offset(.2, .2), // Position of shadow: (x, y)
         ),
       ],
     );

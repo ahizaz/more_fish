@@ -22,6 +22,7 @@ abstract class Routes {
   static const POND_MANAGEMENT = _Paths.POND_MANAGEMENT;
   static const FEED_MANAGEMENT = _Paths.FEED_MANAGEMENT;
   static const FISH_DISEASE_TREATMENT = _Paths.FISH_DISEASE_TREATMENT;
+  static const FISH_DISEASE_DETECTOR = _Paths.FISH_DISEASE_DETECTOR;
   static const FARM_MANAGEMENT = _Paths.FARM_MANAGEMENT;
   static const AERATOR_CONNECTION = _Paths.AERATOR_CONNECTION;
   static const FEEDER_CONNECTION = _Paths.FEEDER_CONNECTION;
@@ -72,6 +73,7 @@ abstract class _Paths {
   static const POND_MANAGEMENT = '/pond-management';
   static const FEED_MANAGEMENT = '/feed-management';
   static const FISH_DISEASE_TREATMENT = '/fish-disease-treatment';
+  static const FISH_DISEASE_DETECTOR = '/fish-disease-detector';
   static const FARM_MANAGEMENT = '/farm-management';
   static const AERATOR_CONNECTION = '/aerator-connection';
   static const FEEDER_CONNECTION = '/feeder-connection';

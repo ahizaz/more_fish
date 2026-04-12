@@ -30,6 +30,8 @@ import '../modules/feeder_connection/bindings/feeder_connection_binding.dart';
 import '../modules/feeder_connection/views/feeder_connection_view.dart';
 import '../modules/fish_disease_treatment/bindings/fish_disease_treatment_binding.dart';
 import '../modules/fish_disease_treatment/views/fish_disease_treatment_view.dart';
+import '../modules/fish_disease_detector/bindings/fish_disease_detector_binding.dart';
+import '../modules/fish_disease_detector/views/fish_disease_detector_view.dart';
 import '../modules/fish_disease_treatment_details/bindings/fish_disease_treatment_details_binding.dart';
 import '../modules/fish_disease_treatment_details/views/fish_disease_treatment_details_view.dart';
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
@@ -109,11 +111,7 @@ class AppPages {
       page: () => const ComingSoonView(),
       binding: ComingSoonBinding(),
     ),
-    GetPage(
-      name: _Paths.HOME,
-      page: () => HomeView(),
-      binding: HomeBinding(),
-    ),
+    GetPage(name: _Paths.HOME, page: () => HomeView(), binding: HomeBinding()),
     GetPage(
       name: _Paths.INDEX,
       page: () => const IndexView(),
@@ -193,6 +191,11 @@ class AppPages {
       name: _Paths.FISH_DISEASE_TREATMENT,
       page: () => const FishDiseaseTreatmentView(),
       binding: FishDiseaseTreatmentBinding(),
+    ),
+    GetPage(
+      name: _Paths.FISH_DISEASE_DETECTOR,
+      page: () => const FishDiseaseDetectorView(),
+      binding: FishDiseaseDetectorBinding(),
     ),
     GetPage(
       name: _Paths.FARM_MANAGEMENT,

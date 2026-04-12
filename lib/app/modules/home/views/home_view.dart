@@ -135,7 +135,7 @@ class HomeView extends GetView<HomeController> {
                   Get.toNamed(Routes.WATER_QUALITY_DEVICE);
                 }
               } else if (index == 1) {
-                Get.toNamed(Routes.FISH_DISEASE_TREATMENT);
+                Get.toNamed(Routes.FISH_DISEASE_DETECTOR);
               } else if (index == 2) {
                 Get.toNamed(Routes.POND_MANAGEMENT);
               } else if (index == 3) {
