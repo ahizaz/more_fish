@@ -21,6 +21,7 @@ class PoultryLiveData {
   final int pm10UgM3;
   final int noiseDb;
   final int lightLux;
+  final List<PoultrySwitch> switches;
 
   const PoultryLiveData({
     required this.deviceId,
@@ -39,6 +40,7 @@ class PoultryLiveData {
     required this.pm10UgM3,
     required this.noiseDb,
     required this.lightLux,
+    this.switches = const <PoultrySwitch>[],
   });
 
   factory PoultryLiveData.fromJson(Map<String, dynamic> json) {
@@ -75,6 +77,10 @@ class PoultryLiveData {
       pm10UgM3: _intVal(json['pm10']),
       noiseDb: _intVal(json['noise']),
       lightLux: _intVal(json['lightLux']),
+      switches: ((json['switches'] as List?) ?? const <dynamic>[])
+          .whereType<Map>()
+          .map((e) => PoultrySwitch.fromJson(Map<String, dynamic>.from(e)))
+          .toList(),
     );
   }
 
@@ -95,6 +101,52 @@ class PoultryLiveData {
     'pm10': pm10UgM3,
     'noise': noiseDb,
     'lightLux': lightLux,
+    'switches': switches.map((e) => e.toJson()).toList(),
+  };
+}
+
+class PoultrySwitch {
+  final int? id;
+  final String switchId;
+  final String switchName;
+  final bool isOn;
+  final bool isActive;
+  final String updatedAt;
+
+  const PoultrySwitch({
+    this.id,
+    required this.switchId,
+    required this.switchName,
+    required this.isOn,
+    required this.isActive,
+    required this.updatedAt,
+  });
+
+  factory PoultrySwitch.fromJson(Map<String, dynamic> json) {
+    bool toBool(dynamic value) {
+      if (value is bool) return value;
+      if (value is num) return value != 0;
+      final v = value.toString().trim().toLowerCase();
+      return v == 'true' || v == '1' || v == 'on';
+    }
+
+    return PoultrySwitch(
+      id: json['id'] is num ? (json['id'] as num).toInt() : null,
+      switchId: (json['switch_id'] ?? '').toString(),
+      switchName: (json['switch_name'] ?? '').toString(),
+      isOn: toBool(json['is_on']),
+      isActive: toBool(json['is_active']),
+      updatedAt: (json['updated_at'] ?? '').toString(),
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'switch_id': switchId,
+    'switch_name': switchName,
+    'is_on': isOn,
+    'is_active': isActive,
+    'updated_at': updatedAt,
   };
 }
 

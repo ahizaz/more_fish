@@ -41,6 +41,24 @@ class MockPoultryLiveRepository implements PoultryLiveRepository {
       pm10UgM3: 10 + _rand.nextInt(90),
       noiseDb: 50 + _rand.nextInt(40),
       lightLux: 15 + _rand.nextInt(35),
+      switches: const [
+        PoultrySwitch(
+          id: 1,
+          switchId: 'L001',
+          switchName: 'Main Light',
+          isOn: true,
+          isActive: true,
+          updatedAt: '',
+        ),
+      ],
     );
+  }
+
+  @override
+  Future<void> setSwitchState({
+    required String switchId,
+    required bool turnOn,
+  }) async {
+    await Future.delayed(const Duration(milliseconds: 200));
   }
 }

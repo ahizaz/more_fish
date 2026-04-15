@@ -22,6 +22,8 @@ class PoultryLiveMonitoringController extends GetxController
   final liveData = Rxn<PoultryLiveData>();
   final isLoading = false.obs;
   final error = ''.obs;
+  final switchBusy = <String, bool>{}.obs;
+  final switchUiState = <String, bool>{}.obs;
 
   Timer? _pollTimer;
   bool _isRefreshInProgress = false;
@@ -75,6 +77,7 @@ class PoultryLiveMonitoringController extends GetxController
       debugPrint('Poultry live monitoring: devices fetched ${list.length}');
       devices.assignAll(list);
       if (list.isNotEmpty) {
+        switchUiState.clear();
         selectedDeviceId.value = list.first.id;
         await refreshLiveData();
         _startPolling();
@@ -126,6 +129,7 @@ class PoultryLiveMonitoringController extends GetxController
   }
 
   Future<void> onDeviceChanged(String deviceId) async {
+    switchUiState.clear();
     selectedDeviceId.value = deviceId;
     await refreshLiveData();
     _startPolling();
@@ -166,6 +170,44 @@ class PoultryLiveMonitoringController extends GetxController
     } finally {
       isLoading.value = false;
       _isRefreshInProgress = false;
+    }
+  }
+
+  Future<void> onSwitchChanged({
+    required PoultrySwitch item,
+    required bool nextValue,
+  }) async {
+    if (item.switchId.trim().isEmpty) {
+      return;
+    }
+
+    final current = switchBusy[item.switchId] ?? false;
+    if (current) {
+      return;
+    }
+
+    switchBusy[item.switchId] = true;
+    switchUiState[item.switchId] = nextValue;
+    EasyLoading.show(status: 'Updating switch...');
+    debugPrint(
+      'Poultry switch toggle: ${item.switchId} -> ${nextValue ? 'ON' : 'OFF'}',
+    );
+
+    try {
+      await _repo.setSwitchState(switchId: item.switchId, turnOn: nextValue);
+      await refreshLiveData();
+      debugPrint('Poultry switch toggle success: ${item.switchId}');
+    } catch (e) {
+      error.value = e.toString();
+      switchUiState[item.switchId] = item.isOn;
+      debugPrint('Poultry switch toggle error: $e');
+      EasyLoading.dismiss();
+      EasyLoading.showError('Failed to update switch');
+    } finally {
+      switchBusy[item.switchId] = false;
+      if (EasyLoading.isShow) {
+        EasyLoading.dismiss();
+      }
     }
   }
 

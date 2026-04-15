@@ -168,6 +168,8 @@ class _LoggedInDashboard extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 14),
+              _SwitchesSection(controller: controller, live: live),
+              const SizedBox(height: 14),
               _DustParticlesSection(live: live),
               const SizedBox(height: 14),
               // Temporary note until Poultry Pulse devices/backend are connected.
@@ -364,6 +366,100 @@ class _DustParticlesSection extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class _SwitchesSection extends StatelessWidget {
+  const _SwitchesSection({required this.controller, required this.live});
+
+  final PoultryLiveMonitoringController controller;
+  final PoultryLiveData? live;
+
+  @override
+  Widget build(BuildContext context) {
+    final switches = live?.switches ?? const <PoultrySwitch>[];
+    if (switches.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+      decoration: BoxDecoration(
+        color: const Color(0xfff3f4c5),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+        border: Border.all(color: Colors.black12),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(bottom: 8),
+            child: Text(
+              'Switch Controls',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+            ),
+          ),
+          ...switches.map(
+            (item) => Padding(
+              padding: const EdgeInsets.only(top: 6),
+              child: _SwitchCard(controller: controller, item: item),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SwitchCard extends StatelessWidget {
+  const _SwitchCard({required this.controller, required this.item});
+
+  final PoultryLiveMonitoringController controller;
+  final PoultrySwitch item;
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() {
+      final busy = controller.switchBusy[item.switchId] ?? false;
+      final value = controller.switchUiState[item.switchId] ?? item.isOn;
+
+      return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 216, 226, 180),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Colors.black12),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                item.switchName.isEmpty ? item.switchId : item.switchName,
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            Switch(
+              value: value,
+              onChanged: (!item.isActive || busy)
+                  ? null
+                  : (v) {
+                      controller.onSwitchChanged(item: item, nextValue: v);
+                    },
+            ),
+          ],
+        ),
+      );
+    });
   }
 }
 
