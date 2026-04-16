@@ -117,6 +117,7 @@ class _LoggedInDashboard extends StatelessWidget {
                         iconData: _dynamicMetricIcon(metric.name),
                         title: metric.title,
                         value: _formatDynamicMetricValue(metric),
+                        borderColor: _metricBorderColor(metric.dangerStatus),
                       ),
                     )
                     .toList(),
@@ -473,12 +474,14 @@ class _MetricCard extends StatelessWidget {
     this.iconData,
     required this.title,
     required this.value,
+    required this.borderColor,
   });
 
   final String? iconAsset;
   final IconData? iconData;
   final String title;
   final String value;
+  final Color borderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -497,7 +500,7 @@ class _MetricCard extends StatelessWidget {
               offset: const Offset(0, 4),
             ),
           ],
-          border: Border.all(color: Colors.black12),
+          border: Border.all(color: borderColor, width: 2),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -539,6 +542,15 @@ String _formatDynamicMetricValue(PoultrySensorMetric metric) {
     return formatted;
   }
   return '$formatted $unit';
+}
+
+Color _metricBorderColor(String status) {
+  final normalized = status.trim().toLowerCase();
+  if (normalized == 'perfect') {
+    return Colors.green;
+  }
+  // Requirements: danger and invalid should be red.
+  return Colors.red;
 }
 
 IconData _dynamicMetricIcon(String name) {
