@@ -118,7 +118,10 @@ class PoultryApiLiveRepository implements PoultryLiveRepository {
     debugPrint('Poultry latest-readings GET: $_latestReadingsUri');
     debugPrint('Poultry latest-readings token exists: ${token.isNotEmpty}');
 
-    final response = await http.get(_latestReadingsUri, headers: _headers(token));
+    final response = await http.get(
+      _latestReadingsUri,
+      headers: _headers(token),
+    );
 
     debugPrint('Poultry latest-readings status: ${response.statusCode}');
     debugPrint('Poultry latest-readings body: ${response.body}');
@@ -169,7 +172,9 @@ class PoultryApiLiveRepository implements PoultryLiveRepository {
     debugPrint('Poultry farms-list body: ${response.body}');
 
     if (response.statusCode != 200) {
-      throw Exception('Farm list API failed with status ${response.statusCode}');
+      throw Exception(
+        'Farm list API failed with status ${response.statusCode}',
+      );
     }
 
     final decoded = jsonDecode(response.body);
@@ -179,7 +184,9 @@ class PoultryApiLiveRepository implements PoultryLiveRepository {
 
     final ok = decoded['success'];
     if (ok is bool && !ok) {
-      throw Exception(decoded['message']?.toString() ?? 'Farm list API failed.');
+      throw Exception(
+        decoded['message']?.toString() ?? 'Farm list API failed.',
+      );
     }
 
     final data = decoded['data'];
@@ -193,7 +200,9 @@ class PoultryApiLiveRepository implements PoultryLiveRepository {
         .toList();
   }
 
-  Future<Map<String, dynamic>> _fetchFarmDashboard({required int farmId}) async {
+  Future<Map<String, dynamic>> _fetchFarmDashboard({
+    required int farmId,
+  }) async {
     final token = _getToken();
     final uri = _farmDashboardUri(farmId);
 
