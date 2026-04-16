@@ -10,16 +10,6 @@ import 'poultry_live_models.dart';
 import 'poultry_live_repo.dart';
 
 class PoultryApiLiveRepository implements PoultryLiveRepository {
-  List<Map<String, dynamic>>? _cachedReadings;
-  DateTime? _lastFetchedAt;
-
-  static const Duration _cacheTtl = Duration(seconds: 8);
-  static const String _fallbackBearerToken =
-      '21067c389d5d27d6ecfd22dc13e0ccb792714ad6';
-
-  Uri get _latestReadingsUri =>
-      Uri.parse('${ApiService.baseUrl}/poultry_care/api/latest-readings/');
-
   Uri get _farmListUri =>
       Uri.parse('${ApiService.baseUrl}/poultry_care/farms/list/');
 
@@ -43,21 +33,11 @@ class PoultryApiLiveRepository implements PoultryLiveRepository {
       throw Exception('Invalid farm id: $deviceId');
     }
 
-    final readings = await _fetchLatestReadings();
-    if (readings.isEmpty) {
-      throw Exception('No device readings found for poultry live monitoring.');
-    }
-
     final dashboard = await _fetchFarmDashboard(farmId: farmId);
 
-    final selected = _pickDeviceReading(deviceId: deviceId, readings: readings);
-    final token = _getToken();
-    debugPrint('Poultry latest-readings token exists: ${token.isNotEmpty}');
-
-    return _toLiveData(
-      reading: selected,
+    return _toLiveDataFromDashboard(
+      dashboardData: dashboard,
       selectedDeviceId: deviceId,
-      switches: _extractSwitches(dashboard),
     );
   }
 
@@ -101,63 +81,6 @@ class PoultryApiLiveRepository implements PoultryLiveRepository {
         }
       }
     }
-  }
-
-  Future<List<Map<String, dynamic>>> _fetchLatestReadings() async {
-    final cachedReadings = _cachedReadings;
-    final lastFetchedAt = _lastFetchedAt;
-    if (cachedReadings != null && lastFetchedAt != null) {
-      final age = DateTime.now().difference(lastFetchedAt);
-      if (age <= _cacheTtl) {
-        return cachedReadings;
-      }
-    }
-
-    final token = _getToken();
-
-    debugPrint('Poultry latest-readings GET: $_latestReadingsUri');
-    debugPrint('Poultry latest-readings token exists: ${token.isNotEmpty}');
-
-    final response = await http.get(
-      _latestReadingsUri,
-      headers: _headers(token),
-    );
-
-    debugPrint('Poultry latest-readings status: ${response.statusCode}');
-    debugPrint('Poultry latest-readings body: ${response.body}');
-
-    if (response.statusCode != 200) {
-      throw Exception(
-        'Latest readings API failed with status ${response.statusCode}',
-      );
-    }
-
-    final decoded = jsonDecode(response.body);
-    if (decoded is! Map<String, dynamic>) {
-      throw Exception('Invalid latest readings response format.');
-    }
-
-    final ok = decoded['success'];
-    if (ok is bool && !ok) {
-      throw Exception(
-        decoded['message']?.toString() ?? 'Latest readings API failed.',
-      );
-    }
-
-    final data = decoded['data'];
-    if (data is! List) {
-      throw Exception('Latest readings response missing data list.');
-    }
-
-    final readings = data
-        .whereType<Map>()
-        .map((e) => Map<String, dynamic>.from(e))
-        .toList();
-
-    _cachedReadings = List<Map<String, dynamic>>.unmodifiable(readings);
-    _lastFetchedAt = DateTime.now();
-
-    return _cachedReadings!;
   }
 
   Future<List<Map<String, dynamic>>> _fetchFarmList() async {
@@ -251,46 +174,28 @@ class PoultryApiLiveRepository implements PoultryLiveRepository {
     return PoultryDevice(id: farmId, name: displayName);
   }
 
-  Map<String, dynamic> _pickDeviceReading({
-    required String deviceId,
-    required List<Map<String, dynamic>> readings,
-  }) {
-    final normalizedDeviceId = deviceId.trim().toLowerCase();
-
-    for (final reading in readings) {
-      final possibleIds = [
-        _string(reading['client_id']).trim().toLowerCase(),
-        _string(reading['id']).trim().toLowerCase(),
-        _string(reading['name']).trim().toLowerCase(),
-        _string(reading['farm_id']).trim().toLowerCase(),
-      ];
-      if (possibleIds.contains(normalizedDeviceId)) {
-        return reading;
-      }
-    }
-
-    return readings.first;
-  }
-
-  PoultryLiveData _toLiveData({
-    required Map<String, dynamic> reading,
+  PoultryLiveData _toLiveDataFromDashboard({
+    required Map<String, dynamic> dashboardData,
     required String selectedDeviceId,
-    required List<PoultrySwitch> switches,
   }) {
-    final latestReading = _map(reading['latest_reading']);
-    final values = _map(latestReading['data']);
+    final device = _map(dashboardData['device']);
+    final sensorsRaw = device['sensors'];
+    final sensors = sensorsRaw is List
+        ? sensorsRaw.whereType<Map>().map((e) => _map(e)).toList()
+        : const <Map<String, dynamic>>[];
+
+    final values = _extractSensorValues(sensors);
 
     final resolvedDeviceId = _firstNonEmpty([
-      _string(reading['client_id']),
-      _string(reading['name']),
-      _string(reading['farm_name']),
+      _string(device['client_id']),
+      _string(device['device_name']),
+      _string(dashboardData['farm_name']),
       selectedDeviceId,
     ]);
 
     final ts = _firstNonEmpty([
-      _string(latestReading['timestamp']),
-      _string(reading['updated_at']),
-      _string(reading['timestamp']),
+      _string(_sensorValueByName(sensors, 'temperature', field: 'data_time')),
+      _string(_sensorValueByName(sensors, 'humidity', field: 'data_time')),
       DateTime.now().toUtc().toIso8601String(),
     ]);
 
@@ -311,8 +216,42 @@ class PoultryApiLiveRepository implements PoultryLiveRepository {
       pm10UgM3: 0,
       noiseDb: _double(values['sound_db']).round(),
       lightLux: 0,
-      switches: switches,
+      switches: _extractSwitches(dashboardData),
     );
+  }
+
+  Map<String, double> _extractSensorValues(List<Map<String, dynamic>> sensors) {
+    final result = <String, double>{};
+
+    double valueOf(String name) {
+      return _double(_sensorValueByName(sensors, name, field: 'last_value'));
+    }
+
+    result['temperature'] = valueOf('temperature');
+    result['humidity'] = valueOf('humidity');
+    result['co2'] = valueOf('co2');
+    result['nh3_gas'] = valueOf('nh3_gas');
+    result['aqi'] = valueOf('aqi');
+    result['sound_db'] = valueOf('sound_db');
+    result['tvoc'] = valueOf('tvoc');
+    result['methane_ppm'] = valueOf('methane_ppm');
+
+    return result;
+  }
+
+  dynamic _sensorValueByName(
+    List<Map<String, dynamic>> sensors,
+    String name, {
+    required String field,
+  }) {
+    final normalized = name.trim().toLowerCase();
+    for (final sensor in sensors) {
+      final sensorName = _string(sensor['name']).trim().toLowerCase();
+      if (sensorName == normalized) {
+        return sensor[field];
+      }
+    }
+    return null;
   }
 
   List<PoultrySwitch> _extractSwitches(Map<String, dynamic> dashboardData) {
@@ -336,7 +275,7 @@ class PoultryApiLiveRepository implements PoultryLiveRepository {
       }
     }
 
-    return _fallbackBearerToken;
+    throw Exception('Missing bearer token. Please login again.');
   }
 
   Map<String, String> _headers(String token) {
