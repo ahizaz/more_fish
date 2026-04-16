@@ -88,6 +88,7 @@ class _LoggedInDashboard extends StatelessWidget {
       }
 
       final live = controller.liveData.value;
+      final dynamicMetrics = live?.metrics ?? const <PoultrySensorMetric>[];
 
       return SingleChildScrollView(
         child: Padding(
@@ -109,63 +110,16 @@ class _LoggedInDashboard extends StatelessWidget {
               Wrap(
                 spacing: 12,
                 runSpacing: 12,
-                children: [
-                  _MetricCard(
-                    iconAsset: 'assets/icons/poultry_co.png',
-                    title: 'Air Quality Index (AQI)',
-                    value: live == null
-                        ? '--'
-                        : (live.aqi ?? 0.0).toStringAsFixed(1),
-                  ),
-                  _MetricCard(
-                    iconAsset: 'assets/icons/poultry_nh3.png',
-                    title: 'Ammonia (NH3)',
-                    value: live == null
-                        ? '--'
-                        : '${live.nh3MgL.toStringAsFixed(2)} mg/L',
-                  ),
-                  _MetricCard(
-                    iconAsset: 'assets/icons/poultry_temperature.png',
-                    title: 'Temperature',
-                    value: live == null
-                        ? '--'
-                        : '${live.temperatureC.toStringAsFixed(2)} °C',
-                  ),
-                  // _MetricCard(
-                  //   iconAsset: 'assets/icons/poultry_temperature.png',
-                  //   title: 'Reference temperature',
-                  //   value: live == null
-                  //       ? '--'
-                  //       : '${(live.refTemperatureC ?? 0.0).toStringAsFixed(2)} °C',
-                  // ),
-                  _MetricCard(
-                    iconAsset: 'assets/icons/poultry_humidity.png',
-                    title: 'Humidity',
-                    value: live == null ? '--' : '${live.humidityPct} %',
-                  ),
-                  _MetricCard(
-                    iconAsset: 'assets/icons/poultry_co2.png',
-                    title: 'Carbon dioxide',
-                    value: live == null ? '--' : '${live.co2Ppm} ppm',
-                  ),
-                  _MetricCard(
-                    iconAsset: 'assets/icons/cattle_voc.png',
-                    title: 'TVOC',
-                    value: live == null
-                        ? '--'
-                        : '${live.vocMgM3.toStringAsFixed(2)} mg/m³',
-                  ),
-                  _MetricCard(
-                    iconAsset: 'assets/icons/poultry_noise.png',
-                    title: 'Sound',
-                    value: live == null ? '--' : '${live.noiseDb} dB',
-                  ),
-                  _MetricCard(
-                    iconAsset: 'assets/icons/poultry_ch4.png',
-                    title: 'Methane (CH₄)',
-                    value: live == null ? '--' : '${live.ch4Ppm} ppm',
-                  ),
-                ],
+                children: dynamicMetrics
+                    .map(
+                      (metric) => _MetricCard(
+                        iconAsset: _metricIconAsset(metric.name),
+                        iconData: _dynamicMetricIcon(metric.name),
+                        title: metric.title,
+                        value: _formatDynamicMetricValue(metric),
+                      ),
+                    )
+                    .toList(),
               ),
               const SizedBox(height: 14),
               _SwitchesSection(controller: controller, live: live),
@@ -515,12 +469,14 @@ class _DustParticleCard extends StatelessWidget {
 
 class _MetricCard extends StatelessWidget {
   const _MetricCard({
-    required this.iconAsset,
+    this.iconAsset,
+    this.iconData,
     required this.title,
     required this.value,
   });
 
-  final String iconAsset;
+  final String? iconAsset;
+  final IconData? iconData;
   final String title;
   final String value;
 
@@ -546,7 +502,10 @@ class _MetricCard extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset(iconAsset, height: 56, fit: BoxFit.contain), //
+            if (iconAsset != null)
+              Image.asset(iconAsset!, height: 56, fit: BoxFit.contain)
+            else
+              Icon(iconData ?? Icons.sensors, size: 42, color: Colors.black87),
             const SizedBox(height: 6),
             Text(
               value,
@@ -567,5 +526,54 @@ class _MetricCard extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+String _formatDynamicMetricValue(PoultrySensorMetric metric) {
+  final unit = metric.unit.trim();
+  final value = metric.value;
+  final formatted = value % 1 == 0
+      ? value.toStringAsFixed(0)
+      : value.toStringAsFixed(2);
+  if (unit.isEmpty || unit.toLowerCase() == 'null') {
+    return formatted;
+  }
+  return '$formatted $unit';
+}
+
+IconData _dynamicMetricIcon(String name) {
+  switch (name) {
+    case 'light_intensity':
+      return Icons.light_mode;
+    case 'pm1':
+    case 'pm25':
+    case 'pm4':
+    case 'pm10':
+      return Icons.blur_on;
+    default:
+      return Icons.sensors;
+  }
+}
+
+String? _metricIconAsset(String name) {
+  switch (name) {
+    case 'aqi':
+      return 'assets/icons/poultry_co.png';
+    case 'nh3_gas':
+      return 'assets/icons/poultry_nh3.png';
+    case 'temperature':
+      return 'assets/icons/poultry_temperature.png';
+    case 'humidity':
+      return 'assets/icons/poultry_humidity.png';
+    case 'co2':
+      return 'assets/icons/poultry_co2.png';
+    case 'tvoc':
+      return 'assets/icons/cattle_voc.png';
+    case 'sound_db':
+      return 'assets/icons/poultry_noise.png';
+    case 'methane_ppm':
+      return 'assets/icons/poultry_ch4.png';
+    default:
+      return null;
   }
 }

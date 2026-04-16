@@ -21,6 +21,7 @@ class PoultryLiveData {
   final int pm10UgM3;
   final int noiseDb;
   final int lightLux;
+  final List<PoultrySensorMetric> metrics;
   final List<PoultrySwitch> switches;
 
   const PoultryLiveData({
@@ -40,6 +41,7 @@ class PoultryLiveData {
     required this.pm10UgM3,
     required this.noiseDb,
     required this.lightLux,
+    this.metrics = const <PoultrySensorMetric>[],
     this.switches = const <PoultrySwitch>[],
   });
 
@@ -77,6 +79,12 @@ class PoultryLiveData {
       pm10UgM3: _intVal(json['pm10']),
       noiseDb: _intVal(json['noise']),
       lightLux: _intVal(json['lightLux']),
+      metrics: ((json['metrics'] as List?) ?? const <dynamic>[])
+          .whereType<Map>()
+          .map(
+            (e) => PoultrySensorMetric.fromJson(Map<String, dynamic>.from(e)),
+          )
+          .toList(),
       switches: ((json['switches'] as List?) ?? const <dynamic>[])
           .whereType<Map>()
           .map((e) => PoultrySwitch.fromJson(Map<String, dynamic>.from(e)))
@@ -101,7 +109,51 @@ class PoultryLiveData {
     'pm10': pm10UgM3,
     'noise': noiseDb,
     'lightLux': lightLux,
+    'metrics': metrics.map((e) => e.toJson()).toList(),
     'switches': switches.map((e) => e.toJson()).toList(),
+  };
+}
+
+class PoultrySensorMetric {
+  final String name;
+  final String title;
+  final String unit;
+  final double value;
+  final String dangerStatus;
+  final String dataTime;
+
+  const PoultrySensorMetric({
+    required this.name,
+    required this.title,
+    required this.unit,
+    required this.value,
+    required this.dangerStatus,
+    required this.dataTime,
+  });
+
+  factory PoultrySensorMetric.fromJson(Map<String, dynamic> json) {
+    double toDouble(dynamic v) {
+      if (v is num) return v.toDouble();
+      return double.tryParse('$v') ?? 0.0;
+    }
+
+    return PoultrySensorMetric(
+      name: (json['name'] ?? '').toString(),
+      title: (json['title'] ?? '').toString(),
+      unit: (json['unit'] ?? '').toString(),
+      value: toDouble(json['value']),
+      dangerStatus: (json['danger_status'] ?? '').toString(),
+      dataTime: (json['data_time'] ?? '').toString(),
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+    'name': name,
+    'title': title,
+    'unit': unit,
+    'value': value,
+    'danger_status': dangerStatus,
+    'data_time': dataTime,
   };
 }
 

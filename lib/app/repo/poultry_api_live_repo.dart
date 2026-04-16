@@ -215,7 +215,8 @@ class PoultryApiLiveRepository implements PoultryLiveRepository {
       pm4UgM3: 0,
       pm10UgM3: 0,
       noiseDb: _double(values['sound_db']).round(),
-      lightLux: 0,
+      lightLux: _double(values['light_intensity']).round(),
+      metrics: _extractAllMetrics(sensors),
       switches: _extractSwitches(dashboardData),
     );
   }
@@ -235,8 +236,51 @@ class PoultryApiLiveRepository implements PoultryLiveRepository {
     result['sound_db'] = valueOf('sound_db');
     result['tvoc'] = valueOf('tvoc');
     result['methane_ppm'] = valueOf('methane_ppm');
+    result['light_intensity'] = valueOf('light_intensity');
 
     return result;
+  }
+
+  List<PoultrySensorMetric> _extractAllMetrics(
+    List<Map<String, dynamic>> sensors,
+  ) {
+    return sensors.map((sensor) {
+      final rawName = _string(sensor['name']);
+      final normalizedName = rawName.trim().toLowerCase();
+      return PoultrySensorMetric(
+        name: normalizedName,
+        title: _metricTitle(normalizedName),
+        unit: _string(sensor['unit']),
+        value: _double(sensor['last_value']),
+        dangerStatus: _string(sensor['danger_status']),
+        dataTime: _string(sensor['data_time']),
+      );
+    }).toList();
+  }
+
+  String _metricTitle(String normalizedName) {
+    switch (normalizedName) {
+      case 'aqi':
+        return 'Air Quality Index (AQI)';
+      case 'nh3_gas':
+        return 'Ammonia (NH3)';
+      case 'co2':
+        return 'Carbon dioxide';
+      case 'tvoc':
+        return 'TVOC';
+      case 'sound_db':
+        return 'Sound';
+      case 'methane_ppm':
+        return 'Methane (CH4)';
+      case 'light_intensity':
+        return 'Light intensity';
+      default:
+        return normalizedName
+            .split('_')
+            .where((e) => e.isNotEmpty)
+            .map((word) => '${word[0].toUpperCase()}${word.substring(1)}')
+            .join(' ');
+    }
   }
 
   dynamic _sensorValueByName(
