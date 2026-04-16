@@ -361,11 +361,24 @@ class _SwitchesSection extends StatelessWidget {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
             ),
           ),
-          ...switches.map(
-            (item) => Padding(
-              padding: const EdgeInsets.only(top: 6),
-              child: _SwitchCard(controller: controller, item: item),
-            ),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              const spacing = 6.0;
+              final itemWidth = (constraints.maxWidth - spacing) / 2;
+
+              return Wrap(
+                spacing: spacing,
+                runSpacing: 6,
+                children: switches
+                    .map(
+                      (item) => SizedBox(
+                        width: itemWidth,
+                        child: _SwitchCard(controller: controller, item: item),
+                      ),
+                    )
+                    .toList(),
+              );
+            },
           ),
         ],
       ),
