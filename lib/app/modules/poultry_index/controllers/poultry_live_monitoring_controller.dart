@@ -29,7 +29,7 @@ class PoultryLiveMonitoringController extends GetxController
   bool _isRefreshInProgress = false;
   DateTime? _lastPageVisibleRefreshAt;
 
-  static const Duration _refreshInterval = Duration(seconds: 10);
+  static const Duration _refreshInterval = Duration(seconds: 30);
 
   @override
   void onInit() {
