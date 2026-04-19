@@ -27,8 +27,8 @@ class AuthRepository {
       );
       request.headers.addAll(ApiService.headers);
       request.body = jsonEncode({
-        "usr_email": "${email}",
-        "password": "${password}",
+        "usr_email": "$email",
+        "password": "$password",
       });
 
       http.StreamedResponse response = await request.send();
@@ -99,8 +99,8 @@ class AuthRepository {
       );
       request.headers.addAll(headers);
       request.body = jsonEncode({
-        "old_password": "${oldPassword}",
-        "new_password": "${newPassword}",
+        "old_password": "$oldPassword",
+        "new_password": "$newPassword",
       });
 
       http.StreamedResponse response = await request.send();
@@ -226,8 +226,8 @@ class AuthRepository {
       );
       request.headers.addAll(ApiService.headers);
       request.body = jsonEncode({
-        "user_id": "${userId}",
-        "password": "${password}",
+        "user_id": "$userId",
+        "password": "$password",
       });
 
       http.StreamedResponse response = await request.send();

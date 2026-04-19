@@ -219,7 +219,7 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
 
                                               for(var i in controller.companyListResponse.value!.data!){
                                                 if(i.name == controller.pondListResponse.value?.data[0].astName){
-                                                  print(controller.pondListResponse.value?.data[0].astName);
+                                                  debugPrint(controller.pondListResponse.value?.data[0].astName);
                                                   controller.comId.value = i.id!;
 
                                                   print(controller.comId);
@@ -334,7 +334,7 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                                         }
 
                                                       },
-                                                      activeColor: Colors.green,
+                                                      activeThumbColor: Colors.green,
                                                       inactiveThumbColor: Colors.red,
                                                     );
                                                   })
@@ -363,7 +363,7 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                               var data = sensor.sensorName;
                                               var value = double.tryParse(sensor.lastValue.toString()) ?? 0.0;
 
-                                              if (data == "pH" && value < 7)
+                                              if (data == "pH" && value < 7) {
                                                 return const Row(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
@@ -382,8 +382,9 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                                     ),
                                                   ],
                                                 );
-                                             if(data == "pH" && value > 8.5)
-                                                return const Row(
+                                              }
+                                             if(data == "pH" && value > 8.5) {
+                                               return const Row(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     CommonText(
@@ -401,7 +402,8 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                                     ),
                                                   ],
                                                 );
-                                              if(data == "DO" && value < 3)
+                                             }
+                                              if(data == "DO" && value < 3) {
                                                 return const Row(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
@@ -420,7 +422,8 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                                     ),
                                                   ],
                                                 );
-                                              if(data == "TDS" && value < 100)
+                                              }
+                                              if(data == "TDS" && value < 100) {
                                                 return const Row(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
@@ -439,7 +442,8 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                                     ),
                                                   ],
                                                 );
-                                              if(data == "TDS" && value > 1000)
+                                              }
+                                              if(data == "TDS" && value > 1000) {
                                                 return const Row(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
@@ -458,7 +462,8 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                                     ),
                                                   ],
                                                 );
-                                              if(data == "Temperature" && value > 34)
+                                              }
+                                              if(data == "Temperature" && value > 34) {
                                                 return const Row(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
@@ -477,7 +482,8 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                                     ),
                                                   ],
                                                 );
-                                              if(data == "NH3" && value > 0.5)
+                                              }
+                                              if(data == "NH3" && value > 0.5) {
                                                 return const Row(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
@@ -496,8 +502,9 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                                     ),
                                                   ],
                                                 );
-                                              else
+                                              } else {
                                                 return const CommonText("");
+                                              }
 
                                             },
                                           ),

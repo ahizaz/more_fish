@@ -9,7 +9,7 @@ import '../controllers/product_details_controller.dart';
 class ProductDetailsView extends GetView<ProductDetailsController> {
   const ProductDetailsView({super.key});
   @override
-  Widget build(BuildContext context) {;
+  Widget build(BuildContext context) {
 
     return Scaffold(
       backgroundColor: AppColors.backGround,
@@ -37,7 +37,7 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
                     child: Column(
                       children: [
                         Image.network(
-                          "${ApiService.baseUrl}${data?.productimageSet[0].image}",
+                          "${ApiService.baseUrl}${data.productimageSet[0].image}",
                           height: 180,
                           width: 300,
                         ),

@@ -109,7 +109,9 @@ class Datum {
 }
 
 enum NotColor {
+  // ignore: constant_identifier_names
   GREEN,
+  // ignore: constant_identifier_names
   ORANGE
 }
 
@@ -139,8 +141,11 @@ final notUrgencyValues = EnumValues({
 });
 
 enum NotWarning {
+  // ignore: constant_identifier_names
   EMPTY,
+  // ignore: constant_identifier_names
   NOT_WARNING,
+  // ignore: constant_identifier_names
   PURPLE
 }
 

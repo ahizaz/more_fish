@@ -349,7 +349,7 @@ class HomeView extends GetView<HomeController> {
                   ),
                   InkWell(
                     onTap: () async {
-                      final String phoneNumber = "+8801898-938354";
+                      const String phoneNumber = "+8801898-938354";
 
                       final String cleanedNumber = phoneNumber.replaceAll(
                         '+',

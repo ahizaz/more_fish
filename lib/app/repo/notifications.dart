@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import '../response/notification_response.dart';
@@ -35,9 +36,9 @@ class NotificationsRepository{
       if (response.statusCode == 201) {
         print(response.statusCode);
         var data = await response.stream.bytesToString();
-        print("======================================================1");
+        debugPrint("======================================================1");
         NotificationResponse notificationResponse = NotificationResponse.fromRawJson(data);
-        print("======================================================2");
+        debugPrint("======================================================2");
         return Right(notificationResponse);
       }
       else {

@@ -14,7 +14,7 @@ class CleanAirIndexView extends GetView<CleanAirIndexController> {
 
   @override
   Widget build(BuildContext context) {
-    final pages = const [
+    const pages = [
       CleanAirHomeView(),
       CleanAirNotificationsView(),
       CleanAirProfileView(),

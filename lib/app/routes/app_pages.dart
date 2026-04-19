@@ -111,7 +111,7 @@ class AppPages {
       page: () => const ComingSoonView(),
       binding: ComingSoonBinding(),
     ),
-    GetPage(name: _Paths.HOME, page: () => HomeView(), binding: HomeBinding()),
+    GetPage(name: _Paths.HOME, page: () => const HomeView(), binding: HomeBinding()),
     GetPage(
       name: _Paths.INDEX,
       page: () => const IndexView(),
