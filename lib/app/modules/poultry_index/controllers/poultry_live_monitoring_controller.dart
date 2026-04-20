@@ -29,7 +29,7 @@ class PoultryLiveMonitoringController extends GetxController
   bool _isRefreshInProgress = false;
   DateTime? _lastPageVisibleRefreshAt;
 
-  static const Duration _refreshInterval = Duration(seconds: 30);
+  static const Duration _refreshInterval = Duration(seconds: 5);
 
   @override
   void onInit() {
@@ -214,13 +214,33 @@ class PoultryLiveMonitoringController extends GetxController
     }
 
     switchBusy[item.switchId] = true;
-    switchUiState[item.switchId] = nextValue;
-    EasyLoading.show(status: 'Updating switch...');
+    EasyLoading.show(status: 'Checking latest state...');
     debugPrint(
       'Poultry switch toggle: ${item.switchId} -> ${nextValue ? 'ON' : 'OFF'}',
     );
 
     try {
+      await refreshLiveData();
+
+      final latestSwitch = _findLatestSwitchById(item.switchId);
+      final currentBackendState = latestSwitch?.isOn ?? item.isOn;
+
+      if (!currentBackendState && nextValue) {
+        switchUiState[item.switchId] = false;
+        EasyLoading.dismiss();
+        EasyLoading.showInfo('This switch is currently OFF from server state.');
+        return;
+      }
+
+      if (currentBackendState && !nextValue) {
+        switchUiState[item.switchId] = true;
+        EasyLoading.dismiss();
+        EasyLoading.showInfo('This switch is currently ON from server state.');
+        return;
+      }
+
+      switchUiState[item.switchId] = nextValue;
+      EasyLoading.show(status: 'Updating switch...');
       await _repo.setSwitchState(switchId: item.switchId, turnOn: nextValue);
       await refreshLiveData();
       debugPrint('Poultry switch toggle success: ${item.switchId}');
@@ -236,6 +256,16 @@ class PoultryLiveMonitoringController extends GetxController
         EasyLoading.dismiss();
       }
     }
+  }
+
+  PoultrySwitch? _findLatestSwitchById(String switchId) {
+    final switches = liveData.value?.switches ?? const <PoultrySwitch>[];
+    for (final sw in switches) {
+      if (sw.switchId == switchId) {
+        return sw;
+      }
+    }
+    return null;
   }
 
   void _startPolling() {
