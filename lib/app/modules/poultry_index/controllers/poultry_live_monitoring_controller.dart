@@ -173,6 +173,33 @@ class PoultryLiveMonitoringController extends GetxController
     }
   }
 
+  void openSensorGraph(PoultrySensorMetric metric) {
+    final farmId = int.tryParse(selectedDeviceId.value.trim());
+    if (farmId == null) {
+      debugPrint(
+        'Poultry graph navigation skipped: invalid farm id ${selectedDeviceId.value}',
+      );
+      EasyLoading.showError('Invalid farm selected');
+      return;
+    }
+
+    debugPrint(
+      'Poultry graph navigation: farm_id=$farmId sensor_key=${metric.name}',
+    );
+
+    Get.toNamed(
+      Routes.GRAPH,
+      arguments: {
+        'flow': 'poultry',
+        'farmId': farmId,
+        'sensorKey': metric.name,
+        'sensorName': metric.title,
+        'unit': metric.unit,
+        'type': 'daily',
+      },
+    );
+  }
+
   Future<void> onSwitchChanged({
     required PoultrySwitch item,
     required bool nextValue,

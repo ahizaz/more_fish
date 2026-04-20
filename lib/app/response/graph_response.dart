@@ -6,29 +6,29 @@ class GraphResponse {
   String? message;
   List<Datum>? data;
 
-  GraphResponse({
-    this.success,
-    this.statusCode,
-    this.message,
-    this.data,
-  });
+  GraphResponse({this.success, this.statusCode, this.message, this.data});
 
-  factory GraphResponse.fromRawJson(String str) => GraphResponse.fromJson(json.decode(str));
+  factory GraphResponse.fromRawJson(String str) =>
+      GraphResponse.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
   factory GraphResponse.fromJson(Map<String, dynamic> json) => GraphResponse(
-    success: json["success"],
+    success: json["success"]?.toString(),
     statusCode: json["status_code"],
     message: json["message"],
-    data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
+    data: json["data"] == null
+        ? []
+        : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "success": success,
     "status_code": statusCode,
     "message": message,
-    "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toJson())),
+    "data": data == null
+        ? []
+        : List<dynamic>.from(data!.map((x) => x.toJson())),
   };
 }
 
@@ -56,16 +56,22 @@ class Datum {
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
     assetId: json["asset_id"],
     assetName: json["asset_name"],
-    sensorVal: json["sensor_val"] == null ? [] : List<String>.from(json["sensor_val"]!.map((x) => x)),
+    sensorVal: json["sensor_val"] == null
+        ? []
+        : List<String>.from(json["sensor_val"]!.map((x) => x.toString())),
     sensorName: json["sensor_name"],
-    time: json["time"] == null ? [] : List<String>.from(json["time"]!.map((x) => x)),
+    time: json["time"] == null
+        ? []
+        : List<String>.from(json["time"]!.map((x) => x.toString())),
     dateTime: json["date_time"],
   );
 
   Map<String, dynamic> toJson() => {
     "asset_id": assetId,
     "asset_name": assetName,
-    "sensor_val": sensorVal == null ? [] : List<dynamic>.from(sensorVal!.map((x) => x)),
+    "sensor_val": sensorVal == null
+        ? []
+        : List<dynamic>.from(sensorVal!.map((x) => x)),
     "sensor_name": sensorName,
     "time": time == null ? [] : List<dynamic>.from(time!.map((x) => x)),
     "date_time": dateTime,

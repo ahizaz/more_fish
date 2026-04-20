@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,35 +9,104 @@ import '../controllers/graph_controller.dart';
 class GraphView extends GetView<GraphController> {
   const GraphView({super.key});
 
+  double _computePadding(double minValue, double maxValue) {
+    final range = (maxValue - minValue).abs();
+    if (range < 0.001) {
+      return 1.0;
+    }
+    return (range * 0.1).clamp(0.2, range).toDouble();
+  }
+
+  double _computeYAxisInterval(double minY, double maxY, {required bool isMonthly}) {
+    final range = (maxY - minY).abs();
+    if (range <= 0) {
+      return 1.0;
+    }
+
+    final targetTicks = isMonthly ? 5.0 : 6.0;
+    final roughInterval = range / targetTicks;
+    final magnitude = math.pow(
+      10,
+      (math.log(roughInterval) / math.ln10).floor(),
+    ).toDouble();
+    final residual = roughInterval / magnitude;
+
+    double niceMultiplier;
+    if (residual <= 1) {
+      niceMultiplier = 1;
+    } else if (residual <= 2) {
+      niceMultiplier = 2;
+    } else if (residual <= 5) {
+      niceMultiplier = 5;
+    } else {
+      niceMultiplier = 10;
+    }
+
+    return niceMultiplier * magnitude;
+  }
+
+  String _formatYAxisValue(double value, {required bool isMonthly}) {
+    final absValue = value.abs();
+
+    if (absValue >= 1000000) {
+      return '${(value / 1000000).toStringAsFixed(1)}M';
+    }
+    if (absValue >= 1000) {
+      return '${(value / 1000).toStringAsFixed(1)}K';
+    }
+    if (isMonthly || absValue >= 100) {
+      return value.toStringAsFixed(0);
+    }
+    if (absValue >= 10) {
+      return value.toStringAsFixed(1);
+    }
+    return value.toStringAsFixed(2);
+  }
+
   @override
   Widget build(BuildContext context) {
-    controller.graphData(); // Load data initially
-
     return Scaffold(
       backgroundColor: AppColors.backGround,
       appBar: AppBar(
         backgroundColor: const Color(0xffd4fcfd),
         title: Text(
-          '${Get.arguments["sensorId"] == 1 ? "pH" :
-          Get.arguments["sensorId"] == 2 ? "Temperature" :
-          Get.arguments["sensorId"] == 3 ? "DO" :
-          Get.arguments["sensorId"] == 4 ? "TDS" :
-          Get.arguments["sensorId"] == 5 ? "NH3" :
-          Get.arguments["sensorId"] == 6 ? "Salinity" : null}',
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
+          controller.graphTitle,
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),
 
       body: Obx(() {
-        if (controller.sensorValues.isEmpty) {
+        if (controller.isLoading.value && !controller.hasLoaded.value) {
           return const Center(child: CircularProgressIndicator());
+        }
+
+        if (controller.error.value.isNotEmpty &&
+            controller.sensorValues.isEmpty) {
+          return Center(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(controller.error.value, textAlign: TextAlign.center),
+            ),
+          );
+        }
+
+        if (controller.sensorValues.isEmpty) {
+          return const Center(child: Text('No graph data available'));
         }
 
         final sensorValues = controller.sensorValues;
         final timeLabels = controller.timeLabels;
+        final minValue = sensorValues.reduce((a, b) => a < b ? a : b);
+        final maxValue = sensorValues.reduce((a, b) => a > b ? a : b);
+        final padding = _computePadding(minValue, maxValue);
+        final minY = minValue - padding;
+        final maxY = maxValue + padding;
+        final isMonthly = controller.selectedPeriod.value == 'Monthly';
+        final yInterval = _computeYAxisInterval(
+          minY,
+          maxY,
+          isMonthly: isMonthly,
+        );
 
         return Padding(
           padding: const EdgeInsets.all(16.0),
@@ -50,17 +121,25 @@ class GraphView extends GetView<GraphController> {
                     items: const [
                       DropdownMenuItem(value: 'Daily', child: Text('Daily')),
                       DropdownMenuItem(value: 'Weekly', child: Text('Weekly')),
-                      DropdownMenuItem(value: 'Monthly', child: Text('Monthly')),
+                      DropdownMenuItem(
+                        value: 'Monthly',
+                        child: Text('Monthly'),
+                      ),
                     ],
                     onChanged: (value) {
                       if (value != null) {
-                        controller.sensorValues.clear();
                         controller.selectedPeriod.value = value;
-                        controller.graphData(type: value.toLowerCase()); // fetch new data
+                        controller.graphData(
+                          type: value.toLowerCase(),
+                        ); // fetch new data
                       }
                     },
                     underline: Container(),
-                    style: const TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
                     dropdownColor: Colors.white,
                   ),
                 ],
@@ -74,15 +153,23 @@ class GraphView extends GetView<GraphController> {
                   LineChartData(
                     gridData: FlGridData(
                       show: true,
-                      horizontalInterval: 0.05,
-                      getDrawingHorizontalLine: (value) =>
-                          FlLine(color: Colors.grey.withOpacity(0.3), strokeWidth: 1),
-                      getDrawingVerticalLine: (value) =>
-                          FlLine(color: Colors.grey.withOpacity(0.3), strokeWidth: 1),
+                      horizontalInterval: yInterval,
+                      getDrawingHorizontalLine: (value) => FlLine(
+                        color: Colors.grey.withOpacity(0.3),
+                        strokeWidth: 1,
+                      ),
+                      getDrawingVerticalLine: (value) => FlLine(
+                        color: Colors.grey.withOpacity(0.3),
+                        strokeWidth: 1,
+                      ),
                     ),
                     titlesData: FlTitlesData(
-                      topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                      rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                      topTitles: const AxisTitles(
+                        sideTitles: SideTitles(showTitles: false),
+                      ),
+                      rightTitles: const AxisTitles(
+                        sideTitles: SideTitles(showTitles: false),
+                      ),
 
                       //  X-axis
                       bottomTitles: AxisTitles(
@@ -112,12 +199,16 @@ class GraphView extends GetView<GraphController> {
                       leftTitles: AxisTitles(
                         sideTitles: SideTitles(
                           showTitles: true,
-                          reservedSize: 40,
-                          interval: .30,
+                          reservedSize: isMonthly ? 56 : 48,
+                          interval: yInterval,
                           getTitlesWidget: (value, meta) {
-                            return Text(
-                              value.toStringAsFixed(2),
-                              style: const TextStyle(fontSize: 10),
+                            return SideTitleWidget(
+                              axisSide: meta.axisSide,
+                              space: 6,
+                              child: Text(
+                                _formatYAxisValue(value, isMonthly: isMonthly),
+                                style: const TextStyle(fontSize: 10),
+                              ),
                             );
                           },
                         ),
@@ -127,13 +218,13 @@ class GraphView extends GetView<GraphController> {
                       show: true,
                       border: Border.all(color: Colors.black, width: 1),
                     ),
-                    minY: sensorValues.reduce((a, b) => a < b ? a : b) - 0.20,
-                    maxY: sensorValues.reduce((a, b) => a > b ? a : b) + 0.20,
+                    minY: minY,
+                    maxY: maxY,
                     lineBarsData: [
                       LineChartBarData(
                         spots: List.generate(
                           sensorValues.length,
-                              (i) => FlSpot(i.toDouble(), sensorValues[i]),
+                          (i) => FlSpot(i.toDouble(), sensorValues[i]),
                         ),
                         isCurved: false,
                         color: Colors.blueAccent,

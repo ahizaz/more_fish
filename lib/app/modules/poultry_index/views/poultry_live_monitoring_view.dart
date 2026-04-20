@@ -113,6 +113,7 @@ class _LoggedInDashboard extends StatelessWidget {
                 children: dynamicMetrics
                     .map(
                       (metric) => _MetricCard(
+                        onTap: () => controller.openSensorGraph(metric),
                         iconAsset: _metricIconAsset(metric.name),
                         iconData: _dynamicMetricIcon(metric.name),
                         title: metric.title,
@@ -483,6 +484,7 @@ class _DustParticleCard extends StatelessWidget {
 
 class _MetricCard extends StatelessWidget {
   const _MetricCard({
+    this.onTap,
     this.iconAsset,
     this.iconData,
     required this.title,
@@ -490,6 +492,7 @@ class _MetricCard extends StatelessWidget {
     required this.borderColor,
   });
 
+  final VoidCallback? onTap;
   final String? iconAsset;
   final IconData? iconData;
   final String title;
@@ -501,44 +504,58 @@ class _MetricCard extends StatelessWidget {
     final w = (MediaQuery.of(context).size.width - 14 * 2 - 12) / 2;
     return SizedBox(
       width: w,
-      child: Container(
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: const Color(0xfff3f4c5),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
           borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.08),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
+          onTap: onTap,
+          child: Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: const Color(0xfff3f4c5),
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.08),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+              border: Border.all(color: borderColor, width: 2),
             ),
-          ],
-          border: Border.all(color: borderColor, width: 2),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (iconAsset != null)
-              Image.asset(iconAsset!, height: 56, fit: BoxFit.contain)
-            else
-              Icon(iconData ?? Icons.sensors, size: 42, color: Colors.black87),
-            const SizedBox(height: 6),
-            Text(
-              value,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-                color: Colors.green,
-              ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (iconAsset != null)
+                  Image.asset(iconAsset!, height: 56, fit: BoxFit.contain)
+                else
+                  Icon(
+                    iconData ?? Icons.sensors,
+                    size: 42,
+                    color: Colors.black87,
+                  ),
+                const SizedBox(height: 6),
+                Text(
+                  value,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.green,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 4),
-            Text(
-              title,
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
-            ),
-          ],
+          ),
         ),
       ),
     );
