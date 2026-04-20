@@ -17,7 +17,11 @@ class GraphView extends GetView<GraphController> {
     return (range * 0.1).clamp(0.2, range).toDouble();
   }
 
-  double _computeYAxisInterval(double minY, double maxY, {required bool isMonthly}) {
+  double _computeYAxisInterval(
+    double minY,
+    double maxY, {
+    required bool isMonthly,
+  }) {
     final range = (maxY - minY).abs();
     if (range <= 0) {
       return 1.0;
@@ -25,10 +29,9 @@ class GraphView extends GetView<GraphController> {
 
     final targetTicks = isMonthly ? 5.0 : 6.0;
     final roughInterval = range / targetTicks;
-    final magnitude = math.pow(
-      10,
-      (math.log(roughInterval) / math.ln10).floor(),
-    ).toDouble();
+    final magnitude = math
+        .pow(10, (math.log(roughInterval) / math.ln10).floor())
+        .toDouble();
     final residual = roughInterval / magnitude;
 
     double niceMultiplier;
@@ -102,17 +105,19 @@ class GraphView extends GetView<GraphController> {
         final minY = minValue - padding;
         final maxY = maxValue + padding;
         final isMonthly = controller.selectedPeriod.value == 'Monthly';
+        final isWeekly = controller.selectedPeriod.value == 'Weekly';
+        final isYearly = controller.selectedPeriod.value == 'Yearly';
         final yInterval = _computeYAxisInterval(
           minY,
           maxY,
-          isMonthly: isMonthly,
+          isMonthly: isMonthly || isYearly,
         );
 
         return Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              // Dropdown for Daily / Weekly / Monthly
+              // Dropdown for Daily / Weekly / Monthly / Yearly
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -125,6 +130,7 @@ class GraphView extends GetView<GraphController> {
                         value: 'Monthly',
                         child: Text('Monthly'),
                       ),
+                      DropdownMenuItem(value: 'Yearly', child: Text('Yearly')),
                     ],
                     onChanged: (value) {
                       if (value != null) {
@@ -176,16 +182,23 @@ class GraphView extends GetView<GraphController> {
                         sideTitles: SideTitles(
                           showTitles: true,
                           reservedSize: 50,
-                          interval: (sensorValues.length / 5)
-                              .floorToDouble()
-                              .clamp(1, 10),
+                          interval: (isWeekly || isYearly)
+                              ? 1
+                              : (sensorValues.length / 5).floorToDouble().clamp(
+                                  1,
+                                  10,
+                                ),
                           getTitlesWidget: (value, meta) {
                             int index = value.toInt();
                             if (index >= 0 && index < timeLabels.length) {
+                              final label = timeLabels[index].trim();
+                              if (label.isEmpty) {
+                                return const SizedBox.shrink();
+                              }
                               return Transform.rotate(
                                 angle: -0.7,
                                 child: Text(
-                                  timeLabels[index],
+                                  label,
                                   style: const TextStyle(fontSize: 9),
                                 ),
                               );
@@ -199,14 +212,17 @@ class GraphView extends GetView<GraphController> {
                       leftTitles: AxisTitles(
                         sideTitles: SideTitles(
                           showTitles: true,
-                          reservedSize: isMonthly ? 56 : 48,
+                          reservedSize: (isMonthly || isYearly) ? 56 : 48,
                           interval: yInterval,
                           getTitlesWidget: (value, meta) {
                             return SideTitleWidget(
                               axisSide: meta.axisSide,
                               space: 6,
                               child: Text(
-                                _formatYAxisValue(value, isMonthly: isMonthly),
+                                _formatYAxisValue(
+                                  value,
+                                  isMonthly: isMonthly || isYearly,
+                                ),
                                 style: const TextStyle(fontSize: 10),
                               ),
                             );

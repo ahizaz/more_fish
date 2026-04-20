@@ -113,7 +113,10 @@ class GraphController extends GetxController {
 
   String _initialType() {
     final fromArgs = type?.toString().trim().toLowerCase();
-    if (fromArgs == 'daily' || fromArgs == 'weekly' || fromArgs == 'monthly') {
+    if (fromArgs == 'daily' ||
+        fromArgs == 'weekly' ||
+        fromArgs == 'monthly' ||
+        fromArgs == 'yearly') {
       return fromArgs!;
     }
     return 'daily';
