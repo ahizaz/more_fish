@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:more_fish/app/service/local_storage.dart';
 import 'package:more_fish/app/response/graph_response.dart';
 import '../../../repo/devices_repo.dart';
 import '../../../service/service.dart';
@@ -146,9 +147,9 @@ class GraphController extends GetxController {
       throw Exception('Missing farm_id or sensor_key for poultry graph.');
     }
 
-    final token = _fallbackPoultryToken;
+    final token = _getPoultryToken();
     final uri = Uri.parse(
-      '${ApiService.baseUrl}/poultry_care/data/graph/?farm_id=$farmId&sensor_key=$sensorKey&type=$type',
+      '${ApiService.poultryBaseUrl}/poultry_care/data/graph/?farm_id=$farmId&sensor_key=$sensorKey&type=$type',
     );
 
     debugPrint('Poultry graph GET: $uri');
@@ -173,6 +174,17 @@ class GraphController extends GetxController {
     final parsed = GraphResponse.fromRawJson(response.body);
     graphResponse.value = parsed;
     _applyChartData(parsed);
+  }
+
+  String _getPoultryToken() {
+    if (Get.isRegistered<LoginTokenStorage>()) {
+      final token = Get.find<LoginTokenStorage>().getPoultryToken();
+      final normalized = token?.trim();
+      if (normalized != null && normalized.isNotEmpty) {
+        return normalized;
+      }
+    }
+    return _fallbackPoultryToken;
   }
 
   void _applyChartData(GraphResponse response) {

@@ -35,7 +35,7 @@ class DmaTechnologiesGrid extends StatelessWidget {
     Future<void> openPoultryWithLogin() async {
       final loginTokenStorage = Get.find<LoginTokenStorage>();
 
-      if (loginTokenStorage.hasValidToken()) {
+      if (loginTokenStorage.hasValidPoultryToken()) {
         Get.toNamed(Routes.POULTRY_INDEX);
         return;
       }
@@ -45,7 +45,7 @@ class DmaTechnologiesGrid extends StatelessWidget {
         arguments: {'fromGuard': true},
       );
 
-      if (result == true || loginTokenStorage.hasValidToken()) {
+      if (result == true || loginTokenStorage.hasValidPoultryToken()) {
         Get.toNamed(Routes.POULTRY_INDEX);
       }
     }

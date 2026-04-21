@@ -39,7 +39,7 @@ class PoultryLoginController extends GetxController {
       return;
     }
 
-    if (loginTokenStorage.hasValidToken()) {
+    if (loginTokenStorage.hasValidPoultryToken()) {
       debugPrint(
         'Guard poultry login skipped: token already found in SharedPreferences.',
       );
@@ -87,7 +87,7 @@ class PoultryLoginController extends GetxController {
             return;
           }
 
-          await loginTokenStorage.setToken(token);
+          await loginTokenStorage.setPoultryToken(token);
           await loginTokenStorage.setUserId(userId);
 
           if (_openedFromGuard) {

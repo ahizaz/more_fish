@@ -13,15 +13,17 @@ class PoultryApiLiveRepository implements PoultryLiveRepository {
   static const String _fallbackBearerToken =
       '21067c389d5d27d6ecfd22dc13e0ccb792714ad6';
 
+  static const String _poultryBaseUrl = ApiService.poultryBaseUrl;
+
   Uri get _farmListUri =>
-      Uri.parse('${ApiService.baseUrl}/poultry_care/farms/list/');
+      Uri.parse('$_poultryBaseUrl/poultry_care/farms/list/');
 
   Uri _farmDashboardUri(int farmId) => Uri.parse(
-    '${ApiService.baseUrl}/poultry_care/farms/dashboard/?farm_id=$farmId',
+    '$_poultryBaseUrl/poultry_care/farms/dashboard/?farm_id=$farmId',
   );
 
   Uri get _switchCommandUri =>
-      Uri.parse('${ApiService.baseUrl}/poultry_care/switches/command/');
+      Uri.parse('$_poultryBaseUrl/poultry_care/switches/command/');
 
   @override
   Future<List<PoultryDevice>> getDevices() async {
@@ -316,7 +318,7 @@ class PoultryApiLiveRepository implements PoultryLiveRepository {
 
   String _getToken() {
     if (Get.isRegistered<LoginTokenStorage>()) {
-      final token = Get.find<LoginTokenStorage>().getToken();
+      final token = Get.find<LoginTokenStorage>().getPoultryToken();
       if (_isValidToken(token)) {
         return token!.trim();
       }

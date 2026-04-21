@@ -21,135 +21,145 @@ class ProfileView extends GetView<ProfileController> {
         statusBarIconBrightness: Brightness.dark,
         statusBarBrightness: Brightness.dark,
       ),
-      child:  SafeArea(
+      child: SafeArea(
         child: Scaffold(
           backgroundColor: AppColors.backGround,
           body: Column(
             children: [
-              Obx((){
+              Obx(() {
                 return CommonAppBar(
                   title: 'title'.tr,
                   cityName: "dhaka".tr,
                   date: '${homeController.formattedDate}',
                   time: '${homeController.formattedTime}',
                   temp: '${homeController.weatherData['main']['temp']}°C',
-                  humidity: '${homeController.weatherData['main']['humidity']}%',
+                  humidity:
+                      '${homeController.weatherData['main']['humidity']}%',
                 );
               }),
               Expanded(
-                child: Obx((){
+                child: Obx(() {
                   var data = controller.profileResponse.value;
-                  return controller.isLoggedIn.isEmpty ?
-                  const SizedBox( ):
-                  data == null ?
-                  const Center(child: CircularProgressIndicator(),):
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 20,),
-                        Expanded(
-                          child: CommonContainer(
-                            width: double.infinity,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    CommonText(
-                                      "${data.data?.firstName??''} ${data.data?.lastName??''} ",
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 24,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    const SizedBox(height: 4,),
-                                    CommonText(
-                                        data.data?.usrEmail??'',
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18
-                                    ),
-                                    const SizedBox(height: 4,),
-                                    data.data?.userPhone == null ?
-                                    CommonText(
-                                      "${data.data?.userPhone?.phnCell??''}",
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 18
-                                    ) : const CommonText(""),
-                                    const SizedBox(height: 50,),
-                                  ],
+                  return controller.isLoggedIn.isEmpty
+                      ? const SizedBox()
+                      : data == null
+                      ? const Center(child: CircularProgressIndicator())
+                      : Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Column(
+                            children: [
+                              const SizedBox(height: 20),
+                              Expanded(
+                                child: CommonContainer(
+                                  width: double.infinity,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          CommonText(
+                                            "${data.data?.firstName ?? ''} ${data.data?.lastName ?? ''} ",
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 24,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          const SizedBox(height: 4),
+                                          CommonText(
+                                            data.data?.usrEmail ?? '',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                          ),
+                                          const SizedBox(height: 4),
+                                          data.data?.userPhone == null
+                                              ? CommonText(
+                                                  "${data.data?.userPhone?.phnCell ?? ''}",
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 18,
+                                                )
+                                              : const CommonText(""),
+                                          const SizedBox(height: 50),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ],
-                            ),
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: InkWell(
+                                      onTap: () async {
+                                        Get.toNamed(Routes.PASSWORD_CHANGE);
+                                      },
+                                      child: const CommonContainer(
+                                        height: 50,
+                                        margin: EdgeInsets.symmetric(
+                                          horizontal: 0,
+                                          vertical: 16,
+                                        ),
+                                        alignment: Alignment.center,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              "Change Password",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                              textAlign: TextAlign.justify,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Expanded(
+                                    child: InkWell(
+                                      onTap: () async {
+                                        await controller.loginTokenStorage
+                                            .removeAllTokens();
+                                        Get.offAllNamed(Routes.INDEX);
+                                      },
+                                      child: const CommonContainer(
+                                        height: 50,
+                                        margin: EdgeInsets.symmetric(
+                                          horizontal: 0,
+                                          vertical: 16,
+                                        ),
+                                        alignment: Alignment.center,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              "Logout",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                              textAlign: TextAlign.justify,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: InkWell(
-                                onTap: () async {
-                                  Get.toNamed(Routes.PASSWORD_CHANGE);
-                                },
-                                child: const CommonContainer(
-                                  height: 50,
-                                  margin: EdgeInsets.symmetric(horizontal: 0, vertical: 16),
-                                  alignment: Alignment.center,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "Change Password",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                        textAlign: TextAlign.justify,
-                                      ),
-
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 10,),
-                            Expanded(
-                              child: InkWell(
-                                onTap: () async {
-                                  await controller.loginTokenStorage.removeToken();
-                                  Get.offAllNamed(Routes.INDEX);
-                                },
-                                child: const CommonContainer(
-                                  height: 50,
-                                  margin: EdgeInsets.symmetric(horizontal: 0, vertical: 16),
-                                  alignment: Alignment.center,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "Logout",
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                        textAlign: TextAlign.justify,
-                                      ),
-
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  );
+                        );
                 }),
               ),
             ],
-          )
+          ),
         ),
       ),
     );
