@@ -15,6 +15,7 @@ abstract class Routes {
   static const PROFILE = _Paths.PROFILE;
   static const MORE = _Paths.MORE;
   static const LOGIN = _Paths.LOGIN;
+  static const POULTRY_LOGIN = _Paths.POULTRY_LOGIN;
   static const REGISTRATION = _Paths.REGISTRATION;
   static const PRODUCT_COMPANIES = _Paths.PRODUCT_COMPANIES;
   static const PRODUCT_DETAILS = _Paths.PRODUCT_DETAILS;
@@ -66,6 +67,7 @@ abstract class _Paths {
   static const PROFILE = '/profile';
   static const MORE = '/more';
   static const LOGIN = '/login';
+  static const POULTRY_LOGIN = '/poultry-login';
   static const REGISTRATION = '/registration';
   static const PRODUCT_COMPANIES = '/product-companies';
   static const PRODUCT_DETAILS = '/product-details';

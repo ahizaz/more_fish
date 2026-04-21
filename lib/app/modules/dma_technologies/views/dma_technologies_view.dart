@@ -41,7 +41,7 @@ class DmaTechnologiesGrid extends StatelessWidget {
       }
 
       final result = await Get.toNamed(
-        Routes.LOGIN,
+        Routes.POULTRY_LOGIN,
         arguments: {'fromGuard': true},
       );
 

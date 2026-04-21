@@ -42,7 +42,7 @@ class PoultryIndexController extends GetxController {
     }
 
     final result = await Get.toNamed(
-      Routes.LOGIN,
+      Routes.POULTRY_LOGIN,
       arguments: {'fromGuard': true},
     );
 

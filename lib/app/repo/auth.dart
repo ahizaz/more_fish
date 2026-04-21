@@ -17,13 +17,21 @@ import '../service/service.dart';
 class AuthRepository {
   var loginTokenStorage = Get.find<LoginTokenStorage>();
 
-  Future<Either<Failure, LoginResponse>> setLogin({email, password}) async {
+  Future<Either<Failure, LoginResponse>> setLogin({
+    email,
+    password,
+    bool isPoultryFlow = false,
+  }) async {
+    final loginBaseUrl = isPoultryFlow
+        ? ApiService.poultryBaseUrl
+        : ApiService.moreFishBaseUrl;
+
     debugPrint("Login request email: $email");
-    debugPrint("Login endpoint: ${ApiService.baseUrl}/auth/login/");
+    debugPrint("Login endpoint: $loginBaseUrl/auth/login/");
     try {
       var request = http.Request(
         'POST',
-        Uri.parse("${ApiService.baseUrl}/auth/login/"),
+        Uri.parse("$loginBaseUrl/auth/login/"),
       );
       request.headers.addAll(ApiService.headers);
       request.body = jsonEncode({

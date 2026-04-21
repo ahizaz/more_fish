@@ -54,6 +54,8 @@ import '../modules/internet_checker/bindings/internet_checker_binding.dart';
 import '../modules/internet_checker/views/internet_checker_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/poultry_login/bindings/poultry_login_binding.dart';
+import '../modules/poultry_login/views/poultry_login_view.dart';
 import '../modules/more/bindings/more_binding.dart';
 import '../modules/more/views/more_view.dart';
 import '../modules/notifications/bindings/notifications_binding.dart';
@@ -111,7 +113,11 @@ class AppPages {
       page: () => const ComingSoonView(),
       binding: ComingSoonBinding(),
     ),
-    GetPage(name: _Paths.HOME, page: () => const HomeView(), binding: HomeBinding()),
+    GetPage(
+      name: _Paths.HOME,
+      page: () => const HomeView(),
+      binding: HomeBinding(),
+    ),
     GetPage(
       name: _Paths.INDEX,
       page: () => const IndexView(),
@@ -156,6 +162,11 @@ class AppPages {
       name: _Paths.LOGIN,
       page: () => const LoginView(),
       binding: LoginBinding(),
+    ),
+    GetPage(
+      name: _Paths.POULTRY_LOGIN,
+      page: () => const PoultryLoginView(),
+      binding: PoultryLoginBinding(),
     ),
     GetPage(
       name: _Paths.REGISTRATION,
