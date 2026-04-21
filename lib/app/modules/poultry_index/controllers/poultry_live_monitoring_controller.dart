@@ -228,14 +228,14 @@ class PoultryLiveMonitoringController extends GetxController
       if (!currentBackendState && nextValue) {
         switchUiState[item.switchId] = false;
         EasyLoading.dismiss();
-        EasyLoading.showInfo('This switch is currently OFF from server state.');
+        EasyLoading.showInfo('the device is not connected');
         return;
       }
 
       if (currentBackendState && !nextValue) {
         switchUiState[item.switchId] = true;
         EasyLoading.dismiss();
-        EasyLoading.showInfo('This switch is currently ON from server state.');
+        EasyLoading.showInfo('The device is not connected');
         return;
       }
 
