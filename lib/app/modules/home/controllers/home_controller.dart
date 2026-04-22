@@ -29,6 +29,7 @@ class HomeController extends GetxController {
     "fingerlings_marketplace",
     "grown_fish_sell",
     "fish_medicine_enzyme",
+    "FCR Calculator",
   ].obs;
 
   var iconList1 = [
@@ -42,6 +43,7 @@ class HomeController extends GetxController {
     "assets/icons/fingerlings.png",
     "assets/icons/grown_fish.png",
     "assets/icons/fish_medicine.png",
+    "assets/icons/feed_management.png",
   ].obs;
 
   var listItemsEnglish2 = [

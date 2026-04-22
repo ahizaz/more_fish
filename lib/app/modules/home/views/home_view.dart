@@ -170,7 +170,7 @@ class HomeView extends GetView<HomeController> {
                   Routes.PRODUCT_COMPANIES,
                   arguments: {"id": "08a69b99-9d57-4097-afc0-b38f49f5318d"},
                 );
-              } else {
+              } else if (index == 9) {
                 var category = homeController.categoryResponse.value?.data;
                 for (int i = 0; i < category.length; i++) {
                   if (category[i].categoryName == "Fish Medicine") {
@@ -180,6 +180,8 @@ class HomeView extends GetView<HomeController> {
                     );
                   }
                 }
+              } else {
+                Get.toNamed(Routes.FCR_CALCULATOR);
               }
             },
             child: CommonContainer(

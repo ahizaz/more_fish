@@ -51,6 +51,7 @@ abstract class Routes {
   static const FEED_MANAGEMENT_DETAILS = _Paths.FEED_MANAGEMENT_DETAILS;
   static const SMART_KHAMARI = _Paths.SMART_KHAMARI;
   static const GRAPH = _Paths.GRAPH;
+  static const FCR_CALCULATOR = _Paths.FCR_CALCULATOR;
 }
 
 abstract class _Paths {
@@ -103,4 +104,5 @@ abstract class _Paths {
   static const FEED_MANAGEMENT_DETAILS = '/feed-management-details';
   static const SMART_KHAMARI = '/smart-khamari';
   static const GRAPH = '/graph';
+  static const FCR_CALCULATOR = '/fcr-calculator';
 }

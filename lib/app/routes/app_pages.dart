@@ -34,6 +34,8 @@ import '../modules/fish_disease_detector/bindings/fish_disease_detector_binding.
 import '../modules/fish_disease_detector/views/fish_disease_detector_view.dart';
 import '../modules/fish_disease_treatment_details/bindings/fish_disease_treatment_details_binding.dart';
 import '../modules/fish_disease_treatment_details/views/fish_disease_treatment_details_view.dart';
+import '../modules/fcr_calculator/bindings/fcr_calculator_binding.dart';
+import '../modules/fcr_calculator/views/fcr_calculator_view.dart';
 import '../modules/forgot_password/bindings/forgot_password_binding.dart';
 import '../modules/forgot_password/views/forgot_password_view.dart';
 import '../modules/graph/bindings/graph_binding.dart';
@@ -337,6 +339,11 @@ class AppPages {
       name: _Paths.GRAPH,
       page: () => const GraphView(),
       binding: GraphBinding(),
+    ),
+    GetPage(
+      name: _Paths.FCR_CALCULATOR,
+      page: () => const FcrCalculatorView(),
+      binding: FcrCalculatorBinding(),
     ),
   ];
 }

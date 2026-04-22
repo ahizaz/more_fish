@@ -19,6 +19,7 @@ const Map<String, String> enUS = {
   'fingerlings_marketplace': 'Fingerlings Marketplace',
   'grown_fish_sell': 'Grown Fish Sell',
   'fish_medicine_enzyme': 'Fish Medicine & Enzyme',
+  'fcr_calculator': 'FCR Calculator',
 
   'fish_feed_marketplace': "Fish Feed Marketplace",
   'training_workshop': 'Training & Workshop',
