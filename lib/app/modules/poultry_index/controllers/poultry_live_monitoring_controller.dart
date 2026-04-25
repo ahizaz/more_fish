@@ -159,6 +159,7 @@ class PoultryLiveMonitoringController extends GetxController
 
     _isRefreshInProgress = true;
     debugPrint('Poultry live monitoring: refreshing device $id');
+    debugPrint('Poultry live monitoring: calling API getLatestLiveData for device $id');
     try {
       isLoading.value = true;
       error.value = '';

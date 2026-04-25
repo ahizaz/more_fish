@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 
 class FishDiseaseDetectorController extends GetxController {
   static const String _endpoint =
-      'https://kilt-absolve-cornea.ngrok-free.dev/devices/fish-disease/detect/';
+      'http://66.29.151.40:8004/devices/fish-disease/detect/';
   static const String _token = '21067c389d5d27d6ecfd22dc13e0ccb792714ad6';
 
   final ImagePicker _picker = ImagePicker();

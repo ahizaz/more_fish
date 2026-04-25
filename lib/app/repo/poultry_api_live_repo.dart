@@ -38,6 +38,10 @@ class PoultryApiLiveRepository implements PoultryLiveRepository {
       throw Exception('Invalid farm id: $deviceId');
     }
 
+    final dashboardUri = _farmDashboardUri(farmId);
+    debugPrint('PoultryApiLiveRepository.getLatestLiveData called for deviceId: $deviceId');
+    debugPrint('PoultryApiLiveRepository: resolved farmId=$farmId dashboardUri=$dashboardUri');
+
     final dashboard = await _fetchFarmDashboard(farmId: farmId);
 
     return _toLiveDataFromDashboard(
