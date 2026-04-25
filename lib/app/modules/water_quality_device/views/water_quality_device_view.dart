@@ -33,13 +33,16 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
               final localPosition = box?.globalToLocal(details.globalPosition);
               // If the tap is within the aerator list area, ignore the refresh logic
               // (Assume aerator list is in the lower half of the screen)
-              if (localPosition != null && localPosition.dy > MediaQuery.of(context).size.height * 0.4) {
+              if (localPosition != null &&
+                  localPosition.dy > MediaQuery.of(context).size.height * 0.4) {
                 // Let the Switch handle it
                 return;
               }
               // If a command is in progress, dismiss the loading and cancel the UI lock
               if (controller.commandInProgress.value) {
-                try { EasyLoading.dismiss(); } catch (_) {}
+                try {
+                  EasyLoading.dismiss();
+                } catch (_) {}
                 controller.commandInProgress.value = false;
                 debugPrint('[ui] User dismissed loading via tap');
                 return;
@@ -55,6 +58,10 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                   return CommonAppBar(
                     title: 'title'.tr,
                     cityName: "dhaka".tr,
+
+                    ///
+
+                    ///
                     date: '${homeController.formattedDate}',
                     time: '${homeController.formattedTime}',
                     temp: '${homeController.weatherData['main']['temp']}°C',
