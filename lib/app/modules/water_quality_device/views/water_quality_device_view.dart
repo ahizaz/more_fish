@@ -25,8 +25,25 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
       child: SafeArea(
         child: Scaffold(
           backgroundColor: Colors.grey.shade200,
-          body: InkWell(
-            onTapDown: (v) {
+          body: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTapDown: (details) {
+              // Find the RenderBox of the context
+              final box = context.findRenderObject() as RenderBox?;
+              final localPosition = box?.globalToLocal(details.globalPosition);
+              // If the tap is within the aerator list area, ignore the refresh logic
+              // (Assume aerator list is in the lower half of the screen)
+              if (localPosition != null && localPosition.dy > MediaQuery.of(context).size.height * 0.4) {
+                // Let the Switch handle it
+                return;
+              }
+              // If a command is in progress, dismiss the loading and cancel the UI lock
+              if (controller.commandInProgress.value) {
+                try { EasyLoading.dismiss(); } catch (_) {}
+                controller.commandInProgress.value = false;
+                debugPrint('[ui] User dismissed loading via tap');
+                return;
+              }
               controller.pondDataResponse.value = null;
               controller.pondList();
               controller.sensorList();
@@ -553,49 +570,86 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                                         value: controller
                                                             .aeratorSwitch[index],
                                                         onChanged: (bool value) {
-                                                            if (controller.commandInProgress.value) {
-                                                              try {
-                                                                EasyLoading.showError('Please wait...');
-                                                              } catch (_) {}
-                                                              return;
-                                                            }
-
-                                                            // authoritative current state from API
-                                                            var currentIsRunning = controller.pondDataResponse.value?.data.devices[0].aerators[index].isRunning;
-
-                                                            // block if API disallows requested action
-                                                            if (currentIsRunning == false && value == true) {
-                                                              debugPrint('[aerator] Blocked ON: isRunning=false for index $index');
-                                                              try {
-                                                                EasyLoading.showError('Cannot turn ON: aerator unavailable');
-                                                              } catch (_) {}
-                                                              return;
-                                                            }
-
-                                                            if (currentIsRunning == true && value == false) {
-                                                              debugPrint('[aerator] Blocked OFF: isRunning=true for index $index');
-                                                              try {
-                                                                EasyLoading.showError('Cannot turn OFF: aerator locked');
-                                                              } catch (_) {}
-                                                              return;
-                                                            }
-
-                                                            // optimistically update UI and send command
-                                                            controller.aeratorSwitch[index] = value;
-
-                                                            if (value) {
-                                                              controller.aeratorCommand(
-                                                                id: controller.pondDataResponse.value?.data.devices[0].aerators[index].aeratorId,
-                                                                command: 1,
-                                                                index: index,
+                                                          if (controller
+                                                              .commandInProgress
+                                                              .value) {
+                                                            try {
+                                                              EasyLoading.showError(
+                                                                'Please wait...',
                                                               );
-                                                            } else {
-                                                              controller.aeratorCommand(
-                                                                id: controller.pondDataResponse.value?.data.devices[0].aerators[index].aeratorId,
-                                                                command: 0,
-                                                                index: index,
+                                                            } catch (_) {}
+                                                            return;
+                                                          }
+
+                                                          // authoritative current state from API
+                                                          var currentIsRunning =
+                                                              controller
+                                                                  .pondDataResponse
+                                                                  .value
+                                                                  ?.data
+                                                                  .devices[0]
+                                                                  .aerators[index]
+                                                                  .isRunning;
+
+                                                          // block if API disallows requested action
+                                                          if (currentIsRunning ==
+                                                                  false &&
+                                                              value == true) {
+                                                            debugPrint(
+                                                              '[aerator] Blocked ON: isRunning=false for index $index',
+                                                            );
+                                                            try {
+                                                              EasyLoading.showError(
+                                                                'Cannot turn ON: aerator unavailable',
                                                               );
-                                                            }
+                                                            } catch (_) {}
+                                                            return;
+                                                          }
+
+                                                          if (currentIsRunning ==
+                                                                  true &&
+                                                              value == false) {
+                                                            debugPrint(
+                                                              '[aerator] Blocked OFF: isRunning=true for index $index',
+                                                            );
+                                                            try {
+                                                              EasyLoading.showError(
+                                                                'Cannot turn OFF: aerator locked',
+                                                              );
+                                                            } catch (_) {}
+                                                            return;
+                                                          }
+
+                                                          // optimistically update UI and send command
+                                                          controller
+                                                                  .aeratorSwitch[index] =
+                                                              value;
+
+                                                          if (value) {
+                                                            controller.aeratorCommand(
+                                                              id: controller
+                                                                  .pondDataResponse
+                                                                  .value
+                                                                  ?.data
+                                                                  .devices[0]
+                                                                  .aerators[index]
+                                                                  .aeratorId,
+                                                              command: 1,
+                                                              index: index,
+                                                            );
+                                                          } else {
+                                                            controller.aeratorCommand(
+                                                              id: controller
+                                                                  .pondDataResponse
+                                                                  .value
+                                                                  ?.data
+                                                                  .devices[0]
+                                                                  .aerators[index]
+                                                                  .aeratorId,
+                                                              command: 0,
+                                                              index: index,
+                                                            );
+                                                          }
                                                         },
                                                         activeThumbColor:
                                                             Colors.green,
