@@ -155,11 +155,13 @@ class PoultryLiveMonitoringController extends GetxController
   Future<void> refreshLiveData() async {
     if (_isRefreshInProgress) return;
     final id = selectedDeviceId.value;
-    if (id.isEmpty) return;
+    if (id.isEmpty) return; //
 
     _isRefreshInProgress = true;
     debugPrint('Poultry live monitoring: refreshing device $id');
-    debugPrint('Poultry live monitoring: calling API getLatestLiveData for device $id');
+    debugPrint(
+      'Poultry live monitoring: calling API getLatestLiveData for device $id',
+    );
     try {
       isLoading.value = true;
       error.value = '';

@@ -39,8 +39,12 @@ class PoultryApiLiveRepository implements PoultryLiveRepository {
     }
 
     final dashboardUri = _farmDashboardUri(farmId);
-    debugPrint('PoultryApiLiveRepository.getLatestLiveData called for deviceId: $deviceId');
-    debugPrint('PoultryApiLiveRepository: resolved farmId=$farmId dashboardUri=$dashboardUri');
+    debugPrint(
+      'PoultryApiLiveRepository.getLatestLiveData called for deviceId: $deviceId',
+    );
+    debugPrint(
+      'PoultryApiLiveRepository: resolved farmId=$farmId dashboardUri=$dashboardUri',
+    );
 
     final dashboard = await _fetchFarmDashboard(farmId: farmId);
 
