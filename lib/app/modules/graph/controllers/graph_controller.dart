@@ -90,6 +90,7 @@ class GraphController extends GetxController {
 
   void _readArguments() {
     final args = Get.arguments;
+    debugPrint('GraphController args: $args');
     if (args is! Map) {
       return;
     }
@@ -106,10 +107,14 @@ class GraphController extends GetxController {
       return;
     }
 
-    comId = map['comId'];
-    assetId = map['assetId'];
-    sensorId = map['sensorId'];
-    type = map['type'];
+    // Normalize argument names and types
+    comId = map['comId'] ?? map['companyId'] ?? 39;
+    assetId = map['assetId']?.toString() ?? map['assst_id']?.toString();
+    sensorId = map['sensorId']?.toString() ?? map['sensor_id']?.toString();
+    type = (map['type'] ?? 'daily')?.toString();
+    debugPrint(
+      'GraphController normalized -> comId:$comId assetId:$assetId sensorId:$sensorId type:$type',
+    );
   }
 
   String _initialType() {
@@ -125,7 +130,7 @@ class GraphController extends GetxController {
 
   Future<void> _loadDefaultGraph({required String type}) async {
     final response = await devicesRepository.getGraphData(
-      comId: comId,
+      comId: comId ?? 39,
       assetId: assetId,
       sensorId: sensorId,
       type: type,
@@ -133,7 +138,11 @@ class GraphController extends GetxController {
 
     response.fold(
       (l) {
-        throw Exception('Failed to fetch graph: ${l.message}');
+        // Surface error message to the UI instead of throwing.
+        error.value = 'Failed to fetch graph: ${l.message}';
+        debugPrint('Graph repo failure: ${l.message}');
+        sensorValues.clear();
+        timeLabels.clear();
       },
       (r) {
         graphResponse.value = r;

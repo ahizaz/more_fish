@@ -9,7 +9,53 @@ class GraphResponse {
   GraphResponse({this.success, this.statusCode, this.message, this.data});
 
   factory GraphResponse.fromRawJson(String str) =>
-      GraphResponse.fromJson(json.decode(str));
+      // Some endpoints may return a top-level List instead of the expected
+      // Map. Handle both cases: if decoded is a Map, use it directly;
+      // if it's a List, treat it as the `data` array.
+      (() {
+        final decoded = json.decode(str);
+        if (decoded is Map<String, dynamic>) {
+          return GraphResponse.fromJson(decoded);
+        }
+
+        if (decoded is List) {
+          // If the list contains maps, parse them as data items.
+          if (decoded.isNotEmpty && decoded.first is Map) {
+            return GraphResponse(
+              success: 'True',
+              statusCode: 200,
+              message: '',
+              data: List<Datum>.from(
+                decoded.map(
+                  (x) => Datum.fromJson(Map<String, dynamic>.from(x)),
+                ),
+              ),
+            );
+          }
+
+          // If the API returned a list of strings (usually error messages),
+          // capture them in `message` and return an empty data array.
+          if (decoded.isNotEmpty && decoded.first is String) {
+            return GraphResponse(
+              success: 'False',
+              statusCode: 500,
+              message: decoded.map((e) => e.toString()).join('; '),
+              data: [],
+            );
+          }
+
+          // Unknown list contents: return empty data.
+          return GraphResponse(
+            success: 'False',
+            statusCode: 500,
+            message: '',
+            data: [],
+          );
+        }
+
+        // Fallback: try parsing as map (may throw if not compatible)
+        return GraphResponse.fromJson(Map<String, dynamic>.from(decoded));
+      })();
 
   String toRawJson() => json.encode(toJson());
 

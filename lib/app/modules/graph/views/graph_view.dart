@@ -76,6 +76,36 @@ class GraphView extends GetView<GraphController> {
           controller.graphTitle,
           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
+        actions: [
+          // Popup menu in the AppBar for selecting period (Daily/Weekly/Monthly/Yearly)
+          Obx(
+            () => PopupMenuButton<String>(
+              initialValue: controller.selectedPeriod.value,
+              onSelected: (value) {
+                controller.selectedPeriod.value = value;
+                controller.graphData(type: value.toLowerCase());
+              },
+              itemBuilder: (context) => const [
+                PopupMenuItem(value: 'Daily', child: Text('Daily')),
+                PopupMenuItem(value: 'Weekly', child: Text('Weekly')),
+                PopupMenuItem(value: 'Monthly', child: Text('Monthly')),
+                PopupMenuItem(value: 'Yearly', child: Text('Yearly')),
+              ],
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                child: Center(
+                  child: Text(
+                    controller.selectedPeriod.value,
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
 
       body: Obx(() {

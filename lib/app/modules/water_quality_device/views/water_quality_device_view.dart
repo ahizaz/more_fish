@@ -368,37 +368,18 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
 
                                               return InkWell(
                                                 onTap: () {
+                                                  final passedAssetId = controller.pondDataResponse.value?.data.assetId ?? controller.selectedAstId.value.toString();
+                                                  debugPrint('Graph nav -> comId=${controller.comId.value} assetId=$passedAssetId sensorId=${data?.sensorId} selectedAstId=${controller.selectedAstId.value}');
                                                   Get.toNamed(
                                                     Routes.GRAPH,
                                                     arguments: {
                                                       "comId": controller
                                                           .comId
                                                           .value,
-                                                      "assetId": controller
-                                                          .pondDataResponse
-                                                          .value
-                                                          ?.data
-                                                          .assetId,
+                                                      "assetId": passedAssetId,
+                                                      // Use the actual sensor id returned by the API
                                                       "sensorId":
-                                                          data?.sensorName ==
-                                                              "pH"
-                                                          ? 1
-                                                          : data?.sensorName ==
-                                                                "Temperature"
-                                                          ? 2
-                                                          : data?.sensorName ==
-                                                                "DO"
-                                                          ? 3
-                                                          : data?.sensorName ==
-                                                                "TDS"
-                                                          ? 4
-                                                          : data?.sensorName ==
-                                                                "NH3"
-                                                          ? 5
-                                                          : data?.sensorName ==
-                                                                "Salainity"
-                                                          ? 6
-                                                          : null,
+                                                          data?.sensorId,
                                                       "type": "daily",
                                                     },
                                                   );
