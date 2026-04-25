@@ -30,7 +30,6 @@ class WaterQualityDeviceController extends GetxController {
   void onInit() {
     super.onInit();
     pondList();
-    sensorList();
     CompanyList();
     // start periodic polling every 5 seconds
     _startPolling();
@@ -128,6 +127,16 @@ class WaterQualityDeviceController extends GetxController {
         debugPrint(pondDataResponse.value.toString());
         debugPrint('=================================');
 
+        // After receiving pond data, extract device_id and fetch sensors for that device
+        try {
+          final deviceId = pondDataResponse.value?.data.devices[0].deviceId;
+          if (deviceId != null && deviceId.toString().isNotEmpty) {
+            sensorList(deviceId: deviceId);
+          }
+        } catch (e) {
+          debugPrint('Failed to extract device id for sensor list: $e');
+        }
+
         // done
         isFetching.value = false;
         _firstFetch = false;
@@ -138,8 +147,14 @@ class WaterQualityDeviceController extends GetxController {
     );
   }
 
-  sensorList() async {
-    var response = await devicesRepository.getSensorList();
+  sensorList({dynamic deviceId}) async {
+    // deviceId is required to fetch sensor list for a specific device
+    if (deviceId == null) {
+      debugPrint('sensorList called without deviceId - skipping');
+      return;
+    }
+
+    var response = await devicesRepository.getSensorList(deviceId: deviceId);
     response.fold(
       (l) {
         print("${l.message}");

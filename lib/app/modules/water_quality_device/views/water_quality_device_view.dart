@@ -368,8 +368,49 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
 
                                               return InkWell(
                                                 onTap: () {
-                                                  final passedAssetId = controller.pondDataResponse.value?.data.assetId ?? controller.selectedAstId.value.toString();
-                                                  debugPrint('Graph nav -> comId=${controller.comId.value} assetId=$passedAssetId sensorId=${data?.sensorId} selectedAstId=${controller.selectedAstId.value}');
+                                                  final passedAssetId =
+                                                      controller
+                                                          .pondDataResponse
+                                                          .value
+                                                          ?.data
+                                                          .assetId ??
+                                                      controller
+                                                          .selectedAstId
+                                                          .value
+                                                          .toString();
+                                                  // Try to map the visible sensor name to the sensor__id from the device sensor list
+                                                  String? mappedSensorIdString;
+                                                  try {
+                                                    final sensorName =
+                                                        (data?.sensorName ?? '')
+                                                            .toString()
+                                                            .toLowerCase();
+                                                    final mapped = controller
+                                                        .sensorListResponse
+                                                        .value
+                                                        ?.data
+                                                        .firstWhere(
+                                                          (s) =>
+                                                              s.sensorSensorName
+                                                                  .toString()
+                                                                  .toLowerCase() ==
+                                                              sensorName,
+                                                        );
+                                                    if (mapped != null)
+                                                      mappedSensorIdString =
+                                                          mapped.sensorId
+                                                              .toString();
+                                                  } catch (_) {
+                                                    mappedSensorIdString = null;
+                                                  }
+
+                                                  final sensorIdForGraph =
+                                                      mappedSensorIdString ??
+                                                      data?.sensorId;
+                                                  debugPrint(
+                                                    'Graph nav -> comId=${controller.comId.value} assetId=$passedAssetId sensorId=$sensorIdForGraph selectedAstId=${controller.selectedAstId.value}',
+                                                  );
+
                                                   Get.toNamed(
                                                     Routes.GRAPH,
                                                     arguments: {
@@ -377,9 +418,9 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                                           .comId
                                                           .value,
                                                       "assetId": passedAssetId,
-                                                      // Use the actual sensor id returned by the API
+                                                      // Use mapped sensor__id where available
                                                       "sensorId":
-                                                          data?.sensorId,
+                                                          sensorIdForGraph,
                                                       "type": "daily",
                                                     },
                                                   );

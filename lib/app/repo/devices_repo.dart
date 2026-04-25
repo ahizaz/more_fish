@@ -81,7 +81,9 @@ class DevicesRepository {
     }
   }
 
-  Future<Either<Failure, SensorListResponse>> getSensorList() async {
+  Future<Either<Failure, SensorListResponse>> getSensorList({
+    dynamic deviceId,
+  }) async {
     try {
       var token = await loginTokenStorage.getToken();
       var headers = {
@@ -89,10 +91,13 @@ class DevicesRepository {
         'Content-Type': 'application/json',
       };
 
-      var request = http.Request(
-        'GET',
-        Uri.parse("${ApiService.baseUrl}/devices/sensor/list"),
-      );
+      // Build URI with optional device_id query parameter
+      final base = Uri.parse("${ApiService.baseUrl}/devices/sensor/list");
+      final uri = (deviceId == null)
+          ? base
+          : base.replace(queryParameters: {'device_id': deviceId.toString()});
+
+      var request = http.Request('GET', uri);
       request.headers.addAll(headers);
 
       http.StreamedResponse response = await request.send();
@@ -198,30 +203,34 @@ class DevicesRepository {
         'Content-Type': 'application/json',
       };
 
-      // Use static company_id 39 per requirements
-      final companyId = '39';
       final assetIdStr = assetId?.toString().trim();
       final sensorIdStr = sensorId?.toString().trim();
       final typeStr = (type ?? 'daily').toString().trim();
 
       // Validate required params early
-      if (assetIdStr == null || assetIdStr.isEmpty || assetIdStr.toLowerCase() == 'null') {
+      if (assetIdStr == null ||
+          assetIdStr.isEmpty ||
+          assetIdStr.toLowerCase() == 'null') {
         debugPrint('Graph request aborted: invalid assetId -> "$assetId"');
         return Left(Failure('Missing asset id for graph request'));
       }
 
-      if (sensorIdStr == null || sensorIdStr.isEmpty || sensorIdStr.toLowerCase() == 'null') {
+      if (sensorIdStr == null ||
+          sensorIdStr.isEmpty ||
+          sensorIdStr.toLowerCase() == 'null') {
         debugPrint('Graph request aborted: invalid sensorId -> "$sensorId"');
         return Left(Failure('Missing sensor id for graph request'));
       }
 
+      // API expects assst_id, sensor_id and type. Do not send company_id here.
       final baseUri = Uri.parse('${ApiService.baseUrl}/devices/data/graph');
-      final uri = baseUri.replace(queryParameters: {
-        'company_id': companyId,
-        'assst_id': assetIdStr,
-        'sensor_id': sensorIdStr,
-        'type': typeStr,
-      });
+      final uri = baseUri.replace(
+        queryParameters: {
+          'assst_id': assetIdStr,
+          'sensor_id': sensorIdStr,
+          'type': typeStr,
+        },
+      );
 
       debugPrint('Graph GET: $uri');
 
@@ -234,7 +243,9 @@ class DevicesRepository {
         while (attempt < maxAttempts) {
           attempt++;
           try {
-            res = await client.get(uri, headers: headers).timeout(const Duration(seconds: 8));
+            res = await client
+                .get(uri, headers: headers)
+                .timeout(const Duration(seconds: 8));
             break;
           } on SocketException catch (e) {
             debugPrint('Graph request socket error (attempt $attempt): $e');
@@ -259,7 +270,9 @@ class DevicesRepository {
           return Right(graphResponse);
         }
 
-        return Left(Failure('Failed to fetch graph data with status: ${res.statusCode}'));
+        return Left(
+          Failure('Failed to fetch graph data with status: ${res.statusCode}'),
+        );
       } finally {
         client.close();
       }
