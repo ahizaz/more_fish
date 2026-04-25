@@ -23,6 +23,7 @@ class WaterQualityDeviceController extends GetxController {
   var comId = 19.obs;
   Timer? _pollTimer;
   var isFetching = false.obs;
+  var commandInProgress = false.obs;
   bool _firstFetch = true;
 
   @override
@@ -167,21 +168,41 @@ class WaterQualityDeviceController extends GetxController {
     );
   }
 
-  aeratorCommand({id, command}) async {
+  aeratorCommand({id, command, int? index}) async {
+    if (commandInProgress.value) return;
+
+    commandInProgress.value = true;
+    try {
+      EasyLoading.show(status: 'Sending...');
+    } catch (_) {}
+
     var response = await devicesRepository.setAeratorCommand(
       id: id,
       command: command,
     );
+
     response.fold(
       (l) {
-        print("${l.message}");
+        // show error and revert switch state if index provided
+        try {
+          EasyLoading.showError(l.message);
+        } catch (_) {}
+
+        if (index != null && index >= 0 && index < aeratorSwitch.length) {
+          aeratorSwitch[index] = !aeratorSwitch[index];
+        }
+        commandInProgress.value = false;
       },
       (r) {
         aeratorCommandResponse.value = r;
 
-        print("=================================");
-        print(aeratorCommandResponse.value);
-        print("=================================");
+        try {
+          EasyLoading.showSuccess(r.msg);
+        } catch (_) {}
+
+        // refresh pond data to reflect latest state
+        pondData(id: selectedAstId.value);
+        commandInProgress.value = false;
       },
     );
   }
