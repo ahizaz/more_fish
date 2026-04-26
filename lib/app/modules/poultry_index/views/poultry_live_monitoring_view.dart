@@ -1,4 +1,5 @@
 // app/modules/poultry_index/views/poultry_live_monitoring_view.dart
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -205,6 +206,66 @@ class _DeviceDropdown extends StatelessWidget {
   }
 }
 
+// class _DeviceHeader extends StatelessWidget {
+//   const _DeviceHeader({required this.deviceName, required this.timestampIso});
+
+//   final String deviceName;
+//   final String timestampIso;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     String ts = timestampIso;
+
+//     try {
+//       // ✅ Existing parsed time + 6 hours added
+//       final dt = DateTime.parse(timestampIso).toLocal().add(
+//         const Duration(hours: 6),
+//       );
+
+//       ts =
+//           '${dt.day.toString().padLeft(2, '0')} ${_monthName(dt.month)} ${dt.year}   '
+//           '${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}';
+//     } catch (_) {}
+
+//     return Row(
+//       children: [
+//         const Icon(Icons.circle, color: Colors.green, size: 12),
+//         const SizedBox(width: 8),
+//         Expanded(
+//           child: Text(
+//             deviceName,
+//             style: const TextStyle(fontWeight: FontWeight.w600),
+//           ),
+//         ),
+//         Text(
+//           ts,
+//           style: const TextStyle(
+//             fontSize: 12,
+//             color: Colors.black54,
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+
+//   static String _monthName(int m) {
+//     const names = [
+//       'Jan',
+//       'Feb',
+//       'Mar',
+//       'Apr',
+//       'May',
+//       'Jun',
+//       'Jul',
+//       'Aug',
+//       'Sep',
+//       'Oct',
+//       'Nov',
+//       'Dec',
+//     ];
+//     return (m >= 1 && m <= 12) ? names[m - 1] : '';
+//   }
+// }
 class _DeviceHeader extends StatelessWidget {
   const _DeviceHeader({required this.deviceName, required this.timestampIso});
 
@@ -214,12 +275,21 @@ class _DeviceHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String ts = timestampIso;
+
     try {
-      final dt = DateTime.parse(timestampIso).toLocal();
+      // ✅ API format parse + 6 hours add
+      final parsed = DateFormat(
+        'dd MMM yyyy hh:mm a',
+      ).parse(timestampIso);
+
+      final dt = parsed.add(const Duration(hours: 6));
+
       ts =
           '${dt.day.toString().padLeft(2, '0')} ${_monthName(dt.month)} ${dt.year}   '
           '${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}';
-    } catch (_) {}
+    } catch (e) {
+      debugPrint('Time parse error: $e');
+    }
 
     return Row(
       children: [
@@ -231,30 +301,25 @@ class _DeviceHeader extends StatelessWidget {
             style: const TextStyle(fontWeight: FontWeight.w600),
           ),
         ),
-        Text(ts, style: const TextStyle(fontSize: 12, color: Colors.black54)),
+        Text(
+          ts,
+          style: const TextStyle(
+            fontSize: 12,
+            color: Colors.black54,
+          ),
+        ),
       ],
     );
   }
 
   static String _monthName(int m) {
     const names = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
+      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
     ];
     return (m >= 1 && m <= 12) ? names[m - 1] : '';
   }
 }
-
 class _DustParticlesSection extends StatelessWidget {
   const _DustParticlesSection({required this.live});
 
