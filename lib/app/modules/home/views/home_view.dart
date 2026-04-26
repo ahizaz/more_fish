@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../common_widgets/common_alert_dialog.dart';
 import '../../../common_widgets/common_app_bar.dart';
 import '../../../common_widgets/common_container.dart';
 import '../../../common_widgets/common_text.dart';
@@ -129,7 +130,17 @@ class HomeView extends GetView<HomeController> {
               if (index == 0) {
                 controller.checkLogin();
                 if (controller.isLoggedIn.value.isEmpty) {
-                  Get.toNamed(Routes.ABOUT_DEVICES);
+                  showDialog(
+                    context: context,
+                    barrierDismissible: true,
+                    builder: (context) => WillPopScope(
+                      onWillPop: () async => false,
+                      child: CommonAlertDialog(
+                        notNow: () => Get.back(),
+                        login: () => Get.toNamed(Routes.LOGIN),
+                      ),
+                    ),
+                  );
                 } else {
                   print("===== Water Quality device ==========");
                   Get.toNamed(Routes.WATER_QUALITY_DEVICE);
