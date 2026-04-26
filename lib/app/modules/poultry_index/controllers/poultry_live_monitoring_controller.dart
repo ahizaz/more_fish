@@ -311,7 +311,7 @@ class PoultryLiveMonitoringController extends GetxController
   bool _isRefreshInProgress = false;
   DateTime? _lastPageVisibleRefreshAt;
 
-  static const Duration _refreshInterval = Duration(seconds: 5);
+  static const Duration _refreshInterval = Duration(seconds: 3);
 
   @override
   void onInit() {
@@ -429,7 +429,7 @@ class PoultryLiveMonitoringController extends GetxController
     _startPolling();
   }
 
-  Future<void> refreshLiveData() async {
+  Future<void> refreshLiveData({bool silent = false}) async {
     if (_isRefreshInProgress) return;
 
     final id = selectedDeviceId.value;
@@ -438,14 +438,18 @@ class PoultryLiveMonitoringController extends GetxController
     _isRefreshInProgress = true;
 
     try {
-      isLoading.value = true;
+      if (!silent) {
+        isLoading.value = true;
+      }
       error.value = '';
 
       liveData.value = await _repo.getLatestLiveData(deviceId: id);
     } catch (e) {
       error.value = e.toString();
     } finally {
-      isLoading.value = false;
+      if (!silent) {
+        isLoading.value = false;
+      }
       _isRefreshInProgress = false;
     }
   }
@@ -500,7 +504,7 @@ class PoultryLiveMonitoringController extends GetxController
 
       /// STEP 2: wait + refresh
       await Future.delayed(const Duration(seconds: 2));
-      await refreshLiveData();
+      await refreshLiveData(silent: true);
 
       final latest = _findLatestSwitchById(item.switchId);
       if (latest != null) {
@@ -532,7 +536,8 @@ class PoultryLiveMonitoringController extends GetxController
     _pollTimer?.cancel();
 
     _pollTimer = Timer.periodic(_refreshInterval, (_) {
-      refreshLiveData();
+      // Poll dashboard every 3 seconds to keep switch states updated.
+      refreshLiveData(silent: true);
     });
   }
 }

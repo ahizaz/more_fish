@@ -35,9 +35,9 @@ class PoultryLoginView extends GetView<PoultryLoginController> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(100),
                         child: Image.asset(
-                          'assets/icons/logo_trade_mark.jpg',
+                          'assets/icons/dma_poultry_pulse.png',
                           height: 120,
-                          width: 120,
+                          width: 200,
                         ),
                       ),
                       const SizedBox(height: 30),
