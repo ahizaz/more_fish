@@ -88,7 +88,7 @@ class PoultryLoginController extends GetxController {
           }
 
           await loginTokenStorage.setPoultryToken(token);
-          await loginTokenStorage.setUserId(userId);
+          await loginTokenStorage.setPoultryUserId(userId);
 
           if (_openedFromGuard) {
             Get.back(result: true);

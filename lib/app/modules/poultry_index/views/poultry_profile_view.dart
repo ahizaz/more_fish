@@ -241,7 +241,7 @@ class PoultryProfileView extends StatelessWidget {
 
                             /// ✅ FIX: poultry token properly remove
                             await loginTokenStorage.removePoultryToken();
-                            await loginTokenStorage.removeUserId();
+                            await loginTokenStorage.removePoultryUserId();
 
                             /// clear reactive state
                             poultryIndexController.isLoggedIn.value = '';

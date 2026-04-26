@@ -6,7 +6,8 @@ class LoginTokenStorage {
   final SharedPreferences sharedPreferences;
   static const _moreFishTokenKey = 'token';
   static const _poultryTokenKey = 'poultryToken';
-  static const _userIdKey = 'userId';
+  static const _moreFishUserIdKey = 'userId';
+  static const _poultryUserIdKey = 'poultryUserId';
 
   String? getToken() {
     return getMoreFishToken();
@@ -50,15 +51,39 @@ class LoginTokenStorage {
   }
 
   int? getUserId() {
-    return sharedPreferences.getInt(_userIdKey);
+    return getMoreFishUserId();
   }
 
   Future<void> setUserId(int value) async {
-    await sharedPreferences.setInt(_userIdKey, value);
+    await setMoreFishUserId(value);
   }
 
   Future<void> removeUserId() async {
-    await sharedPreferences.remove(_userIdKey);
+    await removeMoreFishUserId();
+  }
+
+  int? getMoreFishUserId() {
+    return sharedPreferences.getInt(_moreFishUserIdKey);
+  }
+
+  Future<void> setMoreFishUserId(int value) async {
+    await sharedPreferences.setInt(_moreFishUserIdKey, value);
+  }
+
+  Future<void> removeMoreFishUserId() async {
+    await sharedPreferences.remove(_moreFishUserIdKey);
+  }
+
+  int? getPoultryUserId() {
+    return sharedPreferences.getInt(_poultryUserIdKey);
+  }
+
+  Future<void> setPoultryUserId(int value) async {
+    await sharedPreferences.setInt(_poultryUserIdKey, value);
+  }
+
+  Future<void> removePoultryUserId() async {
+    await sharedPreferences.remove(_poultryUserIdKey);
   }
 
   bool hasValidToken() {

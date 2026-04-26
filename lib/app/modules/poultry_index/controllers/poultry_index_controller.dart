@@ -145,7 +145,7 @@ class PoultryIndexController extends GetxController {
 
   void checkLogin() {
     final loginTokenStorage = Get.find<LoginTokenStorage>();
-    final token = loginTokenStorage.getToken();
+    final token = loginTokenStorage.getPoultryToken();
 
     debugPrint('Saved token after app reopen: $token');
 
@@ -244,8 +244,8 @@ class PoultryIndexController extends GetxController {
           final loginTokenStorage =
               Get.find<LoginTokenStorage>();
 
-          await loginTokenStorage.setToken(token);
-          await loginTokenStorage.setUserId(userId);
+          await loginTokenStorage.setPoultryToken(token);
+          await loginTokenStorage.setPoultryUserId(userId);
 
           /// update memory state immediately
           isLoggedIn.value = token.trim();
