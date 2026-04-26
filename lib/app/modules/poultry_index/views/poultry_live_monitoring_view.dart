@@ -286,7 +286,7 @@ class _DeviceHeader extends StatelessWidget {
 
       ts =
           '${dt.day.toString().padLeft(2, '0')} ${_monthName(dt.month)} ${dt.year}   '
-          '${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}';
+          '${DateFormat('h:mm a').format(dt)}';
     } catch (e) {
       debugPrint('Time parse error: $e');
     }
