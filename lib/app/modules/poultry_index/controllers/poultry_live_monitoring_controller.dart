@@ -444,6 +444,7 @@ class PoultryLiveMonitoringController extends GetxController
       error.value = '';
 
       liveData.value = await _repo.getLatestLiveData(deviceId: id);
+      _syncSwitchUiStateWithLiveData();
     } catch (e) {
       error.value = e.toString();
     } finally {
@@ -499,37 +500,20 @@ class PoultryLiveMonitoringController extends GetxController
       /// STEP 1: POST to backend
       await _repo.setSwitchState(switchId: item.switchId, turnOn: nextValue);
 
-      /// Optimistic UI update
-      switchUiState[item.switchId] = nextValue;
-
       /// STEP 2: wait + refresh
       await Future.delayed(const Duration(seconds: 2));
       await refreshLiveData(silent: true);
-
-      final latest = _findLatestSwitchById(item.switchId);
-      if (latest != null) {
-        switchUiState[item.switchId] = latest.isOn;
-      }
 
       EasyLoading.dismiss();
     } catch (e) {
       error.value = e.toString();
 
-      switchUiState[item.switchId] = item.isOn;
-
       EasyLoading.dismiss();
       EasyLoading.showError('Failed to update switch');
+      await refreshLiveData(silent: true);
     } finally {
       switchBusy[item.switchId] = false;
     }
-  }
-
-  PoultrySwitch? _findLatestSwitchById(String switchId) {
-    final list = liveData.value?.switches ?? [];
-    for (final s in list) {
-      if (s.switchId == switchId) return s;
-    }
-    return null;
   }
 
   void _startPolling() {
@@ -539,5 +523,19 @@ class PoultryLiveMonitoringController extends GetxController
       // Poll dashboard every 3 seconds to keep switch states updated.
       refreshLiveData(silent: true);
     });
+  }
+
+  void _syncSwitchUiStateWithLiveData() {
+    final switches = liveData.value?.switches ?? const <PoultrySwitch>[];
+    if (switches.isEmpty) {
+      switchUiState.clear();
+      return;
+    }
+
+    final nextState = <String, bool>{};
+    for (final sw in switches) {
+      nextState[sw.switchId] = sw.isOn;
+    }
+    switchUiState.assignAll(nextState);
   }
 }
