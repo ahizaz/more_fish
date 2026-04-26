@@ -31,24 +31,9 @@ class DmaTechnologiesGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     const bg = Color(0xffebffff);
     const tileBg = Color(0xffd7f2ee);
-
-    Future<void> openPoultryWithLogin() async {
-      final loginTokenStorage = Get.find<LoginTokenStorage>();
-
-      if (loginTokenStorage.hasValidPoultryToken()) {
-        Get.toNamed(Routes.POULTRY_INDEX);
-        return;
-      }
-
-      final result = await Get.toNamed(
-        Routes.POULTRY_LOGIN,
-        arguments: {'fromGuard': true},
-      );
-
-      if (result == true || loginTokenStorage.hasValidPoultryToken()) {
-        Get.toNamed(Routes.POULTRY_INDEX);
-      }
-    }
+void openPoultry() {
+  Get.toNamed(Routes.POULTRY_INDEX);
+}
 
     final tiles = <_DmaTileData>[
       _DmaTileData(
@@ -56,11 +41,11 @@ class DmaTechnologiesGrid extends StatelessWidget {
         asset: 'assets/icons/dma_more_fish.png',
         onTap: () => Get.toNamed(Routes.INDEX),
       ),
-      _DmaTileData(
-        title: 'Poultry Care',
-        asset: 'assets/icons/dma_poultry_pulse.png',
-        onTap: openPoultryWithLogin,
-      ),
+       _DmaTileData(
+  title: 'Poultry Care',
+  asset: 'assets/icons/dma_poultry_pulse.png',
+  onTap: openPoultry,
+),
       _DmaTileData(
         title: 'Cattle Care',
         asset: 'assets/icons/dma_cattle_care.png',
