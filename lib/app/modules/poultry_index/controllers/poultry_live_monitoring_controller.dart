@@ -491,7 +491,10 @@ class PoultryLiveMonitoringController extends GetxController
     switchBusy[item.switchId] = true;
 
     try {
-      EasyLoading.show(status: 'Updating switch...');
+      final loadingText = nextValue
+          ? 'The switch is turning on'
+          : 'The switch is turning off';
+      EasyLoading.show(status: loadingText);
 
       debugPrint(
         'Switch POST: ${item.switchId} -> ${nextValue ? "ON" : "OFF"}',
