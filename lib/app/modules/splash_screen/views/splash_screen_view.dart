@@ -20,9 +20,9 @@ class _SplashScreenViewState extends State<SplashScreenView> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _timer = Timer(const Duration(seconds: 2), () {
-        // Splash -> Version Checker / Update prompt
-        Get.offAllNamed(Routes.VERSION_CHECKER);
+      _timer = Timer(const Duration(seconds: 5), () {
+        // Splash -> Main DMA screen
+        Get.offAllNamed(Routes.DMA_TECHNOLOGIES);
       });
     });
   }

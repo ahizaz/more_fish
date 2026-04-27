@@ -102,7 +102,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.SPLASH_SCREEN;
+  static const INITIAL = Routes.DMA_TECHNOLOGIES;
 
   static final routes = [
     GetPage(
