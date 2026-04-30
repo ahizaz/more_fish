@@ -433,7 +433,7 @@ class WaterQualityDeviceController extends GetxController {
   }
 
   void _startPolling() {
-    _pollTimer = Timer.periodic(const Duration(seconds: 5), (timer) {
+    _pollTimer = Timer.periodic(const Duration(seconds: 3), (timer) {
       if (isFetching.value) return;
       if (selectedAstId.value == 0) return;
 

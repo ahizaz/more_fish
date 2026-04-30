@@ -72,7 +72,7 @@ class CattleLiveMonitoringController extends GetxController {
   void _startPolling() {
     _pollTimer?.cancel();
     // Easy to swap later with WebSocket/SSE stream.
-    _pollTimer = Timer.periodic(const Duration(seconds: 5), (_) {
+    _pollTimer = Timer.periodic(const Duration(seconds: 3), (_) {
       refreshLiveData();
     });
   }
