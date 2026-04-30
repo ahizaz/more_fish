@@ -25,16 +25,18 @@ class PoultryNotificationsView extends GetView<PoultryNotificationsController> {
           backgroundColor: const Color(0xffebffff),
           body: Column(
             children: [
-              Obx(() => CommonAppBar(
-                    title: 'Poultry Pulse',
-                    cityName: 'Dhaka',
-                    date: header.formattedDate.value,
-                    time: header.formattedTime.value,
-                    temp: header.tempText.value,
-                    humidity: header.humidityText.value,
-                    logoAssetPath: 'assets/icons/dma_poultry_pulse.png',
-                    backgroundColor: const Color(0xffdbcc68),
-                  )),
+              Obx(
+                () => CommonAppBar(
+                  title: 'Poultry Care',
+                  cityName: 'Dhaka',
+                  date: header.formattedDate.value,
+                  time: header.formattedTime.value,
+                  temp: header.tempText.value,
+                  humidity: header.humidityText.value,
+                  logoAssetPath: 'assets/icons/dma_poultry_pulse.png',
+                  backgroundColor: const Color(0xffdbcc68),
+                ),
+              ),
               Expanded(
                 child: Obx(() {
                   if (!controller.hasToken.value) {
@@ -80,9 +82,8 @@ class PoultryNotificationsView extends GetView<PoultryNotificationsController> {
                   }
 
                   return RefreshIndicator(
-                    onRefresh: () => controller.fetchNotifications(
-                      showLoader: false,
-                    ),
+                    onRefresh: () =>
+                        controller.fetchNotifications(showLoader: false),
                     child: ListView.builder(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 12,
@@ -109,10 +110,7 @@ class PoultryNotificationsView extends GetView<PoultryNotificationsController> {
                                 ),
                                 decoration: const BoxDecoration(
                                   gradient: LinearGradient(
-                                    colors: [
-                                      Colors.white,
-                                      Color(0xffebffff),
-                                    ],
+                                    colors: [Colors.white, Color(0xffebffff)],
                                     begin: Alignment.topCenter,
                                     end: Alignment.bottomCenter,
                                   ),
@@ -165,9 +163,7 @@ class PoultryNotificationsView extends GetView<PoultryNotificationsController> {
                                     crossAxisAlignment:
                                         WrapCrossAlignment.center,
                                     children: [
-                                      _UrgencyChip(
-                                        urgency: item.urgency,
-                                      ),
+                                      _UrgencyChip(urgency: item.urgency),
                                       Text(
                                         item.sensorName,
                                         style: const TextStyle(
@@ -213,24 +209,21 @@ class PoultryNotificationsView extends GetView<PoultryNotificationsController> {
   }
 
   BoxDecoration _decoration() => BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [
-            Color(0xfffbffff),
-            Colors.white,
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.blueGrey.withOpacity(0.5),
-            spreadRadius: 1,
-            blurRadius: 1,
-            offset: const Offset(.2, .2),
-          ),
-        ],
-      );
+    gradient: const LinearGradient(
+      colors: [Color(0xfffbffff), Colors.white],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+    borderRadius: BorderRadius.circular(10),
+    boxShadow: [
+      BoxShadow(
+        color: Colors.blueGrey.withOpacity(0.5),
+        spreadRadius: 1,
+        blurRadius: 1,
+        offset: const Offset(.2, .2),
+      ),
+    ],
+  );
 }
 
 class _UrgencyChip extends StatelessWidget {

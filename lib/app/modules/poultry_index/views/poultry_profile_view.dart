@@ -216,7 +216,7 @@ class PoultryProfileView extends StatelessWidget {
             children: [
               Obx(
                 () => CommonAppBar(
-                  title: 'Poultry Pulse',
+                  title: 'Poultry Care',
                   cityName: 'Dhaka',
                   date: header.formattedDate.value,
                   time: header.formattedTime.value,

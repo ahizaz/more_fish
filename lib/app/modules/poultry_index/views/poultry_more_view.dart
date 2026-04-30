@@ -25,19 +25,24 @@ class PoultryMoreView extends GetView<PoultryIndexController> {
           backgroundColor: const Color(0xffebffff),
           body: Column(
             children: [
-              Obx(() => CommonAppBar(
-                    title: 'Poultry Pulse',
-                    cityName: 'Dhaka',
-                    date: header.formattedDate.value,
-                    time: header.formattedTime.value,
-                    temp: header.tempText.value,
-                    humidity: header.humidityText.value,
-                    logoAssetPath: 'assets/icons/dma_poultry_pulse.png',
-                    backgroundColor: const Color(0xffdbcc68),
-                  )),
+              Obx(
+                () => CommonAppBar(
+                  title: 'Poultry Care',
+                  cityName: 'Dhaka',
+                  date: header.formattedDate.value,
+                  time: header.formattedTime.value,
+                  temp: header.tempText.value,
+                  humidity: header.humidityText.value,
+                  logoAssetPath: 'assets/icons/dma_poultry_pulse.png',
+                  backgroundColor: const Color(0xffdbcc68),
+                ),
+              ),
               Expanded(
                 child: ListView(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 12,
+                  ),
                   children: [
                     _SimpleMoreTile(
                       title: 'FAQ',
@@ -65,10 +70,7 @@ class PoultryMoreView extends GetView<PoultryIndexController> {
 }
 
 class _SimpleMoreTile extends StatelessWidget {
-  const _SimpleMoreTile({
-    required this.title,
-    required this.onTap,
-  });
+  const _SimpleMoreTile({required this.title, required this.onTap});
 
   final String title;
   final VoidCallback onTap;
