@@ -9,6 +9,11 @@ import '../controllers/graph_controller.dart';
 class GraphView extends GetView<GraphController> {
   const GraphView({super.key});
 
+  String _periodLabel(String period) {
+    if (period == 'Daily') return 'Last 24 H';
+    return period;
+  }
+
   double _computePadding(double minValue, double maxValue) {
     final range = (maxValue - minValue).abs();
     if (range < 0.001) {
@@ -86,7 +91,7 @@ class GraphView extends GetView<GraphController> {
                 controller.graphData(type: value.toLowerCase());
               },
               itemBuilder: (context) => const [
-                PopupMenuItem(value: 'Daily', child: Text('Daily')),
+                PopupMenuItem(value: 'Daily', child: Text('Last 24 H')),
                 PopupMenuItem(value: 'Weekly', child: Text('Weekly')),
                 PopupMenuItem(value: 'Monthly', child: Text('Monthly')),
                 PopupMenuItem(value: 'Yearly', child: Text('Yearly')),
@@ -95,7 +100,7 @@ class GraphView extends GetView<GraphController> {
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: Center(
                   child: Text(
-                    controller.selectedPeriod.value,
+                    _periodLabel(controller.selectedPeriod.value),
                     style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -154,7 +159,10 @@ class GraphView extends GetView<GraphController> {
                   DropdownButton<String>(
                     value: controller.selectedPeriod.value,
                     items: const [
-                      DropdownMenuItem(value: 'Daily', child: Text('Daily')),
+                      DropdownMenuItem(
+                        value: 'Daily',
+                        child: Text('Last 24 H'),
+                      ),
                       DropdownMenuItem(value: 'Weekly', child: Text('Weekly')),
                       DropdownMenuItem(
                         value: 'Monthly',

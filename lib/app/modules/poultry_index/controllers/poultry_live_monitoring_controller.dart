@@ -311,7 +311,7 @@ class PoultryLiveMonitoringController extends GetxController
   bool _isRefreshInProgress = false;
   DateTime? _lastPageVisibleRefreshAt;
 
-  static const Duration _refreshInterval = Duration(seconds: 3);
+  static const Duration _refreshInterval = Duration(seconds: 1);
 
   @override
   void onInit() {
@@ -523,7 +523,7 @@ class PoultryLiveMonitoringController extends GetxController
     _pollTimer?.cancel();
 
     _pollTimer = Timer.periodic(_refreshInterval, (_) {
-      // Poll dashboard every 3 seconds to keep switch states updated.
+      // Poll dashboard every second to keep switch states updated.
       refreshLiveData(silent: true);
     });
   }

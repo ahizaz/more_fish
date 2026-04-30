@@ -78,7 +78,7 @@ class CleanAirLiveMonitoringController extends GetxController {
 
   void _startPolling() {
     _pollTimer?.cancel();
-    _pollTimer = Timer.periodic(const Duration(seconds: 3), (_) {
+    _pollTimer = Timer.periodic(const Duration(seconds: 1), (_) {
       refreshLiveData();
     });
   }

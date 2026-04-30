@@ -300,7 +300,7 @@ class _DeviceHeader extends StatelessWidget {
         Expanded(
           child: Text(
             deviceName,
-            style: const TextStyle(fontWeight: FontWeight.w600),
+            style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
           ),
         ),
         Text(ts, style: const TextStyle(fontSize: 12, color: Colors.black54)),
@@ -422,7 +422,7 @@ class _SwitchCard extends StatelessWidget {
               child: Text(
                 item.switchName.isEmpty ? item.switchId : item.switchName,
                 style: const TextStyle(
-                  fontSize: 15,
+                  fontSize: 18,
                   fontWeight: FontWeight.w600,
                 ),
               ),

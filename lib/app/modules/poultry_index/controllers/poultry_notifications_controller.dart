@@ -29,7 +29,7 @@ class PoultryNotificationsController extends GetxController {
 
   void _startPolling() {
     _pollingTimer?.cancel();
-    _pollingTimer = Timer.periodic(const Duration(seconds: 3), (_) {
+    _pollingTimer = Timer.periodic(const Duration(seconds: 1), (_) {
       fetchNotifications(showLoader: false);
     });
   }
