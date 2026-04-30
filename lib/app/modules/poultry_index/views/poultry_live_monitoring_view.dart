@@ -119,7 +119,7 @@ class _LoggedInDashboard extends StatelessWidget {
                         iconData: _dynamicMetricIcon(metric.name),
                         title: metric.title,
                         value: _formatDynamicMetricValue(metric),
-                        borderColor: _metricBorderColor(metric.dangerStatus),
+                        statusColor: _metricTextColor(metric.dangerStatus),
                       ),
                     )
                     .toList(),
@@ -278,9 +278,7 @@ class _DeviceHeader extends StatelessWidget {
 
     try {
       // ✅ API format parse + 6 hours add
-      final parsed = DateFormat(
-        'dd MMM yyyy hh:mm a',
-      ).parse(timestampIso);
+      final parsed = DateFormat('dd MMM yyyy hh:mm a').parse(timestampIso);
 
       final dt = parsed.add(const Duration(hours: 6));
 
@@ -301,25 +299,30 @@ class _DeviceHeader extends StatelessWidget {
             style: const TextStyle(fontWeight: FontWeight.w600),
           ),
         ),
-        Text(
-          ts,
-          style: const TextStyle(
-            fontSize: 12,
-            color: Colors.black54,
-          ),
-        ),
+        Text(ts, style: const TextStyle(fontSize: 12, color: Colors.black54)),
       ],
     );
   }
 
   static String _monthName(int m) {
     const names = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ];
     return (m >= 1 && m <= 12) ? names[m - 1] : '';
   }
 }
+
 class _DustParticlesSection extends StatelessWidget {
   const _DustParticlesSection({required this.live});
 
@@ -554,7 +557,7 @@ class _MetricCard extends StatelessWidget {
     this.iconData,
     required this.title,
     required this.value,
-    required this.borderColor,
+    required this.statusColor,
   });
 
   final VoidCallback? onTap;
@@ -562,13 +565,14 @@ class _MetricCard extends StatelessWidget {
   final IconData? iconData;
   final String title;
   final String value;
-  final Color borderColor;
+  final Color statusColor;
 
   @override
   Widget build(BuildContext context) {
     final w = (MediaQuery.of(context).size.width - 14 * 2 - 12) / 2;
     return SizedBox(
       width: w,
+      height: 178,
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -586,10 +590,10 @@ class _MetricCard extends StatelessWidget {
                   offset: const Offset(0, 4),
                 ),
               ],
-              border: Border.all(color: borderColor, width: 2),
+              border: Border.all(color: Colors.black12, width: 1.5),
             ),
             child: Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (iconAsset != null)
                   Image.asset(iconAsset!, height: 56, fit: BoxFit.contain)
@@ -603,19 +607,24 @@ class _MetricCard extends StatelessWidget {
                 Text(
                   value,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 16,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 28,
                     fontWeight: FontWeight.w700,
-                    color: Colors.green,
+                    color: statusColor,
                   ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   title,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 13,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 15,
                     fontWeight: FontWeight.w600,
+                    color: statusColor,
                   ),
                 ),
               ],
@@ -639,7 +648,7 @@ String _formatDynamicMetricValue(PoultrySensorMetric metric) {
   return '$formatted $unit';
 }
 
-Color _metricBorderColor(String status) {
+Color _metricTextColor(String status) {
   final normalized = status.trim().toLowerCase();
   if (normalized == 'perfect') {
     return Colors.green;
