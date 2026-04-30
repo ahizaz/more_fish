@@ -220,14 +220,14 @@ class _HomeFeatureTile extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(iconAssetPath, height: 44, fit: BoxFit.contain),
-              const SizedBox(height: 6),
+              Image.asset(iconAssetPath, height: 52, fit: BoxFit.contain),
+              const SizedBox(height: 8),
               Text(
                 title,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w700,
                   color: Colors.black87,
                 ),
               ),
