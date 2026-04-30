@@ -60,7 +60,7 @@ class PoultryLoginController extends GetxController {
 
       await response.fold(
         (l) async {
-          debugPrint('${l.message}');
+          debugPrint(l.message);
           isActiveLoginButton.value = true;
           Get.snackbar(
             'Login Failed',

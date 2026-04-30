@@ -37,7 +37,7 @@ class AboutDevicesView extends GetView<AboutDevicesController> {
                   }),
                   Expanded(
                       child: ListView.builder(
-                        padding: EdgeInsets.only(top: 16),
+                        padding: const EdgeInsets.only(top: 16),
                         itemCount: controller.titleList.length,
                         itemBuilder: (context, index){
                           return InkWell(

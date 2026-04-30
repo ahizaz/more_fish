@@ -1491,8 +1491,7 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                                           .spaceBetween,
                                                   children: [
                                                     CommonText(
-                                                      aerator.aeratorName ??
-                                                          "Aerator",
+                                                      aerator.aeratorName,
                                                       fontSize: 20,
                                                       fontWeight:
                                                           FontWeight.bold,

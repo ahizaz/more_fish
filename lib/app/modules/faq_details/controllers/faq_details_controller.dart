@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class FaqDetailsController extends GetxController {
-  //TODO: Implement FaqDetailsController
+  
 
   final count = 0.obs;
   var data = '';

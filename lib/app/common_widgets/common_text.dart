@@ -12,7 +12,7 @@ class CommonText extends StatelessWidget {
 
   const CommonText(
       this.text, {
-        Key? key,
+        super.key,
         this.fontSize,
         this.color,
         this.fontWeight,
@@ -20,7 +20,7 @@ class CommonText extends StatelessWidget {
         this.maxLines,
         this.overflow,
         this.fontStyle,
-      }) : super(key: key);
+      });
 
   @override
   Widget build(BuildContext context) {

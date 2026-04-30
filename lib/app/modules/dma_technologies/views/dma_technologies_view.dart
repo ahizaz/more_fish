@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../routes/app_pages.dart';
-import '../../../service/local_storage.dart';
+
 
 class DmaTechnologiesView extends StatelessWidget {
   const DmaTechnologiesView({super.key});

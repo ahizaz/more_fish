@@ -539,7 +539,7 @@ class WaterQualityDeviceController extends GetxController {
       (l) {
         // Error case (e.g. "it is not connected", device offline, etc.)
         String errorMsg =
-            l.message ?? 'Command failed. Aerator may not be connected.';
+            l.message;
 
         try {
           EasyLoading.showError(errorMsg);
