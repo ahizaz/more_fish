@@ -20,6 +20,7 @@ class MockPoultryLiveRepository implements PoultryLiveRepository {
     final now = DateTime.now();
     return PoultryLiveData(
       deviceId: deviceId,
+      deviceStatus: 'online',
       timestamp: now.toIso8601String(),
       aqi: double.parse((1 + _rand.nextDouble() * 3).toStringAsFixed(1)),
       nh3MgL: double.parse((_rand.nextDouble() * 0.05).toStringAsFixed(2)),

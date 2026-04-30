@@ -128,8 +128,6 @@ class _LoggedInDashboard extends StatelessWidget {
               const SizedBox(height: 14),
               _SwitchesSection(controller: controller, live: live),
               const SizedBox(height: 14),
-              _DustParticlesSection(live: live),
-              const SizedBox(height: 14),
               // Temporary note until Poultry Pulse devices/backend are connected.
               Container(
                 padding: const EdgeInsets.symmetric(
@@ -337,76 +335,6 @@ class _DeviceHeader extends StatelessWidget {
   }
 }
 
-class _DustParticlesSection extends StatelessWidget {
-  const _DustParticlesSection({required this.live});
-
-  final PoultryLiveData? live;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-      decoration: BoxDecoration(
-        color: const Color(0xfff3f4c5),
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.08),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-        border: Border.all(color: Colors.black12),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(bottom: 10),
-            child: Center(
-              child: Text(
-                'Dust particles',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-              ),
-            ),
-          ),
-
-          GridView.count(
-            crossAxisCount: 2,
-            crossAxisSpacing: 12,
-            mainAxisSpacing: 12,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            childAspectRatio: 1.2,
-            children: [
-              _DustParticleCard(
-                iconAsset: 'assets/icons/poultry_pm1_sensor.png',
-                sizeLabel: 'Size 1.0',
-                value: live == null ? '--' : '${live!.pm1UgM3} µg/m³',
-              ),
-              _DustParticleCard(
-                iconAsset: 'assets/icons/poultry_pm25.png',
-                sizeLabel: 'Size 2.5',
-                value: live == null ? '--' : '${live!.pm25UgM3} µg/m³',
-              ),
-              _DustParticleCard(
-                iconAsset: 'assets/icons/poultry_pm4_sensor.png',
-                sizeLabel: 'Size 4.0',
-                value: live == null ? '--' : '${live!.pm4UgM3} µg/m³',
-              ),
-              _DustParticleCard(
-                iconAsset: 'assets/icons/poultry_pm10.png',
-                sizeLabel: 'Size 10',
-                value: live == null ? '--' : '${live!.pm10UgM3} µg/m³',
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class _SwitchesSection extends StatelessWidget {
   const _SwitchesSection({required this.controller, required this.live});
 
@@ -511,56 +439,6 @@ class _SwitchCard extends StatelessWidget {
         ),
       );
     });
-  }
-}
-
-class _DustParticleCard extends StatelessWidget {
-  const _DustParticleCard({
-    required this.iconAsset,
-    required this.sizeLabel,
-    required this.value,
-  });
-
-  final String iconAsset;
-  final String sizeLabel;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    final w = (MediaQuery.of(context).size.width - 14 * 2 - 12 - 12 * 2) / 2;
-    return SizedBox(
-      width: w,
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 216, 226, 180),
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: Colors.black12),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Image.asset(iconAsset, height: 40, fit: BoxFit.contain),
-            const SizedBox(height: 6),
-            Text(
-              value,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.w700,
-                color: Colors.green,
-              ),
-            ),
-            const SizedBox(height: 2),
-            Text(
-              sizeLabel,
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }
 
