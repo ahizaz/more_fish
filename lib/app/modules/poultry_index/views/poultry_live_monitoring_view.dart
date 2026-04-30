@@ -105,6 +105,7 @@ class _LoggedInDashboard extends StatelessWidget {
               if (live != null)
                 _DeviceHeader(
                   deviceName: live.deviceId,
+                  deviceStatus: live.deviceStatus,
                   timestampIso: live.timestamp,
                 ),
               const SizedBox(height: 10),
@@ -267,9 +268,14 @@ class _DeviceDropdown extends StatelessWidget {
 //   }
 // }
 class _DeviceHeader extends StatelessWidget {
-  const _DeviceHeader({required this.deviceName, required this.timestampIso});
+  const _DeviceHeader({
+    required this.deviceName,
+    required this.deviceStatus,
+    required this.timestampIso,
+  });
 
   final String deviceName;
+  final String deviceStatus;
   final String timestampIso;
 
   @override
@@ -291,7 +297,7 @@ class _DeviceHeader extends StatelessWidget {
 
     return Row(
       children: [
-        const Icon(Icons.circle, color: Colors.green, size: 12),
+        Icon(Icons.circle, color: _deviceSignalColor(deviceStatus), size: 12),
         const SizedBox(width: 8),
         Expanded(
           child: Text(
@@ -320,6 +326,14 @@ class _DeviceHeader extends StatelessWidget {
       'Dec',
     ];
     return (m >= 1 && m <= 12) ? names[m - 1] : '';
+  }
+
+  static Color _deviceSignalColor(String status) {
+    final normalized = status.trim().toLowerCase();
+    if (normalized == 'offline') {
+      return Colors.red;
+    }
+    return Colors.green;
   }
 }
 

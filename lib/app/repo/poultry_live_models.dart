@@ -1,5 +1,6 @@
 class PoultryLiveData {
   final String deviceId;
+  final String deviceStatus;
   final String timestamp; // ISO or formatted
   final double? aqi;
   final double nh3MgL;
@@ -26,6 +27,7 @@ class PoultryLiveData {
 
   const PoultryLiveData({
     required this.deviceId,
+    required this.deviceStatus,
     required this.timestamp,
     this.aqi,
     required this.nh3MgL,
@@ -53,6 +55,7 @@ class PoultryLiveData {
 
     return PoultryLiveData(
       deviceId: (json['deviceId'] ?? '').toString(),
+      deviceStatus: (json['device_status'] ?? '').toString(),
       timestamp: (json['timestamp'] ?? '').toString(),
       aqi: (json['aqi'] is num)
           ? (json['aqi'] as num).toDouble()
@@ -94,6 +97,7 @@ class PoultryLiveData {
 
   Map<String, dynamic> toJson() => {
     'deviceId': deviceId,
+    'device_status': deviceStatus,
     'timestamp': timestamp,
     'aqi': aqi,
     'nh3': nh3MgL,

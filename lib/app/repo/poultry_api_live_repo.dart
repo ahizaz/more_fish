@@ -214,6 +214,7 @@ class PoultryApiLiveRepository implements PoultryLiveRepository {
 
     return PoultryLiveData(
       deviceId: resolvedDeviceId.isEmpty ? selectedDeviceId : resolvedDeviceId,
+      deviceStatus: _string(device['device_status']),
       timestamp: ts,
       aqi: _double(values['aqi']),
       nh3MgL: _double(values['nh3_gas']),
