@@ -31,12 +31,6 @@ class FcrCalculatorView extends GetView<FcrCalculatorController> {
                     fontSize: 18,
                     fontWeight: FontWeight.w700,
                   ),
-                  const SizedBox(height: 8),
-                  CommonText(
-                    'FCR = Total feed amount / Total weight gain',
-                    color: Colors.grey.shade700,
-                    fontSize: 14,
-                  ),
                   const SizedBox(height: 14),
                   _numberInputField(
                     controller: controller.feedAmountController,

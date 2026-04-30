@@ -958,6 +958,21 @@ import '../controllers/water_quality_device_controller.dart';
 class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
   const WaterQualityDeviceView({super.key});
 
+  String _formatSensorValue({
+    required String? sensorName,
+    required String? rawValue,
+  }) {
+    final parsedValue = double.tryParse(rawValue ?? '');
+    if (parsedValue == null) return '0';
+
+    final normalizedSensorName = sensorName?.trim().toUpperCase();
+    final displayValue = normalizedSensorName == 'DO'
+        ? parsedValue.clamp(1.62, 16.0).toDouble()
+        : parsedValue;
+
+    return displayValue.toStringAsFixed(2);
+  }
+
   @override
   Widget build(BuildContext context) {
     HomeController homeController = Get.put(HomeController());
@@ -1376,13 +1391,12 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                                                   sensorData?.dangerStatus ==
                                                                           "invalid"
                                                                       ? "No Data"
-                                                                      : double.tryParse(
-                                                                              sensorData?.lastValue ??
-                                                                                  '',
-                                                                            )?.toStringAsFixed(
-                                                                              2,
-                                                                            ) ??
-                                                                            '0',
+                                                                      : _formatSensorValue(
+                                                                          sensorName:
+                                                                              sensorData?.sensorName,
+                                                                          rawValue:
+                                                                              sensorData?.lastValue,
+                                                                        ),
                                                                   fontSize:
                                                                       sensorData
                                                                               ?.dangerStatus ==

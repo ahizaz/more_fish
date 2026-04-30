@@ -421,6 +421,7 @@ class WaterQualityDeviceController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    debugPrint('[WaterQuality] onInit -> pondList + companyList + polling');
     pondList();
     CompanyList();
     _startPolling();
@@ -433,6 +434,7 @@ class WaterQualityDeviceController extends GetxController {
   }
 
   void _startPolling() {
+    debugPrint('[WaterQuality] Polling started (every 1 second)');
     _pollTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (isFetching.value) return;
       if (selectedAstId.value == 0) return;
@@ -443,10 +445,13 @@ class WaterQualityDeviceController extends GetxController {
   }
 
   pondList() async {
+    debugPrint('[API] getPondList() requested');
     var response = await devicesRepository.getPondList();
     response.fold((l) => print("${l.message}"), (r) {
+      debugPrint('[API] getPondList() success -> ponds: ${r.data.length}');
       pondListResponse.value = r;
       if (r.data.isNotEmpty) {
+        debugPrint('[Flow] First pond selected -> id: ${r.data[0].id}');
         pondData(id: r.data[0].id);
       }
     });
@@ -464,9 +469,11 @@ class WaterQualityDeviceController extends GetxController {
 
     if (id != null) selectedAstId.value = id;
 
+    debugPrint('[API] getPondData() requested -> asset_id: $id');
     var response = await devicesRepository.getPondData(id: id);
     response.fold(
       (l) {
+        debugPrint('[API] getPondData() failed -> ${l.message}');
         print("${l.message}");
         isFetching.value = false;
         _firstFetch = false;
@@ -475,6 +482,7 @@ class WaterQualityDeviceController extends GetxController {
         } catch (_) {}
       },
       (r) {
+        debugPrint('[API] getPondData() success');
         pondDataResponse.value = r;
 
         // Reset and populate aerator switches from fresh API data
@@ -488,6 +496,7 @@ class WaterQualityDeviceController extends GetxController {
         try {
           final deviceId = r.data.devices[0].deviceId;
           if (deviceId != null && deviceId.toString().isNotEmpty) {
+            debugPrint('[Flow] sensorList() triggered -> device_id: $deviceId');
             sensorList(deviceId: deviceId);
           }
         } catch (e) {
@@ -505,18 +514,32 @@ class WaterQualityDeviceController extends GetxController {
 
   sensorList({dynamic deviceId}) async {
     if (deviceId == null) return;
+    debugPrint('[API] getSensorList() requested -> device_id: $deviceId');
     var response = await devicesRepository.getSensorList(deviceId: deviceId);
     response.fold(
-      (l) => print("${l.message}"),
-      (r) => sensorListResponse.value = r,
+      (l) {
+        debugPrint('[API] getSensorList() failed -> ${l.message}');
+        print("${l.message}");
+      },
+      (r) {
+        debugPrint('[API] getSensorList() success');
+        sensorListResponse.value = r;
+      },
     );
   }
 
   CompanyList() async {
+    debugPrint('[API] getCompanyList() requested');
     var response = await devicesRepository.getCompanyList();
     response.fold(
-      (l) => print("${l.message}"),
-      (r) => companyListResponse.value = r,
+      (l) {
+        debugPrint('[API] getCompanyList() failed -> ${l.message}');
+        print("${l.message}");
+      },
+      (r) {
+        debugPrint('[API] getCompanyList() success -> companies: ${r.data?.length}');
+        companyListResponse.value = r;
+      },
     );
   }
 
@@ -530,6 +553,7 @@ class WaterQualityDeviceController extends GetxController {
       EasyLoading.show(status: 'Sending command...');
     } catch (_) {}
 
+    debugPrint('[API] setAeratorCommand() requested -> id: $id, command: $command');
     var response = await devicesRepository.setAeratorCommand(
       id: id,
       command: command,
@@ -540,6 +564,7 @@ class WaterQualityDeviceController extends GetxController {
         // Error case (e.g. "it is not connected", device offline, etc.)
         String errorMsg =
             l.message;
+        debugPrint('[API] setAeratorCommand() failed -> $errorMsg');
 
         try {
           EasyLoading.showError(errorMsg);
@@ -550,6 +575,7 @@ class WaterQualityDeviceController extends GetxController {
       },
       (r) {
         // Success case
+        debugPrint('[API] setAeratorCommand() success -> ${r.msg}');
         aeratorCommandResponse.value = r;
 
         try {
