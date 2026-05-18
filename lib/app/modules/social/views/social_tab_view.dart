@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
+import '../../../common_widgets/safe_network_image.dart';
 
 /// Social tab entry point.
 ///
@@ -573,7 +574,7 @@ class _PostCard extends StatelessWidget {
               const SizedBox(height: 10),
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image.network(imageUrl, fit: BoxFit.cover),
+                child: SafeNetworkImage(url: imageUrl, fit: BoxFit.cover),
               ),
             ],
             const SizedBox(height: 10),

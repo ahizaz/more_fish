@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../../../common_widgets/common_app_bar.dart';
 import '../../../common_widgets/common_container.dart';
 import '../../../common_widgets/common_text.dart';
+import '../../../common_widgets/safe_network_image.dart';
 import '../../../routes/app_pages.dart';
 import '../../../service/service.dart';
 import '../controllers/clean_air_header_controller.dart';
@@ -429,8 +430,8 @@ class CleanAirLiveMonitoringView
                                                   child: Column(
                                                     children: [
                                                       Expanded(
-                                                        child: Image.network(
-                                                          '${ApiService.baseUrl}/${controller.pondDataResponse.value?.data.devices[0].sensors[index].sensorIcon}',
+                                                        child: SafeNetworkImage(
+                                                          url: '${ApiService.baseUrl}/${controller.pondDataResponse.value?.data.devices[0].sensors[index].sensorIcon}',
                                                           height: 40,
                                                           width: 40,
                                                         ),

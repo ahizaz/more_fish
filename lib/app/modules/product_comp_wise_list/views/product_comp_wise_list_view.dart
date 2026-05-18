@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../common_widgets/common_container.dart';
 import '../../../res/colors/colors.dart';
+import '../../../common_widgets/safe_network_image.dart';
 import '../../../routes/app_pages.dart';
 import '../../../service/service.dart';
 
@@ -47,8 +48,8 @@ class ProductCompWiseListView extends GetView<ProductCompWiseListController> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.network(
-                      "${ApiService.baseUrl}${data.data[index].productimageSet[0].image}",
+                    SafeNetworkImage(
+                      url: "${ApiService.baseUrl}${data.data[index].productimageSet[0].image}",
                       height: 80,
                       width: 80,
                     ),

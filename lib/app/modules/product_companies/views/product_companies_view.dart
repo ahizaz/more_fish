@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../common_widgets/common_app_bar.dart';
 import '../../../common_widgets/common_container.dart';
 import '../../../res/colors/colors.dart';
+import '../../../common_widgets/safe_network_image.dart';
 import '../../../routes/app_pages.dart';
 import '../../../service/service.dart';
 import '../../home/controllers/home_controller.dart';
@@ -68,8 +69,8 @@ class ProductCompaniesView extends GetView<ProductCompaniesController> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Image.network(
-                                    "${ApiService.baseUrl}${data[index].companyImage}",
+                                  SafeNetworkImage(
+                                    url: "${ApiService.baseUrl}${data[index].companyImage}",
                                     height: 80,
                                     width: 80,
                                   ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../common_widgets/common_text.dart';
+import '../../../common_widgets/safe_network_image.dart';
 import '../controllers/weather_forecast_controller.dart';
 
 class WeatherForecastView extends GetView<WeatherForecastController> {
@@ -68,8 +69,8 @@ class WeatherForecastView extends GetView<WeatherForecastController> {
                           color: const Color(0xff87CEEB),
                           borderRadius: BorderRadius.circular(10)
                         ),
-                        child: Image.network(
-                          "https://openweathermap.org/img/wn/$icon@4x.png",
+                        child: SafeNetworkImage(
+                          url: "https://openweathermap.org/img/wn/$icon@4x.png",
                           width: 100,
                           height: 100,
                         ),

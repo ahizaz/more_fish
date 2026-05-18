@@ -934,6 +934,7 @@ import 'package:flutter/services.dart';
 
 import 'package:more_fish/app/common_widgets/common_text.dart';
 import 'package:more_fish/app/service/service.dart';
+import 'package:more_fish/app/common_widgets/safe_network_image.dart';
 import '../../../common_widgets/common_app_bar.dart';
 import '../../../common_widgets/common_container.dart';
 import '../../../routes/app_pages.dart';
@@ -1357,8 +1358,8 @@ class WaterQualityDeviceView extends GetView<WaterQualityDeviceController> {
                                                   child: Column(
                                                     children: [
                                                       Expanded(
-                                                        child: Image.network(
-                                                          "${ApiService.baseUrl}/${controller.pondDataResponse.value?.data.devices[0].sensors[index].sensorIcon}",
+                                                        child: SafeNetworkImage(
+                                                          url: "${ApiService.baseUrl}/${controller.pondDataResponse.value?.data.devices[0].sensors[index].sensorIcon}",
                                                           height: 40,
                                                           width: 40,
                                                         ),
